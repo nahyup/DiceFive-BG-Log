@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react';
 import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
 import GameModal from '../components/GameModal';
-import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter } from 'lucide-react';
+import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter, ArrowUpDown } from 'lucide-react';
+
+export type SortOption = 'most_played' | 'least_played' | 'most_photos' | 'abc' | 'zyx' | 'published';
 
 export default function GameCollection() {
   const { games, logs, deleteGame } = useBoardGameStore();
@@ -9,9 +11,10 @@ export default function GameCollection() {
   const [editingGame, setEditingGame] = useState<Game | null>(null);
   const [gameToDelete, setGameToDelete] = useState<{id: string, title: string} | null>(null);
   
-  // Filter States
+  // Filter & Sort States
   const [playerFilter, setPlayerFilter] = useState<string>('');
   const [weightFilter, setWeightFilter] = useState<string>('');
+  const [sortOption, setSortOption] = useState<SortOption>('most_played');
 
   const handleEdit = (game: Game) => {
     setEditingGame(game);
@@ -27,8 +30,23 @@ export default function GameCollection() {
     setGameToDelete({ id, title });
   };
 
+// Helper to get all images for a game (cover + log photos)
+  const getGameImages = (gameId: string, coverImage?: string) => {
+    const images: string[] = [];
+    if (coverImage) images.push(coverImage);
+    
+    // Add all uploaded photos from play logs for this game
+    logs.forEach(log => {
+      if (log.gameId === gameId && log.imageUrls) {
+        images.push(...log.imageUrls);
+      }
+    });
+    
+    return images;
+  };
+
   const filteredGames = useMemo(() => {
-    return games.filter(game => {
+    let result = games.filter(game => {
       // Player match
       let matchPlayer = true;
       if (playerFilter) {
@@ -55,22 +73,32 @@ export default function GameCollection() {
 
       return matchPlayer && matchWeight;
     });
-  }, [games, playerFilter, weightFilter]);
 
-  // Helper to get all images for a game (cover + log photos)
-  const getGameImages = (gameId: string, coverImage?: string) => {
-    const images: string[] = [];
-    if (coverImage) images.push(coverImage);
-    
-    // Add all uploaded photos from play logs for this game
-    logs.forEach(log => {
-      if (log.gameId === gameId && log.imageUrls) {
-        images.push(...log.imageUrls);
+    // Sort the results globally
+    result = [...result].sort((a, b) => {
+      switch (sortOption) {
+        case 'most_played':
+          return b.totalPlays - a.totalPlays;
+        case 'least_played':
+          return a.totalPlays - b.totalPlays;
+        case 'most_photos': {
+          const photosA = getGameImages(a.id, a.imageUrl).length;
+          const photosB = getGameImages(b.id, b.imageUrl).length;
+          return photosB - photosA; // Sort descending by number of photos
+        }
+        case 'abc':
+          return a.title.localeCompare(b.title);
+        case 'zyx':
+          return b.title.localeCompare(a.title);
+        case 'published':
+          return (b.publishedYear || 0) - (a.publishedYear || 0); // Newest first
+        default:
+          return 0;
       }
     });
-    
-    return images;
-  };
+
+    return result;
+  }, [games, playerFilter, weightFilter, sortOption, logs]);
 
   return (
     <div className="space-y-6">
@@ -84,34 +112,56 @@ export default function GameCollection() {
         </button>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-surface-800 p-4 rounded-2xl border border-surface-200 dark:border-surface-700 shadow-sm">
-        <div className="flex items-center gap-2 text-surface-500 font-medium px-2">
-          <Filter size={18} /> Filters:
+      {/* Filters & Sort */}
+      <div className="flex flex-col xl:flex-row gap-4">
+        {/* Filters */}
+        <div className="flex-1 flex flex-col sm:flex-row gap-4 bg-white dark:bg-surface-800 p-4 rounded-2xl border border-surface-200 dark:border-surface-700 shadow-sm">
+          <div className="flex items-center gap-2 text-surface-500 font-medium px-2">
+            <Filter size={18} /> Filters:
+          </div>
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <select 
+              className="input"
+              value={playerFilter}
+              onChange={(e) => setPlayerFilter(e.target.value)}
+            >
+              <option value="">All Player Counts</option>
+              <option value="1">1 Player</option>
+              <option value="2">2 Players</option>
+              <option value="3">3 Players</option>
+              <option value="4">4 Players</option>
+              <option value="5+">5+ Players</option>
+            </select>
+            <select 
+              className="input"
+              value={weightFilter}
+              onChange={(e) => setWeightFilter(e.target.value)}
+            >
+              <option value="">All Weights (Complexity)</option>
+              <option value="light">Light (&lt; 2.0)</option>
+              <option value="medium">Medium (2.0 - 2.99)</option>
+              <option value="heavy">Heavy (3.0 - 4.0)</option>
+              <option value="very_heavy">Very Heavy (&gt; 4.0)</option>
+            </select>
+          </div>
         </div>
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        {/* Sort */}
+        <div className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-surface-800 p-4 rounded-2xl border border-surface-200 dark:border-surface-700 shadow-sm xl:min-w-[320px]">
+          <div className="flex items-center gap-2 text-surface-500 font-medium px-2 whitespace-nowrap">
+            <ArrowUpDown size={18} /> Sort By:
+          </div>
           <select 
-            className="input"
-            value={playerFilter}
-            onChange={(e) => setPlayerFilter(e.target.value)}
+            className="input w-full"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value as SortOption)}
           >
-            <option value="">All Player Counts</option>
-            <option value="1">1 Player</option>
-            <option value="2">2 Players</option>
-            <option value="3">3 Players</option>
-            <option value="4">4 Players</option>
-            <option value="5+">5+ Players</option>
-          </select>
-          <select 
-            className="input"
-            value={weightFilter}
-            onChange={(e) => setWeightFilter(e.target.value)}
-          >
-            <option value="">All Weights (Complexity)</option>
-            <option value="light">Light (&lt; 2.0)</option>
-            <option value="medium">Medium (2.0 - 2.99)</option>
-            <option value="heavy">Heavy (3.0 - 4.0)</option>
-            <option value="very_heavy">Very Heavy (&gt; 4.0)</option>
+            <option value="most_played">Most Played</option>
+            <option value="least_played">Least Played</option>
+            <option value="most_photos">Most Photographs</option>
+            <option value="abc">A to Z</option>
+            <option value="zyx">Z to A</option>
+            <option value="published">Newest Published</option>
           </select>
         </div>
       </div>
@@ -176,8 +226,17 @@ export default function GameCollection() {
             
             <div className="p-5 flex-1 flex flex-col">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-bold text-surface-900 dark:text-white line-clamp-1">{game.title}</h3>
-                <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex-1 pr-2">
+                  <h3 className="text-xl font-bold text-surface-900 dark:text-white line-clamp-1" title={game.title}>
+                    {game.title}
+                  </h3>
+                  {game.publishedYear && (
+                    <span className="text-xs font-medium text-surface-500 bg-surface-100 dark:bg-surface-700/50 px-2 py-0.5 rounded-md mt-1 inline-block">
+                      {game.publishedYear}
+                    </span>
+                  )}
+                </div>
+                <div className="flex opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                   <button onClick={() => handleEdit(game)} className="p-1.5 text-surface-500 hover:text-primary-600 rounded-md hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors">
                     <Edit2 size={16} />
                   </button>

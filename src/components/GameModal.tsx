@@ -14,6 +14,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
   
   const [formData, setFormData] = useState({
     title: '',
+    publishedYear: new Date().getFullYear(),
     players: '',
     playTime: 60,
     weight: 2.5,
@@ -25,6 +26,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     if (gameToEdit) {
       setFormData({
         title: gameToEdit.title,
+        publishedYear: gameToEdit.publishedYear || new Date().getFullYear(),
         players: gameToEdit.players,
         playTime: gameToEdit.playTime,
         weight: gameToEdit.weight,
@@ -33,6 +35,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     } else {
       setFormData({
         title: '',
+        publishedYear: new Date().getFullYear(),
         players: '',
         playTime: 60,
         weight: 2.5,
@@ -78,20 +81,36 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         </div>
         
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <div>
-            <label className="label">Game Title</label>
-            <input 
-              required
-              type="text" 
-              className={`input ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}`} 
-              value={formData.title}
-              onChange={(e) => {
-                setFormData({...formData, title: e.target.value});
-                if (error) setError(null);
-              }}
-              placeholder="e.g. Catan"
-            />
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="label">Game Title</label>
+              <input 
+                required
+                type="text" 
+                className={`input ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}`} 
+                value={formData.title}
+                onChange={(e) => {
+                  setFormData({...formData, title: e.target.value});
+                  if (error) setError(null);
+                }}
+                placeholder="e.g. Catan"
+              />
+              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            </div>
+            
+            <div>
+              <label className="label">Published Year</label>
+              <input 
+                required
+                type="number" 
+                min="1000"
+                max="2100"
+                className="input" 
+                value={formData.publishedYear}
+                onChange={(e) => setFormData({...formData, publishedYear: Number(e.target.value)})}
+                placeholder="e.g. 1995"
+              />
+            </div>
           </div>
           
           <div className="grid grid-cols-2 gap-4">

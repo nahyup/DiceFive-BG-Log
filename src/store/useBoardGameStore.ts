@@ -9,6 +9,7 @@ export interface Game {
   weight: number; // 1.0 - 5.0
   imageUrl: string;
   totalPlays: number;
+  publishedYear?: number;
 }
 
 export interface Player {
