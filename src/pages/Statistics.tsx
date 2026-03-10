@@ -34,13 +34,22 @@ export default function Statistics() {
   const sortedGames = [...games].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
 
   // Compute publication stats
-  const gamesWithYear = games.filter(g => g.publishedYear);
-  const averageYear = gamesWithYear.length > 0 
-    ? Math.round(gamesWithYear.reduce((acc, g) => acc + (g.publishedYear || 0), 0) / gamesWithYear.length) 
-    : 0;
+  const gamesWithYear = [...games]
+    .filter(g => g.publishedYear !== undefined)
+    .sort((a, b) => (a.publishedYear || 0) - (b.publishedYear || 0));
+    
+  let medianYear = 0;
+  if (gamesWithYear.length > 0) {
+    const mid = Math.floor(gamesWithYear.length / 2);
+    if (gamesWithYear.length % 2 === 0) {
+      medianYear = Math.round(((gamesWithYear[mid - 1].publishedYear || 0) + (gamesWithYear[mid].publishedYear || 0)) / 2);
+    } else {
+      medianYear = gamesWithYear[mid].publishedYear || 0;
+    }
+  }
   
-  const oldestGame = [...gamesWithYear].sort((a, b) => (a.publishedYear || 0) - (b.publishedYear || 0))[0];
-  const newestGame = [...gamesWithYear].sort((a, b) => (b.publishedYear || 0) - (a.publishedYear || 0))[0];
+  const oldestGame = gamesWithYear[0];
+  const newestGame = gamesWithYear[gamesWithYear.length - 1];
 
   // Decade distribution
   const groupedDecades: Record<string, number> = {};
@@ -171,8 +180,8 @@ export default function Statistics() {
             </div>
             <div className="space-y-4">
               <div>
-                <p className="text-xs text-surface-500 uppercase tracking-wider mb-1">Average Year</p>
-                <p className="text-3xl font-display font-bold text-surface-900 dark:text-white">{averageYear || '-'}</p>
+                <p className="text-xs text-surface-500 uppercase tracking-wider mb-1">Median Year</p>
+                <p className="text-3xl font-display font-bold text-surface-900 dark:text-white">{medianYear || '-'}</p>
               </div>
               <div className="pt-4 border-t border-surface-100 dark:border-surface-700 grid grid-cols-2 gap-4">
                 <div>
