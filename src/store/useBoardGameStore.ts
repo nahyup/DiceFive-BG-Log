@@ -31,6 +31,7 @@ export interface PlayLog {
   winnerId?: string | null; // Legacy single winner (or fallback)
   winnerIds?: string[]; // Supports multiple joint 1st place winners
   reviewMemo: string;
+  imageUrls?: string[]; // New: support for uploaded photographs
 }
 
 interface BoardGameState {
@@ -48,6 +49,7 @@ interface BoardGameState {
   deletePlayer: (id: string) => void;
   
   addLog: (log: Omit<PlayLog, 'id'>) => void;
+  updateLog: (id: string, logData: Partial<PlayLog>) => void;
   deleteLog: (id: string) => void;
   
   importData: (data: { games: Game[], players: Player[], logs: PlayLog[] }) => void;
@@ -1939,6 +1941,23 @@ export const useBoardGameStore = create<BoardGameState>()(
           g.id === logData.gameId ? { ...g, totalPlays: g.totalPlays + 1 } : g
         );
         return { logs: [...state.logs, newLog], games: updatedGames };
+      }),
+
+      updateLog: (id, logData) => set((state) => {
+        const oldLog = state.logs.find(l => l.id === id);
+        if (!oldLog) return state;
+
+        const isGameChanged = logData.gameId && logData.gameId !== oldLog.gameId;
+
+        return {
+          logs: state.logs.map(l => l.id === id ? { ...l, ...logData } : l),
+          // If the game was changed, decrement the old game's play count and increment the new one's.
+          games: isGameChanged ? state.games.map(g => {
+            if (g.id === oldLog.gameId) return { ...g, totalPlays: Math.max(0, g.totalPlays - 1) };
+            if (g.id === logData.gameId) return { ...g, totalPlays: g.totalPlays + 1 };
+            return g;
+          }) : state.games
+        };
       }),
 
       deleteLog: (id) => set((state) => {

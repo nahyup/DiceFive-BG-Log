@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
 import { X } from 'lucide-react';
+import ImageUpload from './ImageUpload';
 interface GameModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -132,15 +133,29 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
             />
           </div>
 
-          <div>
-            <label className="label">Image URL</label>
-            <input 
-              type="url" 
-              className="input" 
-              value={formData.imageUrl}
-              onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-              placeholder="https://..."
-            />
+          <div className="space-y-4">
+            <h4 className="font-medium text-surface-900 dark:text-white">Game Image</h4>
+            <div className="bg-surface-50 dark:bg-surface-800/50 p-4 rounded-xl border border-surface-200 dark:border-surface-700 space-y-4">
+              <ImageUpload
+                multiple={false}
+                value={formData.imageUrl}
+                onChange={(url) => setFormData({ ...formData, imageUrl: Array.isArray(url) ? url[0] : url })}
+              />
+              <div className="flex items-center gap-3">
+                <div className="h-px bg-surface-200 dark:bg-surface-700 flex-1"></div>
+                <span className="text-xs font-semibold text-surface-400 uppercase tracking-widest">OR ENTER URL</span>
+                <div className="h-px bg-surface-200 dark:bg-surface-700 flex-1"></div>
+              </div>
+              <div>
+                <input 
+                  type="url" 
+                  className="input text-sm" 
+                  value={formData.imageUrl}
+                  onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="pt-4 flex justify-end gap-3">

@@ -4,7 +4,7 @@ import GameModal from '../components/GameModal';
 import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter } from 'lucide-react';
 
 export default function GameCollection() {
-  const { games, deleteGame } = useBoardGameStore();
+  const { games, logs, deleteGame } = useBoardGameStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingGame, setEditingGame] = useState<Game | null>(null);
   const [gameToDelete, setGameToDelete] = useState<{id: string, title: string} | null>(null);
@@ -57,6 +57,21 @@ export default function GameCollection() {
     });
   }, [games, playerFilter, weightFilter]);
 
+  // Helper to get all images for a game (cover + log photos)
+  const getGameImages = (gameId: string, coverImage?: string) => {
+    const images: string[] = [];
+    if (coverImage) images.push(coverImage);
+    
+    // Add all uploaded photos from play logs for this game
+    logs.forEach(log => {
+      if (log.gameId === gameId && log.imageUrls) {
+        images.push(...log.imageUrls);
+      }
+    });
+    
+    return images;
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -106,21 +121,55 @@ export default function GameCollection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {filteredGames.map(game => (
+        {filteredGames.map(game => {
+          const gameImages = getGameImages(game.id, game.imageUrl);
+          
+          return (
           <div key={game.id} className="card group flex flex-col h-full hover:border-primary-300 dark:hover:border-primary-700 transition-colors">
             <div className="relative h-48 bg-surface-200 dark:bg-surface-800 overflow-hidden">
-              {game.imageUrl ? (
-                <img 
-                  src={game.imageUrl} 
-                  alt={game.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+              {gameImages.length > 0 ? (
+                <div id={`carousel-${game.id}`} className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth">
+                  {gameImages.map((imgUrl, idx) => (
+                    <img 
+                      key={idx}
+                      src={imgUrl} 
+                      alt={`${game.title} - Image ${idx + 1}`} 
+                      className="w-full h-full flex-shrink-0 snap-center object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ))}
+                </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-surface-400">
                   <Gamepad2 size={48} />
                 </div>
               )}
-              <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg">
+              
+              {/* Image pagination dots indicator (only if multiple images) */}
+              {gameImages.length > 1 && (
+                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10">
+                  {gameImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      aria-label={`Go to image ${idx + 1}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        const container = document.getElementById(`carousel-${game.id}`);
+                        if (container) {
+                          container.scrollTo({
+                            left: container.clientWidth * idx,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }}
+                      className="w-2 h-2 rounded-full bg-white/50 hover:bg-white backdrop-blur-sm shadow-sm transition-colors cursor-pointer" 
+                    />
+                  ))}
+                </div>
+              )}
+
+              <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg pointer-events-none">
                  Play Count: {game.totalPlays}
               </div>
             </div>
@@ -154,7 +203,8 @@ export default function GameCollection() {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
         
         {filteredGames.length === 0 && games.length > 0 && (
           <div className="col-span-full py-16 text-center border-2 border-dashed border-surface-300 dark:border-surface-700 rounded-2xl flex flex-col items-center justify-center text-surface-500">

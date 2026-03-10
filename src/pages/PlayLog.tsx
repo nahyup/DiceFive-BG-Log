@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import { useBoardGameStore, type PlayerScore } from '../store/useBoardGameStore';
 import { format } from 'date-fns';
-import { Trophy, CalendarDays, Users, MessageSquareText, Plus, Trash2 } from 'lucide-react';
+import { Trophy, CalendarDays, Users, MessageSquareText, Plus, Trash2, ImageIcon, X, Edit2 } from 'lucide-react';
+import ImageUpload from '../components/ImageUpload';
 
 export default function PlayLog() {
-  const { games, players, logs, addLog, deleteLog } = useBoardGameStore();
+  const { games, players, logs, addLog, updateLog, deleteLog } = useBoardGameStore();
   
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [gameSearchQuery, setGameSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [logToEdit, setLogToEdit] = useState<string | null>(null); // State for editing
   const [logToDelete, setLogToDelete] = useState<string | null>(null); // New state for delete confirmation
+  const [selectedImage, setSelectedImage] = useState<string | null>(null); // State for viewing large images
 
   const [formData, setFormData] = useState({
     gameId: '',
     date: new Date().toISOString().split('T')[0],
     playerScores: [] as PlayerScore[],
     reviewMemo: '',
+    imageUrls: [] as string[],
   });
 
   const filteredGames = games
@@ -74,25 +78,62 @@ export default function PlayLog() {
       }
     }
 
-    addLog({
-      gameId: formData.gameId,
-      date: new Date(formData.date).toISOString(),
-      players: formData.playerScores,
-      winnerId,
-      winnerIds,
-      reviewMemo: formData.reviewMemo
-    });
+    if (logToEdit) {
+      updateLog(logToEdit, {
+        gameId: formData.gameId,
+        date: new Date(formData.date).toISOString(),
+        players: formData.playerScores,
+        winnerId,
+        winnerIds,
+        reviewMemo: formData.reviewMemo,
+        imageUrls: formData.imageUrls.length > 0 ? formData.imageUrls : undefined
+      });
+    } else {
+      addLog({
+        gameId: formData.gameId,
+        date: new Date(formData.date).toISOString(),
+        players: formData.playerScores,
+        winnerId,
+        winnerIds,
+        reviewMemo: formData.reviewMemo,
+        imageUrls: formData.imageUrls.length > 0 ? formData.imageUrls : undefined
+      });
+    }
 
+    resetForm();
+  };
+
+  const resetForm = () => {
     setIsFormOpen(false);
+    setLogToEdit(null);
     setGameSearchQuery('');
     setFormData({
       gameId: '',
       date: new Date().toISOString().split('T')[0],
       playerScores: [],
       reviewMemo: '',
+      imageUrls: [],
     });
   };
 
+  const openFormForEdit = (logId: string) => {
+    const log = logs.find(l => l.id === logId);
+    if (!log) return;
+    
+    const game = games.find(g => g.id === log.gameId);
+    
+    setLogToEdit(logId);
+    setGameSearchQuery(game?.title || '');
+    setFormData({
+      gameId: log.gameId,
+      date: log.date.split('T')[0],
+      playerScores: log.players,
+      reviewMemo: log.reviewMemo,
+      imageUrls: log.imageUrls || [],
+    });
+    setIsFormOpen(true);
+  };
+    
   const availablePlayers = players.filter(
     p => !formData.playerScores.some(ps => ps.playerId === p.id)
   );
@@ -124,10 +165,10 @@ export default function PlayLog() {
       </div>
 
       {isFormOpen && (
-        <div className="card p-6 animate-in fade-in slide-in-from-top-4 duration-300 border-primary-200 dark:border-primary-800 shadow-lg">
+        <div className="card p-6 animate-in fade-in slide-in-from-top-4 duration-300 border-primary-200 dark:border-primary-800 shadow-lg mb-8">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold">Record Play Session</h3>
-            <button onClick={() => setIsFormOpen(false)} className="text-surface-400 hover:text-surface-700">Cancel</button>
+            <h3 className="text-xl font-bold">{logToEdit ? 'Edit Play Session' : 'Record Play Session'}</h3>
+            <button onClick={resetForm} className="text-surface-400 hover:text-surface-700">Cancel</button>
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -248,9 +289,23 @@ export default function PlayLog() {
               />
             </div>
 
+            <div>
+              <label className="label flex items-center gap-2 mb-2">
+                <ImageIcon size={16} /> 
+                <span>Session Photos</span>
+              </label>
+              <div className="bg-surface-50 dark:bg-surface-800/50 p-4 rounded-xl border border-surface-200 dark:border-surface-700">
+                <ImageUpload
+                  multiple={true}
+                  value={formData.imageUrls}
+                  onChange={(urls) => setFormData({ ...formData, imageUrls: urls as string[] })}
+                />
+              </div>
+            </div>
+
             <div className="flex justify-end pt-2">
               <button type="submit" className="btn btn-primary px-8">
-                Save Play Log
+                {logToEdit ? 'Save Changes' : 'Save Play Log'}
               </button>
             </div>
           </form>
@@ -304,6 +359,26 @@ export default function PlayLog() {
                       );
                     })}
                   </div>
+                  
+                  {log.imageUrls && log.imageUrls.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-surface-100 dark:border-surface-700/50">
+                      <div className="flex items-center gap-2 mb-3">
+                        <ImageIcon size={16} className="text-surface-400" />
+                        <span className="text-sm font-medium">Photos ({log.imageUrls.length})</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {log.imageUrls.map((url, i) => (
+                          <div 
+                            key={i} 
+                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-surface-200 dark:border-surface-700 cursor-pointer hover:border-primary-400 transition-colors shadow-sm"
+                            onClick={() => setSelectedImage(url)}
+                          >
+                            <img src={url} alt={`Session photo ${i+1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="md:w-1/4 flex flex-col justify-between">
@@ -315,7 +390,14 @@ export default function PlayLog() {
                   ) : (
                     <div className="flex-1"></div>
                   )}
-                  <div className="mt-3 text-right">
+                  <div className="mt-3 flex justify-end gap-2">
+                    <button 
+                      className="p-1.5 text-surface-400 hover:text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                      title="Edit Log"
+                      onClick={() => openFormForEdit(log.id)}
+                    >
+                      <Edit2 size={16} />
+                    </button>
                     <button 
                       className="p-1.5 text-surface-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                       title="Delete Log"
@@ -366,6 +448,31 @@ export default function PlayLog() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Image Viewer Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/70 p-2 rounded-full backdrop-blur-md transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+          >
+            <X size={24} />
+          </button>
+          
+          <img 
+            src={selectedImage} 
+            alt="Enlarged session photo" 
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()} 
+          />
         </div>
       )}
     </div>
