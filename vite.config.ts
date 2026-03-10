@@ -59,4 +59,7 @@ const localDataPlugin = () => ({
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), localDataPlugin()],
+  server: {
+    host: true
+  }
 })
