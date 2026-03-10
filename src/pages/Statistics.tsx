@@ -1,5 +1,5 @@
 import { useBoardGameStore } from '../store/useBoardGameStore';
-import { BarChart3, TrendingUp, Medal, Gamepad2 } from 'lucide-react';
+import { BarChart3, TrendingUp, Medal, Gamepad2, Calendar, History, Award } from 'lucide-react';
 
 export default function Statistics() {
   const { games, players, logs } = useBoardGameStore();
@@ -32,6 +32,38 @@ export default function Statistics() {
 
   // Compute top games
   const sortedGames = [...games].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
+
+  // Compute publication stats
+  const gamesWithYear = games.filter(g => g.publishedYear);
+  const averageYear = gamesWithYear.length > 0 
+    ? Math.round(gamesWithYear.reduce((acc, g) => acc + (g.publishedYear || 0), 0) / gamesWithYear.length) 
+    : 0;
+  
+  const oldestGame = [...gamesWithYear].sort((a, b) => (a.publishedYear || 0) - (b.publishedYear || 0))[0];
+  const newestGame = [...gamesWithYear].sort((a, b) => (b.publishedYear || 0) - (a.publishedYear || 0))[0];
+
+  // Decade distribution
+  const groupedDecades: Record<string, number> = {};
+  gamesWithYear.forEach(g => {
+    if (g.publishedYear) {
+      if (g.publishedYear < 1980) {
+        groupedDecades['Before 1980s'] = (groupedDecades['Before 1980s'] || 0) + 1;
+      } else {
+        const decade = Math.floor(g.publishedYear / 10) * 10;
+        groupedDecades[`${decade}s`] = (groupedDecades[`${decade}s`] || 0) + 1;
+      }
+    }
+  });
+
+  const decades = Object.entries(groupedDecades)
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => {
+      if (a.label === 'Before 1980s') return -1;
+      if (b.label === 'Before 1980s') return 1;
+      return a.label.localeCompare(b.label);
+    });
+
+  const maxDecadeCount = Math.max(...decades.map(d => d.count), 1);
 
   return (
     <div className="space-y-8">
@@ -97,6 +129,78 @@ export default function Statistics() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Collection Insights */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 card p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <History className="text-primary-500" />
+            <h3 className="text-lg font-bold font-display">Publication Timeline</h3>
+          </div>
+          
+          <div className="space-y-4">
+            {decades.map(({ label, count }) => (
+              <div key={label} className="space-y-1">
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium text-surface-700 dark:text-surface-300">{label}</span>
+                  <span className="text-surface-500">{count} games</span>
+                </div>
+                <div className="w-full bg-surface-100 dark:bg-surface-800 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className="bg-primary-500 h-full rounded-full transition-all duration-1000" 
+                    style={{ width: `${(count / maxDecadeCount) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+            {decades.length === 0 && (
+              <p className="text-center text-surface-400 py-4">No publication data available</p>
+            )}
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="card p-6 border-t-4 border-t-primary-500">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-primary-50 dark:bg-primary-900/30 rounded-lg text-primary-600 dark:text-primary-400">
+                <Calendar size={20} />
+              </div>
+              <h4 className="font-bold">Collection Age</h4>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-surface-500 uppercase tracking-wider mb-1">Average Year</p>
+                <p className="text-3xl font-display font-bold text-surface-900 dark:text-white">{averageYear || '-'}</p>
+              </div>
+              <div className="pt-4 border-t border-surface-100 dark:border-surface-700 grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-[10px] text-surface-500 uppercase mb-1">Oldest</p>
+                  <p className="font-bold text-surface-900 dark:text-white truncate" title={oldestGame?.title}>
+                    {oldestGame?.publishedYear || '-'}
+                  </p>
+                  <p className="text-[10px] text-surface-400 truncate">{oldestGame?.title}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] text-surface-500 uppercase mb-1">Newest</p>
+                  <p className="font-bold text-surface-900 dark:text-white truncate" title={newestGame?.title}>
+                    {newestGame?.publishedYear || '-'}
+                  </p>
+                  <p className="text-[10px] text-surface-400 truncate">{newestGame?.title}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card p-6 bg-surface-900 dark:bg-surface-800 text-white relative overflow-hidden">
+            <div className="absolute -right-4 -bottom-4 opacity-10">
+              <Award size={120} />
+            </div>
+            <h4 className="text-sm font-medium text-surface-400 mb-1">Total Collection Value</h4>
+            <p className="text-2xl font-bold font-display">{games.length} Unique Titles</p>
+            <p className="text-xs text-surface-500 mt-2 italic">A legacy of {oldestGame && newestGame ? `${(newestGame.publishedYear || 0) - (oldestGame.publishedYear || 0)}+` : '0'} years of gaming history.</p>
+          </div>
         </div>
       </div>
 
