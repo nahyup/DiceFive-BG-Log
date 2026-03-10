@@ -8,7 +8,8 @@ interface GameModalProps {
 }
 
 export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProps) {
-  const { addGame, updateGame } = useBoardGameStore();
+  const { games, addGame, updateGame } = useBoardGameStore();
+  const [error, setError] = useState<string | null>(null);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -19,6 +20,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
   });
 
   useEffect(() => {
+    setError(null);
     if (gameToEdit) {
       setFormData({
         title: gameToEdit.title,
@@ -42,6 +44,18 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check for duplicates
+    const normalizedTitle = formData.title.trim().toLowerCase();
+    const isDuplicate = games.some(g => 
+      g.title.toLowerCase() === normalizedTitle && g.id !== gameToEdit?.id
+    );
+
+    if (isDuplicate) {
+      setError('A game with this title is already registered.');
+      return;
+    }
+
     if (gameToEdit) {
       updateGame(gameToEdit.id, formData);
     } else {
@@ -68,11 +82,15 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
             <input 
               required
               type="text" 
-              className="input" 
+              className={`input ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}`} 
               value={formData.title}
-              onChange={(e) => setFormData({...formData, title: e.target.value})}
+              onChange={(e) => {
+                setFormData({...formData, title: e.target.value});
+                if (error) setError(null);
+              }}
               placeholder="e.g. Catan"
             />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
           
           <div className="grid grid-cols-2 gap-4">
