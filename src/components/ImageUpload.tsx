@@ -27,7 +27,25 @@ export default function ImageUpload({ value, onChange, multiple = false }: Image
         if (!multiple && i > 0) break;
         
         const compressedBase64 = await compressImage(filesArray[i]);
-        newImages.push(compressedBase64);
+        
+        // Upload the compressed image to the server
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            image: compressedBase64,
+            name: filesArray[i].name
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Upload failed: ${response.statusText}`);
+        }
+
+        const { url } = await response.json();
+        newImages.push(url);
       }
 
       if (newImages.length > 0) {
