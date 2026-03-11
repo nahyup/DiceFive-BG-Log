@@ -54,8 +54,10 @@ export default function GameCollection() {
         const min = parseInt(parts[0], 10) || 1;
         const max = parts.length > 1 ? parseInt(parts[1], 10) : min;
         
-        if (playerFilter === '5+') {
-          matchPlayer = max >= 5;
+        if (playerFilter === '5') {
+          matchPlayer = min <= 5 && max >= 5;
+        } else if (playerFilter === '6+') {
+          matchPlayer = max >= 6;
         } else {
           const target = parseInt(playerFilter, 10);
           matchPlayer = target >= min && target <= max;
@@ -130,7 +132,8 @@ export default function GameCollection() {
               <option value="2">2 Players</option>
               <option value="3">3 Players</option>
               <option value="4">4 Players</option>
-              <option value="5+">5+ Players</option>
+              <option value="5">5 Players</option>
+              <option value="6+">6+ Players</option>
             </select>
             <select 
               className="input"
