@@ -23,8 +23,12 @@ export default function PlayLog() {
   });
 
   const filteredGames = games
-    .filter(g => g.title.toLowerCase().includes(gameSearchQuery.toLowerCase()))
-    .slice(0, 10); // Limit to top 10 results for performance and UI
+    .filter(g => {
+      const normalizedTitle = g.title.toLowerCase().replace(/\s+/g, '');
+      const normalizedQuery = gameSearchQuery.toLowerCase().replace(/\s+/g, '');
+      return normalizedTitle.includes(normalizedQuery);
+    })
+    .slice(0, 20); // Limit results for performance and UI
 
   const handleGameSelect = (gameId: string, gameTitle: string) => {
     setFormData({ ...formData, gameId });
@@ -59,7 +63,15 @@ export default function PlayLog() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.gameId || formData.playerScores.length === 0) {
-      alert("Please select a game and add at least one player.");
+      if (!formData.gameId) {
+        if (gameSearchQuery) {
+          alert(`"${gameSearchQuery}" was not chosen from the list. Please select the game from the search results dropdown.`);
+        } else {
+          alert("Please select a game.");
+        }
+      } else if (formData.playerScores.length === 0) {
+        alert("Please add at least one player.");
+      }
       return;
     }
 
@@ -197,7 +209,10 @@ export default function PlayLog() {
                       <li 
                         key={g.id}
                         className="px-4 py-2 hover:bg-primary-50 dark:hover:bg-primary-900/30 cursor-pointer text-sm dark:text-white"
-                        onClick={() => handleGameSelect(g.id, g.title)}
+                        onMouseDown={(e) => {
+                          e.preventDefault(); // Prevent focus loss from input
+                          handleGameSelect(g.id, g.title);
+                        }}
                       >
                         {g.title}
                       </li>
