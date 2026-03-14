@@ -1,12 +1,36 @@
+import { useState } from 'react';
 import { useBoardGameStore } from '../store/useBoardGameStore';
 import { BarChart3, TrendingUp, Medal, Gamepad2, Calendar, History, Award } from 'lucide-react';
 
 export default function Statistics() {
   const { games, players, logs } = useBoardGameStore();
+  const [groupFilter, setGroupFilter] = useState<'All' | 'Family' | 'Friend'>('All');
 
-  // Compute family stats
-  const playerStats = players.map(p => {
-    const playerLogs = logs.filter(l => l.players.some(ps => ps.playerId === p.id));
+  // Filter players based on group
+  const filteredPlayers = groupFilter === 'All' 
+    ? players 
+    : players.filter(p => p.group === groupFilter);
+
+  // Filter logs based on group
+  // A log is included if at least one player in that log belongs to the selected group
+  const filteredLogs = groupFilter === 'All'
+    ? logs
+    : logs.filter(l => l.players.some(ps => {
+        const player = players.find(p => p.id === ps.playerId);
+        return player?.group === groupFilter;
+      }));
+
+  // Filter games based on those played in the filtered logs
+  const filteredGames = groupFilter === 'All'
+    ? games
+    : games.map(g => {
+        const playCount = filteredLogs.filter(l => l.gameId === g.id).length;
+        return { ...g, totalPlays: playCount };
+      }).filter(g => g.totalPlays > 0);
+
+  // Compute stats for filtered players
+  const playerStats = filteredPlayers.map(p => {
+    const playerLogs = filteredLogs.filter(l => l.players.some(ps => ps.playerId === p.id));
     const plays = playerLogs.length;
     const wins = playerLogs.filter(l => 
       (l.winnerIds && l.winnerIds.includes(p.id)) || 
@@ -30,11 +54,11 @@ export default function Statistics() {
     return { ...p, plays, wins, winRate, highScore, highScoreGame };
   }).sort((a, b) => b.winRate - a.winRate);
 
-  // Compute top games
-  const sortedGames = [...games].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
+  // Compute top games from filtered games
+  const sortedGames = [...filteredGames].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
 
-  // Compute publication stats
-  const gamesWithYear = [...games]
+  // Compute publication stats from filtered games
+  const gamesWithYear = [...filteredGames]
     .filter(g => g.publishedYear !== undefined)
     .sort((a, b) => (a.publishedYear || 0) - (b.publishedYear || 0));
     
@@ -76,9 +100,27 @@ export default function Statistics() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h2 className="text-2xl font-display font-bold text-surface-900 dark:text-white">Statistics</h2>
-        <p className="text-surface-500">Deep dive into your family's gaming history</p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-display font-bold text-surface-900 dark:text-white">Statistics</h2>
+          <p className="text-surface-500">Deep dive into your gaming history</p>
+        </div>
+        
+        <div className="flex bg-surface-100 dark:bg-surface-800 p-1 rounded-xl w-fit border border-surface-200 dark:border-surface-700">
+          {(['All', 'Family', 'Friend'] as const).map((group) => (
+            <button
+              key={group}
+              onClick={() => setGroupFilter(group)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                groupFilter === group
+                  ? 'bg-white dark:bg-surface-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                  : 'text-surface-500 hover:text-surface-700 dark:hover:text-surface-300'
+              }`}
+            >
+              {group}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Player Stats Grid */}
@@ -206,9 +248,13 @@ export default function Statistics() {
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <Award size={120} />
             </div>
-            <h4 className="text-sm font-medium text-surface-400 mb-1">Total Collection Value</h4>
-            <p className="text-2xl font-bold font-display">{games.length} Unique Titles</p>
-            <p className="text-xs text-surface-500 mt-2 italic">A legacy of {oldestGame && newestGame ? `${(newestGame.publishedYear || 0) - (oldestGame.publishedYear || 0)}+` : '0'} years of gaming history.</p>
+            <h4 className="text-sm font-medium text-surface-400 mb-1">Total Collection Insights</h4>
+            <p className="text-2xl font-bold font-display">{filteredGames.length} Unique Titles</p>
+            <p className="text-xs text-surface-500 mt-2 italic">
+              {groupFilter === 'All' 
+                ? `A legacy of ${oldestGame && newestGame ? `${(newestGame.publishedYear || 0) - (oldestGame.publishedYear || 0)}+` : '0'} years of gaming history.`
+                : `Showing ${filteredGames.length} games played by ${groupFilter} group.`}
+            </p>
           </div>
         </div>
       </div>
@@ -294,11 +340,11 @@ export default function Statistics() {
           </p>
           <div className="flex gap-4">
             <div className="bg-white/10 backdrop-blur rounded-xl p-4 min-w-[100px]">
-              <p className="text-3xl font-bold">{games.length}</p>
+              <p className="text-3xl font-bold">{filteredGames.length}</p>
               <p className="text-xs text-primary-200 mt-1 uppercase tracking-wider">Games</p>
             </div>
             <div className="bg-white/10 backdrop-blur rounded-xl p-4 min-w-[100px]">
-              <p className="text-3xl font-bold">{logs.length}</p>
+              <p className="text-3xl font-bold">{filteredLogs.length}</p>
               <p className="text-xs text-primary-200 mt-1 uppercase tracking-wider">Log Entries</p>
             </div>
           </div>

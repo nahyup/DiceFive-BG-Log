@@ -233,6 +233,11 @@ export default function GameCollection() {
                   <h3 className="text-xl font-bold text-surface-900 dark:text-white line-clamp-1" title={game.title}>
                     {game.title}
                   </h3>
+                  {game.subtitle && (
+                    <p className="text-sm font-medium text-surface-500 line-clamp-1" title={game.subtitle}>
+                      {game.subtitle}
+                    </p>
+                  )}
                   {game.publishedYear && (
                     <span className="text-xs font-medium text-surface-500 bg-surface-100 dark:bg-surface-700/50 px-2 py-0.5 rounded-md mt-1 inline-block">
                       {game.publishedYear}

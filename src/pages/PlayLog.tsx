@@ -25,8 +25,9 @@ export default function PlayLog() {
   const filteredGames = games
     .filter(g => {
       const normalizedTitle = g.title.toLowerCase().replace(/\s+/g, '');
+      const normalizedSubtitle = (g.subtitle || '').toLowerCase().replace(/\s+/g, '');
       const normalizedQuery = gameSearchQuery.toLowerCase().replace(/\s+/g, '');
-      return normalizedTitle.includes(normalizedQuery);
+      return normalizedTitle.includes(normalizedQuery) || normalizedSubtitle.includes(normalizedQuery);
     })
     .slice(0, 20); // Limit results for performance and UI
 
@@ -214,7 +215,10 @@ export default function PlayLog() {
                           handleGameSelect(g.id, g.title);
                         }}
                       >
-                        {g.title}
+                        <div className="flex flex-col">
+                          <span className="font-medium">{g.title}</span>
+                          {g.subtitle && <span className="text-xs text-surface-400">{g.subtitle}</span>}
+                        </div>
                       </li>
                     ))}
                   </ul>

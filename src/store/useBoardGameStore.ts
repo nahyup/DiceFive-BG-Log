@@ -4,6 +4,7 @@ import { persist, createJSONStorage, type StateStorage } from 'zustand/middlewar
 export interface Game {
   id: string;
   title: string;
+  subtitle?: string; // Optional subtitle (e.g., Korean title)
   players: string; // e.g., '2-5'
   playTime: number; // minutes
   weight: number; // 1.0 - 5.0

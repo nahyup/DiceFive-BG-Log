@@ -14,6 +14,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
   
   const [formData, setFormData] = useState({
     title: '',
+    subtitle: '',
     publishedYear: new Date().getFullYear(),
     players: '',
     playTime: 60,
@@ -26,6 +27,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     if (gameToEdit) {
       setFormData({
         title: gameToEdit.title,
+        subtitle: gameToEdit.subtitle || '',
         publishedYear: gameToEdit.publishedYear || new Date().getFullYear(),
         players: gameToEdit.players,
         playTime: gameToEdit.playTime,
@@ -35,6 +37,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     } else {
       setFormData({
         title: '',
+        subtitle: '',
         publishedYear: new Date().getFullYear(),
         players: '',
         playTime: 60,
@@ -98,6 +101,19 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>
             
+            <div>
+              <label className="label">Subtitle (Korean Title)</label>
+              <input 
+                type="text" 
+                className="input" 
+                value={formData.subtitle}
+                onChange={(e) => setFormData({...formData, subtitle: e.target.value})}
+                placeholder="예) 카탄"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Published Year</label>
               <input 
