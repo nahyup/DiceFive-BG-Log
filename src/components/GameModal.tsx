@@ -167,11 +167,11 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
               </div>
               <div>
                 <input 
-                  type="url" 
+                  type="text" 
                   className="input text-sm" 
                   value={formData.imageUrl}
                   onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-                  placeholder="https://example.com/image.jpg"
+                  placeholder="e.g. /uploads/image.jpg or https://example.com/image.jpg"
                 />
               </div>
             </div>
