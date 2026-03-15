@@ -14,6 +14,7 @@ export default function GameCollection() {
   // Filter & Sort States
   const [playerFilter, setPlayerFilter] = useState<string>('');
   const [weightFilter, setWeightFilter] = useState<string>('');
+  const [statusFilter, setStatusFilter] = useState<string>('');
   const [sortOption, setSortOption] = useState<SortOption>('most_played');
 
   const handleEdit = (game: Game) => {
@@ -73,7 +74,13 @@ export default function GameCollection() {
         else if (weightFilter === 'very_heavy') matchWeight = game.weight > 4.0;
       }
 
-      return matchPlayer && matchWeight;
+      // Status match
+      let matchStatus = true;
+      if (statusFilter) {
+        matchStatus = (game.status || 'Owned') === statusFilter;
+      }
+
+      return matchPlayer && matchWeight && matchStatus;
     });
 
     // Sort the results globally
@@ -100,7 +107,7 @@ export default function GameCollection() {
     });
 
     return result;
-  }, [games, playerFilter, weightFilter, sortOption, logs]);
+  }, [games, playerFilter, weightFilter, statusFilter, sortOption, logs]);
 
   return (
     <div className="space-y-6">
@@ -121,7 +128,7 @@ export default function GameCollection() {
           <div className="flex items-center gap-2 text-surface-500 font-medium px-2">
             <Filter size={18} /> Filters:
           </div>
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
             <select 
               className="input"
               value={playerFilter}
@@ -145,6 +152,17 @@ export default function GameCollection() {
               <option value="medium">Medium (2.0 - 2.99)</option>
               <option value="heavy">Heavy (3.0 - 4.0)</option>
               <option value="very_heavy">Very Heavy (&gt; 4.0)</option>
+            </select>
+            <select
+              className="input"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">All Statuses</option>
+              <option value="Owned">Owned</option>
+              <option value="Owned by Friends">Owned by Friends</option>
+              <option value="Wishlist">Wishlist</option>
+              <option value="Preorder">Preorder</option>
             </select>
           </div>
         </div>
@@ -222,6 +240,22 @@ export default function GameCollection() {
                 </div>
               )}
 
+              <div className="absolute top-3 left-3">
+                {(() => {
+                  const status = game.status || 'Owned';
+                  const styles: Record<string, string> = {
+                    Owned: 'bg-emerald-500/90 text-white',
+                    'Owned by Friends': 'bg-teal-500/90 text-white',
+                    Wishlist: 'bg-violet-500/90 text-white',
+                    Preorder: 'bg-amber-500/90 text-white',
+                  };
+                  return (
+                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full backdrop-blur-md shadow-lg ${styles[status]}`}>
+                      {status}
+                    </span>
+                  );
+                })()}
+              </div>
               <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg pointer-events-none">
                  Play Count: {game.totalPlays}
               </div>

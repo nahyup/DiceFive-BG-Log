@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage, type StateStorage } from 'zustand/middleware';
 
+export type GameStatus = 'Owned' | 'Owned by Friends' | 'Wishlist' | 'Preorder';
+
 export interface Game {
   id: string;
   title: string;
@@ -11,6 +13,7 @@ export interface Game {
   imageUrl: string;
   totalPlays: number;
   publishedYear?: number;
+  status?: GameStatus; // Ownership status
 }
 
 export interface Player {

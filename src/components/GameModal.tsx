@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
+import { useBoardGameStore, type Game, type GameStatus } from '../store/useBoardGameStore';
 import { X } from 'lucide-react';
 import ImageUpload from './ImageUpload';
 interface GameModalProps {
@@ -19,7 +19,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     players: '',
     playTime: 60,
     weight: 2.5,
-    imageUrl: ''
+    imageUrl: '',
+    status: 'Owned' as GameStatus
   });
 
   useEffect(() => {
@@ -32,7 +33,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         players: gameToEdit.players,
         playTime: gameToEdit.playTime,
         weight: gameToEdit.weight,
-        imageUrl: gameToEdit.imageUrl
+        imageUrl: gameToEdit.imageUrl,
+        status: gameToEdit.status || 'Owned'
       });
     } else {
       setFormData({
@@ -42,7 +44,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         players: '',
         playTime: 60,
         weight: 2.5,
-        imageUrl: ''
+        imageUrl: '',
+        status: 'Owned'
       });
     }
   }, [gameToEdit, isOpen]);
@@ -73,7 +76,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
 
   return (
     <div className="fixed inset-0 bg-surface-900/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-surface-800 rounded-2xl w-full max-w-md shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-surface-800 rounded-2xl w-full max-w-md shadow-xl overflow-y-auto max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
         <div className="flex justify-between items-center p-5 border-b border-surface-200 dark:border-surface-700">
           <h3 className="text-xl font-display font-semibold">
             {gameToEdit ? 'Edit Game' : 'Add New Game'}
@@ -84,6 +87,11 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         </div>
         
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
+          {error && (
+            <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-sm font-medium px-4 py-3 rounded-xl">
+              <span>⚠️</span> {error}
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Game Title</label>
@@ -154,18 +162,33 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
             </div>
           </div>
 
-          <div>
-            <label className="label">Complexity/Weight (1.0 - 5.0)</label>
-            <input 
-              required
-              type="number" 
-              min="1.0"
-              max="5.0"
-              step="0.01"
-              className="input" 
-              value={formData.weight}
-              onChange={(e) => setFormData({...formData, weight: Number(e.target.value)})}
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="label">Complexity/Weight (1.0 - 5.0)</label>
+              <input 
+                required
+                type="number" 
+                min="1.0"
+                max="5.0"
+                step="0.01"
+                className="input" 
+                value={formData.weight}
+                onChange={(e) => setFormData({...formData, weight: Number(e.target.value)})}
+              />
+            </div>
+            <div>
+              <label className="label">Status</label>
+              <select
+                className="input"
+                value={formData.status}
+                onChange={(e) => setFormData({...formData, status: e.target.value as GameStatus})}
+              >
+                <option value="Owned">Owned</option>
+                <option value="Owned by Friends">Owned by Friends</option>
+                <option value="Wishlist">Wishlist</option>
+                <option value="Preorder">Preorder</option>
+              </select>
+            </div>
           </div>
 
           <div className="space-y-4">
