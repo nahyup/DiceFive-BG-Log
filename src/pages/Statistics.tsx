@@ -37,20 +37,35 @@ export default function Statistics() {
     ).length;
     const winRate = plays > 0 ? Math.round((wins / plays) * 100) : 0;
     
-    // Highest score
-    let highScore = 0;
-    let highScoreGame = '';
-    
+    // Favorite game: game this player has played the most
+    const gamePlayCounts: Record<string, number> = {};
     playerLogs.forEach(log => {
-      const ps = log.players.find(x => x.playerId === p.id);
-      if (ps && ps.score > highScore) {
-        highScore = ps.score;
-        const game = games.find(g => g.id === log.gameId);
-        highScoreGame = game?.title || 'Unknown Game';
+      gamePlayCounts[log.gameId] = (gamePlayCounts[log.gameId] || 0) + 1;
+    });
+    const favoriteGameId = Object.entries(gamePlayCounts).sort((a, b) => b[1] - a[1])[0]?.[0];
+    const favoriteGame = games.find(g => g.id === favoriteGameId);
+    const favoriteGameTitle = favoriteGame?.title || '';
+    const favoriteGamePlays = favoriteGameId ? gamePlayCounts[favoriteGameId] : 0;
+
+    // Best game: game with highest personal win rate (min 2 plays)
+    const gameWinCounts: Record<string, number> = {};
+    playerLogs.forEach(log => {
+      if (log.winnerIds.includes(p.id)) {
+        gameWinCounts[log.gameId] = (gameWinCounts[log.gameId] || 0) + 1;
+      }
+    });
+    let bestGameTitle = '';
+    let bestGameWinRate = 0;
+    Object.entries(gamePlayCounts).forEach(([gameId, count]) => {
+      if (count < 2) return; // need at least 2 plays for meaningful rate
+      const rate = Math.round(((gameWinCounts[gameId] || 0) / count) * 100);
+      if (rate > bestGameWinRate) {
+        bestGameWinRate = rate;
+        bestGameTitle = games.find(g => g.id === gameId)?.title || '';
       }
     });
 
-    return { ...p, plays, wins, winRate, highScore, highScoreGame };
+    return { ...p, plays, wins, winRate, favoriteGameTitle, favoriteGamePlays, bestGameTitle, bestGameWinRate };
   }).sort((a, b) => b.winRate - a.winRate);
 
   // Compute top games from filtered games
@@ -166,13 +181,34 @@ export default function Statistics() {
 
                 <div className="bg-surface-50 dark:bg-surface-800/50 rounded-xl p-3 flex justify-between items-center border border-surface-100 dark:border-surface-700">
                   <div className="flex items-center gap-2 text-surface-600 dark:text-surface-300">
-                    <TrendingUp size={16} />
-                    <span className="text-sm">High Score</span>
+                    <Gamepad2 size={16} />
+                    <span className="text-sm">Favorite Game</span>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-lg leading-none">{stat.highScore}</p>
-                    {stat.highScore > 0 && (
-                      <p className="text-[10px] text-surface-400 mt-0.5 truncate max-w-[100px]">{stat.highScoreGame}</p>
+                    {stat.favoriteGameTitle ? (
+                      <>
+                        <p className="font-bold text-xs leading-tight truncate max-w-[110px]">{stat.favoriteGameTitle}</p>
+                        <p className="text-[10px] text-surface-400 mt-0.5">{stat.favoriteGamePlays} plays</p>
+                      </>
+                    ) : (
+                      <p className="text-surface-400 text-xs">—</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="bg-surface-50 dark:bg-surface-800/50 rounded-xl p-3 flex justify-between items-center border border-surface-100 dark:border-surface-700">
+                  <div className="flex items-center gap-2 text-surface-600 dark:text-surface-300">
+                    <TrendingUp size={16} />
+                    <span className="text-sm">Best Game</span>
+                  </div>
+                  <div className="text-right">
+                    {stat.bestGameTitle ? (
+                      <>
+                        <p className="font-bold text-xs leading-tight truncate max-w-[110px]">{stat.bestGameTitle}</p>
+                        <p className="text-[10px] text-surface-400 mt-0.5">{stat.bestGameWinRate}% win rate</p>
+                      </>
+                    ) : (
+                      <p className="text-surface-400 text-xs">—</p>
                     )}
                   </div>
                 </div>
