@@ -33,8 +33,7 @@ export interface PlayLog {
   gameId: string;
   date: string; // ISO string
   players: PlayerScore[];
-  winnerId?: string | null; // Legacy single winner (or fallback)
-  winnerIds?: string[]; // Supports multiple joint 1st place winners
+  winnerIds: string[]; // All 1st-place winners (1 for sole winner, >1 for ties)
   reviewMemo: string;
   imageUrls?: string[]; // New: support for uploaded photographs
 }
@@ -63,7 +62,7 @@ interface BoardGameState {
 // Initial dummy data to showcase the app
 const initialGames: Game[] = [
   {
-    "id": "bgg-real-1",
+    "id": "70c4f864-4188-4485-bc5b-0e08ba7cdd9f",
     "title": "Brass: Birmingham (2018)",
     "players": "2-4",
     "playTime": 120,
@@ -72,7 +71,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-2",
+    "id": "67deee70-29f9-4550-bc7f-53c4e66cf636",
     "title": "Pandemic Legacy: Season 1 (2015)",
     "players": "2-4",
     "playTime": 60,
@@ -81,7 +80,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-3",
+    "id": "120ce9aa-3472-4d2e-a576-d237c5abaef5",
     "title": "Gloomhaven (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -90,7 +89,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-4",
+    "id": "da80797e-fafc-4cdb-8f7c-78e51e257840",
     "title": "Ark Nova (2021)",
     "players": "1-4",
     "playTime": 150,
@@ -99,7 +98,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-5",
+    "id": "23803779-1d53-48f5-a11a-1c6adafc2f07",
     "title": "Twilight Imperium: Fourth Edition (2017)",
     "players": "3-6",
     "playTime": 480,
@@ -108,7 +107,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-6",
+    "id": "d0c021f4-5a73-42e1-b97d-3d7acd0f90f6",
     "title": "Terraforming Mars (2016)",
     "players": "1-5",
     "playTime": 120,
@@ -117,7 +116,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-7",
+    "id": "0baaf7d7-efc5-4be0-bbe3-306cf27a0138",
     "title": "Dune: Imperium (2020)",
     "players": "1-4",
     "playTime": 120,
@@ -126,7 +125,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-8",
+    "id": "4ffe6bd7-4150-45ff-a0d7-d740368fb909",
     "title": "Star Wars: Rebellion (2016)",
     "players": "2-4",
     "playTime": 240,
@@ -135,7 +134,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-9",
+    "id": "2b1b8908-dec0-4a58-9b58-f6a7c10d763e",
     "title": "War of the Ring: Second Edition (2011)",
     "players": "2-4",
     "playTime": 180,
@@ -144,7 +143,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-10",
+    "id": "9ca1a5de-0276-4c9b-a4ce-62892f7fb209",
     "title": "Spirit Island (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -153,7 +152,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-11",
+    "id": "75b103f0-72cb-4914-be48-4d82d2edc02e",
     "title": "Scythe (2016)",
     "players": "1-5",
     "playTime": 115,
@@ -162,7 +161,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-12",
+    "id": "14130fcb-a8c4-4e99-83a4-ff0ff6096452",
     "title": "Cascadia (2021)",
     "players": "1-4",
     "playTime": 45,
@@ -171,7 +170,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-13",
+    "id": "14f668cf-4ecd-433f-af6a-1e90a1177721",
     "title": "The Castles of Burgundy (2011)",
     "players": "2-4",
     "playTime": 90,
@@ -180,7 +179,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-14",
+    "id": "2db3540f-0551-44cd-b924-064c308e5224",
     "title": "7 Wonders Duel (2015)",
     "players": "2",
     "playTime": 30,
@@ -189,7 +188,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-15",
+    "id": "9b9d362a-6a0b-4bc5-bb0b-f43bb16342d6",
     "title": "Wingspan (2019)",
     "players": "1-5",
     "playTime": 70,
@@ -198,7 +197,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-16",
+    "id": "0dd52813-1b31-4008-a642-5701e6fb1fc4",
     "title": "Concordia (2013)",
     "players": "2-5",
     "playTime": 100,
@@ -207,7 +206,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-17",
+    "id": "561d5262-46d3-463b-893e-ba1b9b27bd4a",
     "title": "Root (2018)",
     "players": "2-4",
     "playTime": 90,
@@ -216,7 +215,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-18",
+    "id": "0671cf43-e199-4597-b8b4-020b7f5c1d62",
     "title": "Everdell (2018)",
     "players": "1-4",
     "playTime": 80,
@@ -225,7 +224,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-19",
+    "id": "ac7cffb2-18f6-4b93-902f-5bea2562a04c",
     "title": "A Feast for Odin (2016)",
     "players": "1-4",
     "playTime": 120,
@@ -234,7 +233,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-20",
+    "id": "027b38bf-aad4-48db-9cbf-2da5ba98ded2",
     "title": "Great Western Trail (2016)",
     "players": "2-4",
     "playTime": 150,
@@ -243,7 +242,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-21",
+    "id": "b5642a64-35f9-4839-b4d7-77fed19a06dc",
     "title": "Orléans (2014)",
     "players": "2-4",
     "playTime": 90,
@@ -252,7 +251,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-22",
+    "id": "30385100-5182-4187-9c07-d1e5e1aa1736",
     "title": "Lost Ruins of Arnak (2020)",
     "players": "1-4",
     "playTime": 120,
@@ -261,7 +260,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-23",
+    "id": "1c8e0fe7-2c58-498a-bafb-ed0750b196a3",
     "title": "Blood Rage (2015)",
     "players": "2-4",
     "playTime": 90,
@@ -270,7 +269,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-24",
+    "id": "92fef6ea-9320-4a6a-977f-fbf3b36892da",
     "title": "Eclipse: Second Dawn for the Galaxy (2020)",
     "players": "2-6",
     "playTime": 200,
@@ -279,7 +278,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-25",
+    "id": "7c1f26f6-0558-4ad8-9908-e65a7e94e3a9",
     "title": "Mage Knight Board Game (2011)",
     "players": "1-4",
     "playTime": 240,
@@ -288,7 +287,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-26",
+    "id": "7911fafa-ebaa-40fa-b47b-ead0cde6eb35",
     "title": "The Crew: The Quest for Planet Nine (2019)",
     "players": "2-5",
     "playTime": 20,
@@ -297,7 +296,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-27",
+    "id": "393fd487-051a-4145-b7a1-04931b55b568",
     "title": "Tzolk'in: The Mayan Calendar (2012)",
     "players": "2-4",
     "playTime": 90,
@@ -306,7 +305,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-28",
+    "id": "21ff18ea-6387-4e7a-891c-25bba2b66d8f",
     "title": "Mansions of Madness: Second Edition (2016)",
     "players": "1-5",
     "playTime": 180,
@@ -315,7 +314,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-29",
+    "id": "12a51423-d076-479a-bcad-d2adf0007b46",
     "title": "Marvel Champions: The Card Game (2019)",
     "players": "1-4",
     "playTime": 90,
@@ -324,7 +323,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-30",
+    "id": "7d9443e2-cd93-4019-9b86-bd145a2e895d",
     "title": "Clank! Legacy: Acquisitions Incorporated (2019)",
     "players": "2-4",
     "playTime": 120,
@@ -333,7 +332,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-31",
+    "id": "d97e8d3c-d5db-435b-906d-ed8c9bdd3eb2",
     "title": "Azul (2017)",
     "players": "2-4",
     "playTime": 45,
@@ -342,7 +341,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-32",
+    "id": "ded7454e-671d-4407-99f4-2c140dda0e1a",
     "title": "Viticulture Essential Edition (2015)",
     "players": "1-6",
     "playTime": 90,
@@ -351,7 +350,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-33",
+    "id": "7b23d6b5-c40b-45c5-a8c0-330b3301db1a",
     "title": "Crokinole (1876)",
     "players": "2-4",
     "playTime": 30,
@@ -360,7 +359,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-34",
+    "id": "f90bfa92-f551-4d99-9b66-a15e949f20f0",
     "title": "Pax Pamir: Second Edition (2019)",
     "players": "1-5",
     "playTime": 120,
@@ -369,7 +368,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-35",
+    "id": "03025ba5-a83d-4787-a13a-bb4b2487607e",
     "title": "Through the Ages: A New Story of Civilization (2015)",
     "players": "2-4",
     "playTime": 120,
@@ -378,7 +377,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-36",
+    "id": "7c0b7360-573c-4f92-84ad-51490dd4c8fa",
     "title": "The Quacks of Quedlinburg (2018)",
     "players": "2-4",
     "playTime": 45,
@@ -387,7 +386,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-37",
+    "id": "4c40b3c2-0660-4e8a-a63d-9d21e72da84a",
     "title": "Catan (1995)",
     "players": "3-4",
     "playTime": 120,
@@ -396,7 +395,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-38",
+    "id": "3e1644ea-750f-41f7-a7a9-c070bde392f2",
     "title": "Ticket to Ride (2004)",
     "players": "2-5",
     "playTime": 60,
@@ -405,7 +404,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-39",
+    "id": "63e37a61-420a-446a-8b36-55f062f36e0b",
     "title": "Carcassonne (2000)",
     "players": "2-5",
     "playTime": 45,
@@ -414,7 +413,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-40",
+    "id": "376bdad5-d339-47a3-bfa0-5c3e7968a6c7",
     "title": "Splendor (2014)",
     "players": "2-4",
     "playTime": 30,
@@ -423,7 +422,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-41",
+    "id": "6b0b8b6f-ac90-4c25-8883-be840938fa8a",
     "title": "Patchwork (2014)",
     "players": "2",
     "playTime": 30,
@@ -432,7 +431,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-42",
+    "id": "d55cdcea-ad6b-4d7e-9a4e-68e8dcdf08b2",
     "title": "Dominion (2008)",
     "players": "2-4",
     "playTime": 30,
@@ -441,7 +440,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-43",
+    "id": "32a0b167-5d25-4e1e-b3ec-b4f2c81df539",
     "title": "7 Wonders (2010)",
     "players": "2-7",
     "playTime": 30,
@@ -450,7 +449,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-44",
+    "id": "6ce92127-fa0c-40ff-bfd5-d4427d9e9039",
     "title": "Agricola (2007)",
     "players": "1-5",
     "playTime": 150,
@@ -459,7 +458,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-45",
+    "id": "843aadef-cdd8-4f37-be5b-da232e432c26",
     "title": "Race for the Galaxy (2007)",
     "players": "2-4",
     "playTime": 60,
@@ -468,7 +467,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-46",
+    "id": "f2742e47-fbe1-4301-b591-0274f5c583bb",
     "title": "Puerto Rico (2002)",
     "players": "3-5",
     "playTime": 150,
@@ -477,7 +476,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-47",
+    "id": "e8c4357a-0793-449e-9355-7c371556dc47",
     "title": "Power Grid (2004)",
     "players": "2-6",
     "playTime": 120,
@@ -486,7 +485,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-48",
+    "id": "aa53e890-52a5-478a-9b94-3c11a320a3ed",
     "title": "El Grande (1995)",
     "players": "2-5",
     "playTime": 120,
@@ -495,7 +494,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-49",
+    "id": "ba94cedd-846a-4534-a391-e8da6175a6cd",
     "title": "Brass: Lancashire (2007)",
     "players": "2-4",
     "playTime": 120,
@@ -504,7 +503,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-50",
+    "id": "371121e3-d95d-4546-83bc-91f41b6c6be7",
     "title": "Tigris & Euphrates (1997)",
     "players": "2-4",
     "playTime": 90,
@@ -513,7 +512,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-51",
+    "id": "cb25ca43-a9e6-426b-a8f5-7ba7ad5d0ed3",
     "title": "Star Wars: Imperial Assault (2014)",
     "players": "1-5",
     "playTime": 120,
@@ -522,7 +521,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-52",
+    "id": "6c21b66f-ad65-4f14-a849-a8a1f42f0675",
     "title": "Dune: Imperium – Uprising (2023)",
     "players": "1-4",
     "playTime": 120,
@@ -531,7 +530,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-53",
+    "id": "468ac354-5fac-416b-b682-6bbd47ae00ff",
     "title": "Inis (2016)",
     "players": "2-4",
     "playTime": 90,
@@ -540,7 +539,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-54",
+    "id": "fc169129-45fe-4bcf-aad6-76829c6ecb48",
     "title": "Cosmic Encounter (2008)",
     "players": "3-6",
     "playTime": 60,
@@ -549,7 +548,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-55",
+    "id": "2e309585-8e3b-4041-b3db-4df637fe6ebc",
     "title": "Kemet (2012)",
     "players": "2-5",
     "playTime": 120,
@@ -558,7 +557,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-56",
+    "id": "48e9f77c-7e36-4777-81d4-d264c7dfd1c9",
     "title": "Hansa Teutonica (2009)",
     "players": "2-5",
     "playTime": 90,
@@ -567,7 +566,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-57",
+    "id": "c282216c-7b38-4f42-94f2-0bca0f78d13d",
     "title": "Ra (1999)",
     "players": "2-5",
     "playTime": 60,
@@ -576,7 +575,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-58",
+    "id": "5f311273-ecef-4f42-8f47-1b83fbcace7b",
     "title": "Scythe: Invaders from Afar (2016)",
     "players": "1-5",
     "playTime": 115,
@@ -585,7 +584,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-59",
+    "id": "4c871913-c91c-4d0f-af81-69e03f54ff98",
     "title": "Radlands (2021)",
     "players": "2",
     "playTime": 40,
@@ -594,7 +593,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-60",
+    "id": "6dcaae7b-6db3-4aee-8e47-6e99c4c4bb33",
     "title": "The Resistance: Avalon (2012)",
     "players": "5-10",
     "playTime": 30,
@@ -603,7 +602,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-61",
+    "id": "d3fe239f-2271-460f-a9fa-e6e252474056",
     "title": "Decrypto (2018)",
     "players": "3-8",
     "playTime": 45,
@@ -612,7 +611,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-62",
+    "id": "2fea0178-86ec-4680-afda-bf2c35c43f84",
     "title": "Just One (2018)",
     "players": "3-7",
     "playTime": 20,
@@ -621,7 +620,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-63",
+    "id": "63b91399-7feb-4997-a445-12febe9ea718",
     "title": "Wavelength (2019)",
     "players": "4-8",
     "playTime": 45,
@@ -630,7 +629,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-64",
+    "id": "c1956019-c4f6-4833-beaf-bd2c07a3ab8c",
     "title": "Codenames (2015)",
     "players": "2-8",
     "playTime": 15,
@@ -639,7 +638,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-65",
+    "id": "2df8fa1a-1956-4f94-9041-f20ef8e2dd64",
     "title": "Secret Hitler (2016)",
     "players": "5-10",
     "playTime": 45,
@@ -648,7 +647,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-66",
+    "id": "580f296f-1752-43c3-b40a-a98d1185801c",
     "title": "Deception: Murder in Hong Kong (2014)",
     "players": "4-12",
     "playTime": 20,
@@ -657,7 +656,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-67",
+    "id": "aa50c661-5cd5-4ed6-8ba4-f2116139bb36",
     "title": "Lords of Waterdeep (2012)",
     "players": "2-5",
     "playTime": 120,
@@ -666,7 +665,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-68",
+    "id": "e92cd31c-4052-4156-aa0d-2bbea33891d2",
     "title": "Stone Age (2008)",
     "players": "2-4",
     "playTime": 90,
@@ -675,7 +674,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-69",
+    "id": "6eb385f4-2265-476c-a134-9938bb711a0c",
     "title": "Watergate (2019)",
     "players": "2",
     "playTime": 60,
@@ -684,7 +683,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-70",
+    "id": "1f3e4859-dbe3-450e-b9b0-8ae91cb53ad0",
     "title": "Targi (2012)",
     "players": "2",
     "playTime": 60,
@@ -693,7 +692,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-71",
+    "id": "094e4e86-5f30-4e47-8ec7-e1fd8a7d53d1",
     "title": "Five Tribes (2014)",
     "players": "2-4",
     "playTime": 80,
@@ -702,7 +701,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-72",
+    "id": "919348a1-aa50-4469-bf3f-b040ff1085e0",
     "title": "Troyes (2010)",
     "players": "1-4",
     "playTime": 90,
@@ -711,7 +710,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-73",
+    "id": "c0ad7314-9809-4a28-89f7-21fcd6810b14",
     "title": "Keyflower (2012)",
     "players": "2-6",
     "playTime": 120,
@@ -720,7 +719,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-74",
+    "id": "f11f29ae-0719-413e-8e55-98bf37897a82",
     "title": "Grand Austria Hotel (2015)",
     "players": "2-4",
     "playTime": 120,
@@ -729,7 +728,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-75",
+    "id": "d7ccf01d-9d9e-4f15-8cd1-bff8988afa74",
     "title": "Lorenzo il Magnifico (2016)",
     "players": "2-4",
     "playTime": 120,
@@ -738,7 +737,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-76",
+    "id": "33ebce8e-b9e9-4c76-9e03-b856b08e8207",
     "title": "The Gallerist (2015)",
     "players": "1-4",
     "playTime": 150,
@@ -747,7 +746,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-77",
+    "id": "e7a04b25-570f-47f3-a126-7b861b512418",
     "title": "Lisboa (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -756,7 +755,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-78",
+    "id": "d7ae6728-0032-4db9-993f-7811636fc5d1",
     "title": "On Mars (2020)",
     "players": "1-4",
     "playTime": 150,
@@ -765,7 +764,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-79",
+    "id": "6b4a1ff6-3374-44f9-a992-f3d2cb14aae4",
     "title": "Kanban EV (2020)",
     "players": "1-4",
     "playTime": 180,
@@ -774,7 +773,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-80",
+    "id": "17e38212-196b-4dd3-88e3-91dfa0a8a263",
     "title": "Vinhos Deluxe Edition (2016)",
     "players": "1-4",
     "playTime": 135,
@@ -783,7 +782,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-81",
+    "id": "6c6dd8cc-a85d-4f9d-a55b-2c8603c0c323",
     "title": "Clans of Caledonia (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -792,7 +791,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-82",
+    "id": "7926d9a7-2e2b-4f7c-94b1-24c75ca6364e",
     "title": "Teotihuacan: City of Gods (2018)",
     "players": "1-4",
     "playTime": 120,
@@ -801,7 +800,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-83",
+    "id": "eb3f77c3-7a92-4d3e-9902-fca87b571123",
     "title": "Barrage (2019)",
     "players": "1-4",
     "playTime": 120,
@@ -810,7 +809,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-84",
+    "id": "3b9d5ac2-2a79-414d-b858-f21c382b4263",
     "title": "Nemesis (2018)",
     "players": "1-5",
     "playTime": 180,
@@ -819,7 +818,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-85",
+    "id": "083507f7-a830-48a6-b27f-0d7fdd5283d6",
     "title": "Dead of Winter: A Crossroads Game (2014)",
     "players": "2-5",
     "playTime": 120,
@@ -828,7 +827,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-86",
+    "id": "e389db51-9b05-4579-b457-703e288c29b1",
     "title": "Sherlock Holmes Consulting Detective (1981)",
     "players": "1-5",
     "playTime": 15,
@@ -837,7 +836,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-87",
+    "id": "ed91cd67-78f2-4c57-a74c-fde71634b8bb",
     "title": "Pandemic (2008)",
     "players": "2-4",
     "playTime": 45,
@@ -846,7 +845,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-88",
+    "id": "ce6ac8bf-bbde-4bbd-af23-0fdefddd00c3",
     "title": "Robinson Crusoe: Adventures on the Cursed Island (2012)",
     "players": "1-4",
     "playTime": 120,
@@ -855,7 +854,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-89",
+    "id": "23811a81-2bde-4d59-bc97-87a3b652622b",
     "title": "Eldritch Horror (2013)",
     "players": "1-8",
     "playTime": 240,
@@ -864,7 +863,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-90",
+    "id": "4d1d7da6-d0d3-4fcb-a930-11a3392b070b",
     "title": "Arkham Horror: The Card Game (2016)",
     "players": "1-2",
     "playTime": 120,
@@ -873,7 +872,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-91",
+    "id": "9fe40c97-f9e4-47fb-8b1f-cf30b322a8b6",
     "title": "Gloomhaven: Jaws of the Lion (2020)",
     "players": "1-4",
     "playTime": 120,
@@ -882,7 +881,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-92",
+    "id": "7d67dd7c-78c8-4918-bcd1-467dbf80d7e4",
     "title": "Aeon's End (2016)",
     "players": "1-4",
     "playTime": 60,
@@ -891,7 +890,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-93",
+    "id": "364f3faa-8abb-49af-9346-becaf573988c",
     "title": "Too Many Bones (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -900,7 +899,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-94",
+    "id": "554fd131-1bd4-4220-a948-c7a2476618a3",
     "title": "The Lord of the Rings: Journeys in Middle-Earth (2019)",
     "players": "1-5",
     "playTime": 120,
@@ -909,7 +908,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-95",
+    "id": "95985743-8d86-4091-a079-31db920ab2a4",
     "title": "Sleeping Gods (2021)",
     "players": "1-4",
     "playTime": 1200,
@@ -918,7 +917,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-96",
+    "id": "b5586702-585c-4ac3-ac95-741dd5180d13",
     "title": "Tainted Grail: The Fall of Avalon (2019)",
     "players": "1-4",
     "playTime": 120,
@@ -927,7 +926,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-97",
+    "id": "628db72e-d445-4a2d-9a15-18e892b89f34",
     "title": "Oath: Chronicles of Empire and Exile (2021)",
     "players": "1-6",
     "playTime": 120,
@@ -936,7 +935,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-98",
+    "id": "51c0291b-afa3-4075-9860-0efffef6c4c1",
     "title": "Mombasa (2015)",
     "players": "2-4",
     "playTime": 150,
@@ -945,7 +944,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-99",
+    "id": "31069180-5fb4-462c-8a15-d6e4dbf18644",
     "title": "Maracaibo (2019)",
     "players": "1-4",
     "playTime": 120,
@@ -954,7 +953,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-100",
+    "id": "de42e1df-1718-4751-a7e3-862ea1b24aaf",
     "title": "Nidavellir (2020)",
     "players": "2-5",
     "playTime": 45,
@@ -963,7 +962,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-101",
+    "id": "82e149cf-51f4-4a45-a58e-97018e9a7d7b",
     "title": "Res Arcana (2019)",
     "players": "2-4",
     "playTime": 60,
@@ -972,7 +971,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-102",
+    "id": "ead2eea9-c331-49b6-bf97-436d5b9a5ad5",
     "title": "It's a Wonderful World (2019)",
     "players": "1-5",
     "playTime": 60,
@@ -981,7 +980,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-103",
+    "id": "5df6622b-ee14-48f5-91ec-40a6d260f17e",
     "title": "Furnace (2020)",
     "players": "2-4",
     "playTime": 60,
@@ -990,7 +989,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-104",
+    "id": "b1dfc091-3f73-45ed-b4d2-3e5260d279b5",
     "title": "Fantasy Realms (2017)",
     "players": "2-6",
     "playTime": 20,
@@ -999,7 +998,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-105",
+    "id": "c4142771-d3e5-4e3d-b17b-fb9a9a2efd16",
     "title": "Space Base (2018)",
     "players": "2-5",
     "playTime": 60,
@@ -1008,7 +1007,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-106",
+    "id": "680944c5-efbb-4269-83ae-1994e3082377",
     "title": "Gizmos (2018)",
     "players": "2-4",
     "playTime": 50,
@@ -1017,7 +1016,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-107",
+    "id": "a040bc20-41b8-45b0-91cc-9f310b8ccf5d",
     "title": "Century: Spice Road (2017)",
     "players": "2-5",
     "playTime": 45,
@@ -1026,7 +1025,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-108",
+    "id": "48834e6a-9c7b-4cad-ba33-a0ee9f847664",
     "title": "Sagrada (2017)",
     "players": "1-4",
     "playTime": 45,
@@ -1035,7 +1034,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-109",
+    "id": "0462da53-1af0-4824-af74-02197e364583",
     "title": "Calico (2020)",
     "players": "1-4",
     "playTime": 45,
@@ -1044,7 +1043,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-110",
+    "id": "e0d8ba6a-bf6f-4170-a226-4a62d352249f",
     "title": "Bärenpark (2017)",
     "players": "2-4",
     "playTime": 45,
@@ -1053,7 +1052,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-111",
+    "id": "c2c9161a-567e-485a-a134-99d975b2b4b2",
     "title": "Isle of Cats (2019)",
     "players": "3-6",
     "playTime": 90,
@@ -1062,7 +1061,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-112",
+    "id": "061bf413-f3b7-4cf1-b21b-1b4f37a68c8e",
     "title": "Parks (2019)",
     "players": "1-5",
     "playTime": 60,
@@ -1071,7 +1070,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-113",
+    "id": "e62999ff-50c7-4f3e-92a0-3f186c02fde3",
     "title": "Tokaido (2012)",
     "players": "2-5",
     "playTime": 45,
@@ -1080,7 +1079,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-114",
+    "id": "7a0c393d-8c57-4cf2-9e51-795c27f6a09b",
     "title": "Takenoko (2011)",
     "players": "2-4",
     "playTime": 45,
@@ -1089,7 +1088,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-115",
+    "id": "b6708c15-65e5-4e80-8d2a-5a83aeeeb349",
     "title": "Sushi Go Party! (2016)",
     "players": "2-8",
     "playTime": 20,
@@ -1098,7 +1097,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-116",
+    "id": "34ce80e6-df8d-4e13-bd2e-afd58d11db88",
     "title": "Welcome To... (2018)",
     "players": "1-100",
     "playTime": 25,
@@ -1107,7 +1106,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-117",
+    "id": "332494c2-6763-4154-86a8-34566aa791cb",
     "title": "Cartographers (2019)",
     "players": "1-100",
     "playTime": 45,
@@ -1116,7 +1115,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-118",
+    "id": "2b750292-7d93-4a0b-8d39-1fb069821026",
     "title": "That's Pretty Clever! (2018)",
     "players": "1-4",
     "playTime": 30,
@@ -1125,7 +1124,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-119",
+    "id": "2f19447c-de63-43df-af13-353b4530e17b",
     "title": "Sprawlopolis (2018)",
     "players": "1-4",
     "playTime": 20,
@@ -1134,7 +1133,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-120",
+    "id": "0984c130-d9da-4423-b3e4-6ce8fc2219a8",
     "title": "Love Letter (2012)",
     "players": "2-6",
     "playTime": 20,
@@ -1143,7 +1142,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-121",
+    "id": "70832163-49c5-4f46-8ae0-2cbf47d26040",
     "title": "Skull (2011)",
     "players": "3-6",
     "playTime": 45,
@@ -1152,7 +1151,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-122",
+    "id": "5a1d1fa1-661f-4fa7-b8fa-f1eb1dbd7eae",
     "title": "Camel Up (2014)",
     "players": "2-8",
     "playTime": 30,
@@ -1161,7 +1160,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-123",
+    "id": "719cf349-e5b0-48f3-ad3a-823d20f2b116",
     "title": "The Mind (2018)",
     "players": "2-4",
     "playTime": 20,
@@ -1170,7 +1169,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-124",
+    "id": "ed0e0b7b-14e6-4de6-904c-22fe87e08a24",
     "title": "Hanabi (2010)",
     "players": "2-5",
     "playTime": 25,
@@ -1179,7 +1178,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-125",
+    "id": "31c0074e-a4d7-44d6-9d48-44d7e2cc948a",
     "title": "Dixit (2008)",
     "players": "3-6",
     "playTime": 30,
@@ -1188,7 +1187,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-126",
+    "id": "3a9d454d-721d-4844-8227-7b4b70b91ea4",
     "title": "Mysterium (2015)",
     "players": "2-7",
     "playTime": 42,
@@ -1197,7 +1196,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-127",
+    "id": "1f0ccb6e-0191-4d5f-a1c7-c945979a144a",
     "title": "Betrayal at House on the Hill (2004)",
     "players": "3-6",
     "playTime": 60,
@@ -1206,7 +1205,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-128",
+    "id": "4465fef4-a975-4456-86ec-1c00d2244d50",
     "title": "Smash Up (2012)",
     "players": "2-4",
     "playTime": 45,
@@ -1215,7 +1214,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-129",
+    "id": "30a30bde-34d0-43da-b91e-61be6d27a929",
     "title": "King of Tokyo (2011)",
     "players": "2-6",
     "playTime": 30,
@@ -1224,7 +1223,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-130",
+    "id": "a0fd0fc6-95c9-4bcb-b115-cc7252f63d87",
     "title": "Survive: Escape from Atlantis! (1982)",
     "players": "2-4",
     "playTime": 60,
@@ -1233,7 +1232,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-131",
+    "id": "aef9f74b-79e1-4231-aecb-4e59bacc9146",
     "title": "Letters from Whitechapel (2011)",
     "players": "2-6",
     "playTime": 90,
@@ -1242,7 +1241,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-132",
+    "id": "ef792f78-6611-495f-8efa-8e830297a998",
     "title": "Fury of Dracula (2015)",
     "players": "3-6",
     "playTime": 180,
@@ -1251,7 +1250,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-133",
+    "id": "e836437d-eb8b-4ff3-bdb8-3b31668adc9a",
     "title": "Specter Ops (2015)",
     "players": "2-5",
     "playTime": 120,
@@ -1260,7 +1259,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-134",
+    "id": "372c4273-9a61-4d34-bcc7-19400ef1f47a",
     "title": "Captain Sonar (2016)",
     "players": "2-8",
     "playTime": 60,
@@ -1269,7 +1268,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-135",
+    "id": "7de89347-1457-4e17-b632-3b0bf480acf7",
     "title": "Two Rooms and a Boom (2013)",
     "players": "6-30",
     "playTime": 20,
@@ -1278,7 +1277,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-136",
+    "id": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
     "title": "The Search for Planet X (2020)",
     "players": "1-4",
     "playTime": 60,
@@ -1287,7 +1286,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-137",
+    "id": "6c36ae4c-be80-44fc-8669-6430ad8e193f",
     "title": "Alchemists (2014)",
     "players": "2-4",
     "playTime": 120,
@@ -1296,7 +1295,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-138",
+    "id": "fd3fbe51-a125-4536-9955-c6e3df6b9fb6",
     "title": "Trickerion: Legends of Illusion (2015)",
     "players": "2-4",
     "playTime": 180,
@@ -1305,7 +1304,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-139",
+    "id": "6c0b5d37-4cb5-4511-881f-9b7c47f19c2d",
     "title": "Anachrony (2017)",
     "players": "1-4",
     "playTime": 120,
@@ -1314,7 +1313,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-140",
+    "id": "20f96ba1-8690-4fd6-9fcd-ff3e2e7e53a1",
     "title": "Cerebria: The Inside World (2018)",
     "players": "1-4",
     "playTime": 120,
@@ -1323,7 +1322,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-141",
+    "id": "d84fea74-70a6-435f-8a28-a7c216c9ddae",
     "title": "Agricola: All Creatures Big and Small (2012)",
     "players": "2",
     "playTime": 30,
@@ -1332,7 +1331,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-142",
+    "id": "6d1e6752-02e0-4f50-8580-074f8ec27f67",
     "title": "Fields of Arle (2014)",
     "players": "1-2",
     "playTime": 120,
@@ -1341,7 +1340,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-143",
+    "id": "61805699-abab-47c3-9533-2a611f28a194",
     "title": "Le Havre (2008)",
     "players": "1-5",
     "playTime": 150,
@@ -1350,7 +1349,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-144",
+    "id": "c737c006-9148-4fcd-9898-bf796b4d604a",
     "title": "Ora et Labora (2011)",
     "players": "1-4",
     "playTime": 180,
@@ -1359,7 +1358,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-145",
+    "id": "a8bc0a13-9a96-422e-8841-15a214b68ec7",
     "title": "Caverna: The Cave Farmers (2013)",
     "players": "1-7",
     "playTime": 210,
@@ -1368,7 +1367,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-146",
+    "id": "409217b9-bd6a-4468-a358-9898303f566a",
     "title": "Airlines Europe (2011)",
     "players": "2-5",
     "playTime": 75,
@@ -1377,7 +1376,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-147",
+    "id": "50e0e1cc-3718-4ba4-bc12-33981374393c",
     "title": "Thurn and Taxis (2006)",
     "players": "2-4",
     "playTime": 60,
@@ -1386,7 +1385,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-148",
+    "id": "487958e4-6311-4d90-8e42-46764f281aa9",
     "title": "Yinsh (2003)",
     "players": "2",
     "playTime": 60,
@@ -1395,7 +1394,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-149",
+    "id": "b8881cc1-2b3d-4fc5-af20-416c83fbccea",
     "title": "Tzaar (2007)",
     "players": "2",
     "playTime": 60,
@@ -1404,7 +1403,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-150",
+    "id": "40148230-1178-4330-a4cd-f37ca93cc6f6",
     "title": "Hive (2001)",
     "players": "2",
     "playTime": 20,
@@ -1413,7 +1412,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-151",
+    "id": "c448a615-c619-4889-861c-e419a7130d7d",
     "title": "Santorini (2016)",
     "players": "2-3",
     "playTime": 20,
@@ -1422,7 +1421,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-152",
+    "id": "61b481ea-6dd6-41d8-a5e8-b313e6af9503",
     "title": "Onitama (2014)",
     "players": "2",
     "playTime": 20,
@@ -1431,7 +1430,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-153",
+    "id": "f80ae39a-9104-49b9-8c79-4525df9a0052",
     "title": "Chess (1475)",
     "players": "2",
     "playTime": 90,
@@ -1440,7 +1439,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-154",
+    "id": "bc5ffb9d-6216-451f-a9bf-23de52321918",
     "title": "Go (2200 BC)",
     "players": "1-2",
     "playTime": 120,
@@ -1449,7 +1448,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-155",
+    "id": "5c16efd6-657a-475d-98bd-244e5cb4b166",
     "title": "Tak (2016)",
     "players": "2",
     "playTime": 60,
@@ -1458,7 +1457,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-156",
+    "id": "de532a27-f2cc-43f0-98b7-9c8708914a76",
     "title": "Backgammon (3000 BC)",
     "players": "2",
     "playTime": 30,
@@ -1467,7 +1466,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-157",
+    "id": "890df53b-ac55-43bc-8540-07310f19a26d",
     "title": "Mahjong (1850)",
     "players": "3-4",
     "playTime": 120,
@@ -1476,7 +1475,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-158",
+    "id": "a7bd8779-ec8d-43ce-ab5d-1d105fe91644",
     "title": "Shogi (1580)",
     "players": "2",
     "playTime": 60,
@@ -1485,7 +1484,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-159",
+    "id": "6b6e3828-f77c-4aa3-ba75-e44225101a99",
     "title": "Blokus (2000)",
     "players": "2-4",
     "playTime": 20,
@@ -1494,7 +1493,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-160",
+    "id": "d21bf179-c92c-4a77-8ff4-24fa8f6722bf",
     "title": "Ingenious (2004)",
     "players": "1-4",
     "playTime": 45,
@@ -1503,7 +1502,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-161",
+    "id": "88a02049-69d4-4087-b5be-d4f83945c8b3",
     "title": "Star Realms (2014)",
     "players": "2",
     "playTime": 20,
@@ -1512,7 +1511,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-162",
+    "id": "b89b436a-5209-4fdb-9dec-3670069e7f55",
     "title": "Hero Realms (2016)",
     "players": "2-4",
     "playTime": 30,
@@ -1521,7 +1520,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-163",
+    "id": "70f19fce-c599-4b64-af56-75868229c4a4",
     "title": "Valley of the Kings (2014)",
     "players": "2-4",
     "playTime": 45,
@@ -1530,7 +1529,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-164",
+    "id": "3110fff3-8f54-49ac-8af8-79a9f6d25ff8",
     "title": "Tyrants of the Underdark (2016)",
     "players": "2-4",
     "playTime": 60,
@@ -1539,7 +1538,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-165",
+    "id": "e76efc8d-c2f8-4216-a47a-02f943a0af2c",
     "title": "Dune (1979)",
     "players": "2-4",
     "playTime": 90,
@@ -1548,7 +1547,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-166",
+    "id": "0adfa170-4e61-4653-8912-a20074fa06a9",
     "title": "Rex: Final Days of an Empire (2012)",
     "players": "3-6",
     "playTime": 180,
@@ -1557,7 +1556,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-167",
+    "id": "793996d8-9359-4e86-934a-263140bf5095",
     "title": "Twilight Struggle (2005)",
     "players": "2",
     "playTime": 180,
@@ -1566,7 +1565,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-168",
+    "id": "58a0e889-c9a9-4427-bbdb-1075cd5f927e",
     "title": "1960: The Making of the President (2007)",
     "players": "2",
     "playTime": 120,
@@ -1575,7 +1574,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-169",
+    "id": "42242dcf-0b04-4221-be28-2c94a222b560",
     "title": "Labyrinth: The Awakening, 2010 - ? (2010)",
     "players": "1",
     "playTime": 20,
@@ -1584,7 +1583,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-170",
+    "id": "35fa631c-11c6-4fb0-80d2-38a884619615",
     "title": "Sekigahara: The Unification of Japan (2011)",
     "players": "2",
     "playTime": 180,
@@ -1593,7 +1592,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-171",
+    "id": "64cb449e-4337-41a5-9035-7bb29b3cf0e8",
     "title": "Command & Colors: Ancients (2006)",
     "players": "3-6",
     "playTime": 90,
@@ -1602,7 +1601,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-172",
+    "id": "4b4ccf5f-2f7f-48cb-9bb0-7553165b3cc0",
     "title": "Memoir '44 (2004)",
     "players": "2-8",
     "playTime": 60,
@@ -1611,7 +1610,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-173",
+    "id": "0d3abf7a-c974-444d-b23a-42e94fdaaf57",
     "title": "Combat Commander: Europe (2006)",
     "players": "2",
     "playTime": 180,
@@ -1620,7 +1619,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-174",
+    "id": "1927dba9-5eaa-4fa6-afb3-423e102c9640",
     "title": "Advanced Squad Leader (1985)",
     "players": "2",
     "playTime": 480,
@@ -1629,7 +1628,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-175",
+    "id": "ff26544b-150d-4a2c-b2db-a5efa019a7ce",
     "title": "Up Front (1983)",
     "players": "2-3",
     "playTime": 60,
@@ -1638,7 +1637,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-176",
+    "id": "e8b8924c-6efd-49ff-b74a-d337066d9953",
     "title": "Food Chain Magnate (2015)",
     "players": "2-5",
     "playTime": 240,
@@ -1647,7 +1646,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-177",
+    "id": "f22333dd-a242-4769-ac3c-f49f309f205d",
     "title": "The Great Zimbabwe (2012)",
     "players": "2-5",
     "playTime": 150,
@@ -1656,7 +1655,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-178",
+    "id": "2b8b797a-c730-4b02-b753-c91e95fb377e",
     "title": "Antiquity (2004)",
     "players": "2-4",
     "playTime": 180,
@@ -1665,7 +1664,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-179",
+    "id": "75484e55-c29e-46b8-9d64-1ea678650c37",
     "title": "Indonesia (2005)",
     "players": "2-5",
     "playTime": 240,
@@ -1674,7 +1673,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-180",
+    "id": "ebe9703b-b366-47e5-a273-28fe30e25087",
     "title": "1830: Railways & Robber Barons (1986)",
     "players": "2-7",
     "playTime": 360,
@@ -1683,7 +1682,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-181",
+    "id": "19b60a50-b022-4962-acf3-193f47464fb8",
     "title": "18xx series (various)",
     "players": "1-2",
     "playTime": 30,
@@ -1692,7 +1691,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-182",
+    "id": "f5be98fb-4e26-463c-8f44-fbd1d89baaf5",
     "title": "Age of Steam (2002)",
     "players": "1-6",
     "playTime": 120,
@@ -1701,7 +1700,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-183",
+    "id": "e45af936-d5f6-41e0-86d3-ca2592b78461",
     "title": "Railways of the World (2005)",
     "players": "2-6",
     "playTime": 120,
@@ -1710,7 +1709,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-184",
+    "id": "6c1b14cb-388d-4a4f-9303-88a085a4d860",
     "title": "Steam (2009)",
     "players": "3-5",
     "playTime": 90,
@@ -1719,7 +1718,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-185",
+    "id": "69a6c8f7-0793-4a24-8692-a1a1656c9253",
     "title": "Container (2007)",
     "players": "3-5",
     "playTime": 90,
@@ -1728,7 +1727,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-186",
+    "id": "4f5ce2cb-612d-4b3d-aea2-f1385feba0e9",
     "title": "Dominant Species (2010)",
     "players": "2-6",
     "playTime": 240,
@@ -1737,7 +1736,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-187",
+    "id": "1e8f7816-8472-4840-9f8a-9ed6e52d9d6a",
     "title": "High Frontier 4 All (2020)",
     "players": "1-5",
     "playTime": 240,
@@ -1746,7 +1745,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-188",
+    "id": "4c3d8243-221a-40cb-847b-b27fa8d74c16",
     "title": "Leaving Earth (2015)",
     "players": "1-5",
     "playTime": 180,
@@ -1755,7 +1754,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-189",
+    "id": "6814497b-2a67-4f5e-b2be-fbdb4548b4c7",
     "title": "SpaceCorp: 2025-2300AD (2018)",
     "players": "1-4",
     "playTime": 240,
@@ -1764,7 +1763,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-190",
+    "id": "70cfe606-9515-4c1a-aafc-c487a566be39",
     "title": "Terra Mystica (2012)",
     "players": "2-5",
     "playTime": 150,
@@ -1773,7 +1772,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-191",
+    "id": "899915b7-4ece-4f43-aeca-beb779c68972",
     "title": "Gaia Project (2017)",
     "players": "1-4",
     "playTime": 150,
@@ -1782,7 +1781,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-192",
+    "id": "5987cdb0-2dd7-4102-9922-29fb8c1363b9",
     "title": "Clans (2002)",
     "players": "2-4",
     "playTime": 30,
@@ -1791,7 +1790,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-193",
+    "id": "5763edc2-5f98-432d-a6e6-63ddc0c7430a",
     "title": "Web of Power (2000)",
     "players": "3-5",
     "playTime": 60,
@@ -1800,7 +1799,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-194",
+    "id": "1c15bc9e-1c9a-4653-b142-1f17badd14ac",
     "title": "Iwari (2020)",
     "players": "2-5",
     "playTime": 45,
@@ -1809,7 +1808,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-195",
+    "id": "da9f0d6e-a13a-4160-8fda-bd6e4a5e763f",
     "title": "Chinatown (1999)",
     "players": "3-5",
     "playTime": 60,
@@ -1818,7 +1817,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-196",
+    "id": "7cace0d1-df7e-4103-b180-47ec10fbefb5",
     "title": "Bohnanza (1997)",
     "players": "2-7",
     "playTime": 45,
@@ -1827,7 +1826,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-197",
+    "id": "1edffd91-a484-4b50-8b78-625c851609df",
     "title": "Modern Art (1992)",
     "players": "3-5",
     "playTime": 45,
@@ -1836,7 +1835,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-198",
+    "id": "e0f972a6-7171-499e-ba5c-d6fdd816257b",
     "title": "Ra (1999)",
     "players": "2-5",
     "playTime": 60,
@@ -1845,7 +1844,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-199",
+    "id": "fffcd4ba-65cb-45a4-8e83-7974d7ab7523",
     "title": "High Society (1995)",
     "players": "3-5",
     "playTime": 30,
@@ -1854,7 +1853,7 @@ const initialGames: Game[] = [
     "totalPlays": 0
   },
   {
-    "id": "bgg-real-200",
+    "id": "cdea26c9-a5ba-45b0-930e-9ba2e3fb9b00",
     "title": "For Sale (1997)",
     "players": "3-6",
     "playTime": 30,
@@ -1865,11 +1864,11 @@ const initialGames: Game[] = [
 ];
 
 const initialPlayers: Player[] = [
-  { id: 'p1', name: 'Nahyup', group: 'User', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nahyup' },
-  { id: 'p2', name: 'Mom', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mom' },
-  { id: 'p3', name: 'Dad', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dad' },
-  { id: 'p4', name: 'Sister', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sister' },
-  { id: 'p5', name: 'Brother', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Brother' },
+  { id: '08add8ea-3158-4a27-ac53-a17353dc20b0', name: 'Nahyup', group: 'User', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nahyup' },
+  { id: '6436820c-af37-4b2d-89e0-1644503329d2', name: 'Mom', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mom' },
+  { id: 'f03f59af-84be-49b4-bf1c-882fd0344d4b', name: 'Dad', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dad' },
+  { id: 'a6ace485-ec6f-46ca-ba76-f832d18fa43b', name: 'Sister', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sister' },
+  { id: '87253b71-031f-4e92-bed9-3de068e52d21', name: 'Brother', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Brother' },
 ];
 
 const customApiStorage: StateStorage = {
@@ -1991,6 +1990,21 @@ export const useBoardGameStore = create<BoardGameState>()(
     {
       name: 'dice-five-storage', // key in local storage/api
       storage: createJSONStorage(() => customApiStorage),
+      version: 1,
+      migrate: (persistedState: unknown, fromVersion: number) => {
+        const state = persistedState as { games: Game[]; players: Player[]; logs: PlayLog[] };
+        if (fromVersion < 1 && state.logs) {
+          // Remove legacy winnerId field; ensure winnerIds is always a string[]
+          state.logs = state.logs.map((log: PlayLog & { winnerId?: string | null }) => {
+            const { winnerId, winnerIds, ...rest } = log;
+            return {
+              ...rest,
+              winnerIds: winnerIds ?? (winnerId ? [winnerId] : []),
+            } as PlayLog;
+          });
+        }
+        return state;
+      },
     }
   )
 );

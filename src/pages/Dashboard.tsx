@@ -9,11 +9,7 @@ export default function Dashboard() {
   
   // Calculate top player
   const playerWins = logs.reduce((acc, log) => {
-    // Support both legacy single winnerId and newer multi-winner winnerIds
-    const winners = log.winnerIds && log.winnerIds.length > 0
-      ? log.winnerIds
-      : log.winnerId ? [log.winnerId] : [];
-    for (const id of winners) {
+    for (const id of log.winnerIds) {
       acc[id] = (acc[id] || 0) + 1;
     }
     return acc;
@@ -91,7 +87,7 @@ export default function Dashboard() {
               <ul className="divide-y divide-surface-200 dark:divide-surface-700">
                 {recentLogs.map((log) => {
                   const game = games.find(g => g.id === log.gameId);
-                  const winner = players.find(p => p.id === log.winnerId);
+                  const winnerNames = log.winnerIds.map(id => players.find(p => p.id === id)?.name).filter(Boolean).join(', ');
                   return (
                     <li key={log.id} className="p-4 hover:bg-surface-50 dark:hover:bg-surface-700/50 transition-colors">
                       <div className="flex justify-between items-start">
@@ -110,10 +106,10 @@ export default function Dashboard() {
                             </p>
                           </div>
                         </div>
-                        {winner && (
+                        {winnerNames && (
                           <div className="flex items-center gap-1.5 text-xs font-medium text-accent-amber border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full">
                             <Trophy size={12} />
-                            <span>{winner.name} won</span>
+                            <span>{winnerNames} won</span>
                           </div>
                         )}
                       </div>

@@ -33,8 +33,7 @@ export default function Statistics() {
     const playerLogs = filteredLogs.filter(l => l.players.some(ps => ps.playerId === p.id));
     const plays = playerLogs.length;
     const wins = playerLogs.filter(l => 
-      (l.winnerIds && l.winnerIds.includes(p.id)) || 
-      (!l.winnerIds && l.winnerId === p.id)
+      l.winnerIds.includes(p.id)
     ).length;
     const winRate = plays > 0 ? Math.round((wins / plays) * 100) : 0;
     
@@ -276,11 +275,7 @@ export default function Statistics() {
               const gameLogs = logs.filter(l => l.gameId === game.id);
               const winCounts: Record<string, number> = {};
               gameLogs.forEach(log => {
-                if (log.winnerIds) {
-                  log.winnerIds.forEach(id => { winCounts[id] = (winCounts[id] || 0) + 1; });
-                } else if (log.winnerId) {
-                  winCounts[log.winnerId] = (winCounts[log.winnerId] || 0) + 1;
-                }
+                log.winnerIds.forEach(id => { winCounts[id] = (winCounts[id] || 0) + 1; });
               });
               
               let topPlayerId = '';

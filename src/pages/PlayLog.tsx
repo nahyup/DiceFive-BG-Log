@@ -77,18 +77,12 @@ export default function PlayLog() {
     }
 
     // Auto-calculate winner(s)
-    let winnerId: string | undefined = undefined;
     let winnerIds: string[] = [];
     
     if (formData.playerScores.length > 0) {
       const highestScore = Math.max(...formData.playerScores.map(ps => ps.score));
-      // Check for ties or single winner
       const winners = formData.playerScores.filter(ps => ps.score === highestScore);
-      
       winnerIds = winners.map(w => w.playerId);
-      if (winners.length === 1) {
-        winnerId = winners[0].playerId;
-      }
     }
 
     if (logToEdit) {
@@ -96,7 +90,6 @@ export default function PlayLog() {
         gameId: formData.gameId,
         date: new Date(formData.date).toISOString(),
         players: formData.playerScores,
-        winnerId,
         winnerIds,
         reviewMemo: formData.reviewMemo,
         imageUrls: formData.imageUrls.length > 0 ? formData.imageUrls : undefined
@@ -106,7 +99,6 @@ export default function PlayLog() {
         gameId: formData.gameId,
         date: new Date(formData.date).toISOString(),
         players: formData.playerScores,
-        winnerId,
         winnerIds,
         reviewMemo: formData.reviewMemo,
         imageUrls: formData.imageUrls.length > 0 ? formData.imageUrls : undefined
@@ -362,7 +354,7 @@ export default function PlayLog() {
                   <div className="flex flex-wrap gap-2">
                     {log.players.sort((a,b) => b.score - a.score).map((ps) => {
                       const p = players.find(p => p.id === ps.playerId);
-                      const isWinner = (log.winnerIds && log.winnerIds.includes(ps.playerId)) || (!log.winnerIds && ps.playerId === log.winnerId);
+                      const isWinner = log.winnerIds.includes(ps.playerId);
                       return (
                         <div 
                           key={ps.playerId} 
