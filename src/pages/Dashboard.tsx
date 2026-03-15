@@ -9,8 +9,12 @@ export default function Dashboard() {
   
   // Calculate top player
   const playerWins = logs.reduce((acc, log) => {
-    if (log.winnerId) {
-      acc[log.winnerId] = (acc[log.winnerId] || 0) + 1;
+    // Support both legacy single winnerId and newer multi-winner winnerIds
+    const winners = log.winnerIds && log.winnerIds.length > 0
+      ? log.winnerIds
+      : log.winnerId ? [log.winnerId] : [];
+    for (const id of winners) {
+      acc[id] = (acc[id] || 0) + 1;
     }
     return acc;
   }, {} as Record<string, number>);
