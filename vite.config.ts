@@ -11,6 +11,7 @@ const localDataPlugin = () => ({
   name: 'local-data-plugin',
   configureServer(server: any) {
     server.middlewares.use(async (req: any, res: any, next: any) => {
+        const url = req.url?.split('?')[0]
         const setCorsHeaders = (res: any) => {
           res.setHeader('Access-Control-Allow-Origin', '*')
           res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
@@ -18,7 +19,8 @@ const localDataPlugin = () => ({
         }
 
         // Handle /api/data
-        if (req.url === '/api/data') {
+        if (url === '/api/data') {
+          console.log(`[API] ${req.method} ${url}`)
           res.setHeader('Content-Type', 'application/json')
           setCorsHeaders(res)
 
@@ -50,6 +52,7 @@ const localDataPlugin = () => ({
             req.on('end', () => {
               try {
                 JSON.parse(body) // Validation
+                console.log(`[API] Writing data.json (${body.length} bytes)`)
                 fs.writeFileSync(dataFilePath, body, 'utf-8')
                 res.end(JSON.stringify({ success: true }))
               } catch (error) {
@@ -63,7 +66,8 @@ const localDataPlugin = () => ({
         }
 
         // Handle /api/upload
-        if (req.url === '/api/upload' && (req.method === 'POST' || req.method === 'OPTIONS')) {
+        if (url === '/api/upload' && (req.method === 'POST' || req.method === 'OPTIONS')) {
+          console.log(`[API] ${req.method} ${url}`)
           res.setHeader('Content-Type', 'application/json')
           setCorsHeaders(res)
 
@@ -84,6 +88,7 @@ const localDataPlugin = () => ({
                 return
               }
 
+              console.log(`[API] Handling upload: ${name} (${image.length} bytes)`)
               const base64Data = image.replace(/^data:image\/\w+;base64,/, '')
               const buffer = Buffer.from(base64Data, 'base64')
               

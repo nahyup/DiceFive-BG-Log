@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage, type StateStorage } from 'zustand/middleware';
 
+const generateId = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+};
+
 export type GameStatus = 'Owned' | 'Owned by Friends' | 'Wishlist' | 'Preorder';
 
 export interface Game {
@@ -1914,7 +1921,7 @@ export const useBoardGameStore = create<BoardGameState>()(
       logs: [],
 
       addGame: (gameData) => set((state) => ({
-        games: [...state.games, { ...gameData, id: crypto.randomUUID(), totalPlays: 0 }]
+        games: [...state.games, { ...gameData, id: generateId(), totalPlays: 0 }]
       })),
 
       updateGame: (id, gameData) => set((state) => ({
@@ -1927,7 +1934,7 @@ export const useBoardGameStore = create<BoardGameState>()(
       })),
 
       addPlayer: (playerData) => set((state) => ({
-        players: [...state.players, { ...playerData, id: crypto.randomUUID() }]
+        players: [...state.players, { ...playerData, id: generateId() }]
       })),
 
       updatePlayer: (id, playerData) => set((state) => ({
@@ -1939,7 +1946,7 @@ export const useBoardGameStore = create<BoardGameState>()(
       })),
 
       addLog: (logData) => set((state) => {
-        const newLog = { ...logData, id: crypto.randomUUID() };
+        const newLog = { ...logData, id: generateId() };
         // Increment total plays for the game
         const updatedGames = state.games.map(g => 
           g.id === logData.gameId ? { ...g, totalPlays: g.totalPlays + 1 } : g
