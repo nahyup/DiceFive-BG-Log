@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useBoardGameStore } from '../store/useBoardGameStore';
-import { BarChart3, TrendingUp, Medal, Gamepad2, Calendar, History, Award } from 'lucide-react';
+import { BarChart3, Medal, Gamepad2, Calendar, Award, ChevronRight, Trophy, History } from 'lucide-react';
+import { calculatePlayerPerformance } from '../lib/statsUtils';
+import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
 
 export default function Statistics() {
   const { games, players, logs } = useBoardGameStore();
   const [groupFilter, setGroupFilter] = useState<'All' | 'Family' | 'Friend'>('All');
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 
   // Filter players based on group
   const filteredPlayers = groupFilter === 'All' 
@@ -30,42 +33,8 @@ export default function Statistics() {
 
   // Compute stats for filtered players
   const playerStats = filteredPlayers.map(p => {
-    const playerLogs = filteredLogs.filter(l => l.players.some(ps => ps.playerId === p.id));
-    const plays = playerLogs.length;
-    const wins = playerLogs.filter(l => 
-      l.winnerIds.includes(p.id)
-    ).length;
-    const winRate = plays > 0 ? Math.round((wins / plays) * 100) : 0;
-    
-    // Favorite game: game this player has played the most
-    const gamePlayCounts: Record<string, number> = {};
-    playerLogs.forEach(log => {
-      gamePlayCounts[log.gameId] = (gamePlayCounts[log.gameId] || 0) + 1;
-    });
-    const favoriteGameId = Object.entries(gamePlayCounts).sort((a, b) => b[1] - a[1])[0]?.[0];
-    const favoriteGame = games.find(g => g.id === favoriteGameId);
-    const favoriteGameTitle = favoriteGame?.title || '';
-    const favoriteGamePlays = favoriteGameId ? gamePlayCounts[favoriteGameId] : 0;
-
-    // Best game: game with highest personal win rate (min 2 plays)
-    const gameWinCounts: Record<string, number> = {};
-    playerLogs.forEach(log => {
-      if (log.winnerIds.includes(p.id)) {
-        gameWinCounts[log.gameId] = (gameWinCounts[log.gameId] || 0) + 1;
-      }
-    });
-    let bestGameTitle = '';
-    let bestGameWinRate = 0;
-    Object.entries(gamePlayCounts).forEach(([gameId, count]) => {
-      if (count < 2) return; // need at least 2 plays for meaningful rate
-      const rate = Math.round(((gameWinCounts[gameId] || 0) / count) * 100);
-      if (rate > bestGameWinRate) {
-        bestGameWinRate = rate;
-        bestGameTitle = games.find(g => g.id === gameId)?.title || '';
-      }
-    });
-
-    return { ...p, plays, wins, winRate, favoriteGameTitle, favoriteGamePlays, bestGameTitle, bestGameWinRate };
+    const perf = calculatePlayerPerformance(p, filteredLogs, games);
+    return { ...p, ...perf };
   }).sort((a, b) => b.winRate - a.winRate);
 
   // Compute top games from filtered games
@@ -137,84 +106,98 @@ export default function Statistics() {
         </div>
       </div>
 
-      {/* Player Stats Grid */}
+      {/* Player Performance Leaderboard */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <Medal className="text-accent-amber" />
-          <h3 className="text-xl font-bold font-display">Player Performance</h3>
+          <Trophy className="text-amber-500" size={24} />
+          <h3 className="text-xl font-bold font-display">Player Rankings</h3>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {playerStats.map((stat, index) => (
-            <div key={stat.id} className="card p-6 relative overflow-hidden group">
-              {index === 0 && stat.plays > 0 && (
-                <div className="absolute top-0 right-0 bg-accent-amber text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-sm">
-                  Top Player
-                </div>
-              )}
-              
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-lg font-bold flex items-center gap-2">
-                    {stat.name}
-                    <span className="text-xs font-normal bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400 px-2 py-0.5 rounded">
-                      {stat.group}
-                    </span>
-                  </h4>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-surface-500">Win Rate</span>
-                    <span className="font-bold">{stat.winRate}%</span>
-                  </div>
-                  <div className="w-full bg-surface-200 dark:bg-surface-700 rounded-full h-2 overflow-hidden">
-                    <div 
-                      className="bg-primary-500 h-2 rounded-full transition-all duration-1000" 
-                      style={{ width: `${stat.winRate}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-xs text-surface-400 mt-1">{stat.wins} wins in {stat.plays} plays</p>
-                </div>
-
-                <div className="bg-surface-50 dark:bg-surface-800/50 rounded-xl p-3 flex justify-between items-center border border-surface-100 dark:border-surface-700">
-                  <div className="flex items-center gap-2 text-surface-600 dark:text-surface-300">
-                    <Gamepad2 size={16} />
-                    <span className="text-sm">Favorite Game</span>
-                  </div>
-                  <div className="text-right">
-                    {stat.favoriteGameTitle ? (
-                      <>
-                        <p className="font-bold text-xs leading-tight truncate max-w-[110px]">{stat.favoriteGameTitle}</p>
-                        <p className="text-[10px] text-surface-400 mt-0.5">{stat.favoriteGamePlays} plays</p>
-                      </>
-                    ) : (
-                      <p className="text-surface-400 text-xs">—</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="bg-surface-50 dark:bg-surface-800/50 rounded-xl p-3 flex justify-between items-center border border-surface-100 dark:border-surface-700">
-                  <div className="flex items-center gap-2 text-surface-600 dark:text-surface-300">
-                    <TrendingUp size={16} />
-                    <span className="text-sm">Best Game</span>
-                  </div>
-                  <div className="text-right">
-                    {stat.bestGameTitle ? (
-                      <>
-                        <p className="font-bold text-xs leading-tight truncate max-w-[110px]">{stat.bestGameTitle}</p>
-                        <p className="text-[10px] text-surface-400 mt-0.5">{stat.bestGameWinRate}% win rate</p>
-                      </>
-                    ) : (
-                      <p className="text-surface-400 text-xs">—</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-surface-100 dark:border-surface-700 bg-surface-50/50 dark:bg-surface-800/50">
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider w-16 text-center">Rank</th>
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider">Player</th>
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider">Win Rate</th>
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider hidden md:table-cell">Details</th>
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider text-right"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-surface-100 dark:divide-surface-700">
+                {playerStats.map((stat, index) => (
+                  <tr 
+                    key={stat.id} 
+                    onClick={() => setSelectedPlayerId(stat.id)}
+                    className="group hover:bg-surface-50 dark:hover:bg-surface-700/50 transition-colors cursor-pointer"
+                  >
+                    <td className="px-6 py-4 text-center">
+                      <div className={`
+                        inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm
+                        ${index === 0 ? 'bg-amber-100 text-amber-600 border border-amber-200' : 
+                          index === 1 ? 'bg-slate-100 text-slate-500 border border-slate-200' :
+                          index === 2 ? 'bg-orange-100 text-orange-600 border border-orange-200' :
+                          'text-surface-400'}
+                      `}>
+                        {index + 1}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-surface-100 dark:border-surface-700">
+                          {stat.imageUrl ? (
+                            <img src={stat.imageUrl} alt={stat.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full bg-surface-200 flex items-center justify-center">
+                              <Medal className="text-surface-400" size={18} />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <div className="font-bold text-surface-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                            {stat.name}
+                          </div>
+                          <div className="text-xs text-surface-500">{stat.group}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3 min-w-[120px]">
+                        <div className="flex-1 h-2 bg-surface-100 dark:bg-surface-700 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-primary-500 transition-all duration-500" 
+                            style={{ width: `${stat.winRate}%` }}
+                          />
+                        </div>
+                        <span className="text-sm font-bold text-surface-700 dark:text-surface-300 w-10 text-right">{stat.winRate}%</span>
+                      </div>
+                      <div className="text-[10px] text-surface-400 mt-0.5">{stat.wins}W / {stat.plays}P</div>
+                    </td>
+                    <td className="px-6 py-4 hidden md:table-cell">
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 overflow-hidden">
+                          <Gamepad2 size={12} className="text-surface-400 shrink-0" />
+                          <span className="text-xs text-surface-600 dark:text-surface-400 truncate max-w-[120px]" title={`Favorite: ${stat.favoriteGameTitle}`}>
+                            {stat.favoriteGameTitle || '—'}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 overflow-hidden">
+                          <Award size={12} className="text-surface-400 shrink-0" />
+                          <span className="text-xs text-surface-600 dark:text-surface-400 truncate max-w-[120px]" title={`Best: ${stat.bestGameTitle}`}>
+                            {stat.bestGameTitle || '—'}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <ChevronRight className="inline-block text-surface-300 group-hover:text-primary-500 transition-colors" size={20} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -381,6 +364,13 @@ export default function Statistics() {
           </div>
         </div>
       </div>
+      {/* Player Details Modal */}
+      {selectedPlayerId && (
+        <PlayerDetailsModal 
+          playerId={selectedPlayerId} 
+          onClose={() => setSelectedPlayerId(null)} 
+        />
+      )}
     </div>
   );
 }

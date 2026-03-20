@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { Users, UserPlus, Trash2, Shield, User, Pencil, Upload } from 'lucide-react';
+import { useState, useRef } from 'react';
 import { useBoardGameStore, type Player } from '../store/useBoardGameStore';
+import { Users, UserPlus, Trash2, Shield, User, Pencil, Upload } from 'lucide-react';
+import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
 
 export default function PlayerManagement() {
   const store = useBoardGameStore();
@@ -8,6 +9,7 @@ export default function PlayerManagement() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPlayerId, setEditingPlayerId] = useState<string | null>(null);
   const [playerToDelete, setPlayerToDelete] = useState<string | null>(null);
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   
   const [name, setName] = useState('');
   const [group, setGroup] = useState<'Family' | 'Friend' | 'User'>('Friend');
@@ -123,7 +125,11 @@ export default function PlayerManagement() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {store.players.map((player) => (
-          <div key={player.id} className="bg-white dark:bg-surface-800 rounded-2xl p-5 border border-surface-200 dark:border-surface-700 shadow-sm flex flex-col items-center text-center group">
+          <div 
+            key={player.id} 
+            onClick={() => setSelectedPlayerId(player.id)}
+            className="bg-white dark:bg-surface-800 rounded-2xl p-5 border border-surface-200 dark:border-surface-700 shadow-sm flex flex-col items-center text-center group cursor-pointer hover:border-primary-500 dark:hover:border-primary-500 transition-all hover:shadow-md active:scale-[0.98]"
+          >
             <div className="relative mb-4">
               {player.imageUrl ? (
                 <img src={player.imageUrl} alt={player.name} className="w-24 h-24 rounded-full object-cover border-4 border-surface-100 dark:border-surface-700 shadow-sm bg-surface-100 dark:bg-surface-700" />
@@ -138,15 +144,21 @@ export default function PlayerManagement() {
             <GroupBadge group={player.group} />
             
             <div className="mt-4 pt-4 border-t border-surface-100 dark:border-surface-700 w-full flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-               <button 
-                onClick={() => handleOpenEditModal(player)}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOpenEditModal(player);
+                }}
                 className="p-2 text-surface-400 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-colors"
                 title="Edit player"
               >
                 <Pencil size={18} />
               </button>
                <button 
-                onClick={() => setPlayerToDelete(player.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPlayerToDelete(player.id);
+                }}
                 disabled={player.group === 'User'}
                 className="p-2 text-surface-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 title={player.group === 'User' ? "Cannot delete the main user" : "Delete player"}
@@ -317,6 +329,13 @@ export default function PlayerManagement() {
              </div>
           </div>
         </div>
+      )}
+      {/* Player Details Modal */}
+      {selectedPlayerId && (
+        <PlayerDetailsModal 
+          playerId={selectedPlayerId} 
+          onClose={() => setSelectedPlayerId(null)} 
+        />
       )}
     </div>
   );
