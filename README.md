@@ -49,6 +49,21 @@ Make sure you have [Node.js](https://nodejs.org/) (version 18+ recommended) inst
 
 4. Open your browser and navigate to the address shown in your terminal (typically `http://localhost:5173`).
 
+### 🐳 Running with Docker
+
+The easiest way to run the application in a production-like environment with persistent storage:
+
+1. Build and start the container using Docker Compose:
+   ```bash
+   docker compose up -d
+   ```
+
+2. Access the application at `http://localhost:3000`.
+
+3. **Data Persistence**:
+   - Your `data.json` file is mounted to the container, so all logs and sessions are saved locally on your host.
+   - Images uploaded through the app are stored in the `public/uploads` directory on your host.
+
 ---
 
 ## 💾 How Data is Saved
