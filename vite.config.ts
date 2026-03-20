@@ -11,10 +11,22 @@ const localDataPlugin = () => ({
   name: 'local-data-plugin',
   configureServer(server: any) {
     server.middlewares.use(async (req: any, res: any, next: any) => {
+        const setCorsHeaders = (res: any) => {
+          res.setHeader('Access-Control-Allow-Origin', '*')
+          res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+          res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+        }
+
         // Handle /api/data
         if (req.url === '/api/data') {
           res.setHeader('Content-Type', 'application/json')
-          res.setHeader('Access-Control-Allow-Origin', '*')
+          setCorsHeaders(res)
+
+          if (req.method === 'OPTIONS') {
+            res.statusCode = 204
+            res.end()
+            return
+          }
 
           if (req.method === 'GET') {
             try {
@@ -51,9 +63,15 @@ const localDataPlugin = () => ({
         }
 
         // Handle /api/upload
-        if (req.url === '/api/upload' && req.method === 'POST') {
+        if (req.url === '/api/upload' && (req.method === 'POST' || req.method === 'OPTIONS')) {
           res.setHeader('Content-Type', 'application/json')
-          res.setHeader('Access-Control-Allow-Origin', '*')
+          setCorsHeaders(res)
+
+          if (req.method === 'OPTIONS') {
+            res.statusCode = 204
+            res.end()
+            return
+          }
           
           let body = ''
           req.on('data', (chunk: any) => { body += chunk.toString() })
