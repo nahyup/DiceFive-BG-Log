@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useBoardGameStore } from '../store/useBoardGameStore';
 import { BarChart3, Medal, Gamepad2, Calendar, Award, ChevronRight, Trophy, History } from 'lucide-react';
-import { calculatePlayerPerformance } from '../lib/statsUtils';
+import { calculatePlayerPerformance, calculateEloScores } from '../lib/statsUtils';
 import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
 
 export default function Statistics() {
@@ -31,11 +31,14 @@ export default function Statistics() {
         return { ...g, totalPlays: playCount };
       }).filter(g => g.totalPlays > 0);
 
+  // Calculate ELO scores for all players based on all logs
+  const eloScores = calculateEloScores(players, logs);
+
   // Compute stats for filtered players
   const playerStats = filteredPlayers.map(p => {
-    const perf = calculatePlayerPerformance(p, filteredLogs, games);
+    const perf = calculatePlayerPerformance(p, filteredLogs, games, eloScores[p.id]);
     return { ...p, ...perf };
-  }).sort((a, b) => b.winRate - a.winRate);
+  }).sort((a, b) => b.elo - a.elo);
 
   // Compute top games from filtered games
   const sortedGames = [...filteredGames].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
@@ -120,6 +123,7 @@ export default function Statistics() {
                 <tr className="border-b border-surface-100 dark:border-surface-700 bg-surface-50/50 dark:bg-surface-800/50">
                   <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider w-16 text-center">Rank</th>
                   <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider">Player</th>
+                  <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider">ELO Rating</th>
                   <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider">Win Rate</th>
                   <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider hidden md:table-cell">Details</th>
                   <th className="px-6 py-4 text-xs font-bold text-surface-500 uppercase tracking-wider text-right"></th>
@@ -160,6 +164,12 @@ export default function Statistics() {
                           </div>
                           <div className="text-xs text-surface-500">{stat.group}</div>
                         </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <div className="flex flex-col items-center">
+                        <span className="text-lg font-bold text-primary-600 dark:text-primary-400">{stat.elo}</span>
+                        <span className="text-[10px] text-surface-400 uppercase tracking-wider font-medium">Rating</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">

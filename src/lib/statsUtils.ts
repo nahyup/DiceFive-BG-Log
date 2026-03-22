@@ -4,16 +4,72 @@ export interface PlayerStats {
   plays: number;
   wins: number;
   winRate: number;
+  elo: number;
   favoriteGameTitle: string;
   favoriteGamePlays: number;
   bestGameTitle: string;
   bestGameWinRate: number;
 }
 
+export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<string, number> {
+  const eloScores: Record<string, number> = {};
+  const K = 32;
+
+  // Initialize everyone at 1200
+  players.forEach(p => {
+    eloScores[p.id] = 1200;
+  });
+
+  // Process logs in chronological order
+  const sortedLogs = [...logs].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  sortedLogs.forEach(log => {
+    const logPlayerIds = log.players.map(p => p.playerId);
+    const winners = new Set(log.winnerIds);
+    const n = logPlayerIds.length;
+    if (n < 2) return;
+
+    const changes: Record<string, number> = {};
+    logPlayerIds.forEach(id => { changes[id] = 0; });
+
+    // Treat as series of 1v1 matchups
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const idA = logPlayerIds[i];
+        const idB = logPlayerIds[j];
+        
+        const ratingA = eloScores[idA];
+        const ratingB = eloScores[idB];
+
+        const expectedA = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
+        const expectedB = 1 - expectedA;
+
+        let actualA = 0.5;
+        if (winners.has(idA) && !winners.has(idB)) actualA = 1;
+        else if (!winners.has(idA) && winners.has(idB)) actualA = 0;
+        
+        const actualB = 1 - actualA;
+
+        // Normalizing by (n-1) to avoid inflation in large games
+        changes[idA] += (K / (n - 1)) * (actualA - expectedA);
+        changes[idB] += (K / (n - 1)) * (actualB - expectedB);
+      }
+    }
+
+    // Apply changes
+    logPlayerIds.forEach(id => {
+      eloScores[id] = Math.round(eloScores[id] + changes[id]);
+    });
+  });
+
+  return eloScores;
+}
+
 export function calculatePlayerPerformance(
   player: Player,
   logs: PlayLog[],
-  games: Game[]
+  games: Game[],
+  elo: number = 1200
 ): PlayerStats {
   const playerLogs = logs.filter(l => l.players.some(ps => ps.playerId === player.id));
   const plays = playerLogs.length;
@@ -53,6 +109,7 @@ export function calculatePlayerPerformance(
     plays,
     wins,
     winRate,
+    elo,
     favoriteGameTitle,
     favoriteGamePlays,
     bestGameTitle,

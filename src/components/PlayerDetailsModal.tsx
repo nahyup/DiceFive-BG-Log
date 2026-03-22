@@ -1,5 +1,5 @@
 import { useBoardGameStore } from '../store/useBoardGameStore';
-import { calculatePlayerPerformance, getPlayerGameHistory } from '../lib/statsUtils';
+import { calculatePlayerPerformance, getPlayerGameHistory, calculateEloScores } from '../lib/statsUtils';
 import { User, Gamepad2, History, X } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -27,7 +27,8 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
   
   if (!player) return null;
   
-  const stats = calculatePlayerPerformance(player, store.logs, store.games);
+  const eloScores = calculateEloScores(store.players, store.logs);
+  const stats = calculatePlayerPerformance(player, store.logs, store.games, eloScores[playerId]);
   const history = getPlayerGameHistory(playerId, store.logs).slice(0, 10);
   
   return (
@@ -65,7 +66,12 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-surface-50 dark:bg-surface-800 p-4 rounded-2xl border border-surface-100 dark:border-surface-700">
+              <p className="text-xs text-surface-500 uppercase font-bold tracking-wider mb-1">ELO Rating</p>
+              <p className="text-2xl font-display font-bold text-primary-600 dark:text-primary-400">{stats.elo}</p>
+              <p className="text-xs text-surface-400 mt-1">Skill Ranking</p>
+            </div>
             <div className="bg-surface-50 dark:bg-surface-800 p-4 rounded-2xl border border-surface-100 dark:border-surface-700">
               <p className="text-xs text-surface-500 uppercase font-bold tracking-wider mb-1">Win Rate</p>
               <p className="text-2xl font-display font-bold text-primary-600 dark:text-primary-400">{stats.winRate}%</p>
