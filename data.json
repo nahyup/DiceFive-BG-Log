@@ -110,7 +110,7 @@
         "playTime": 150,
         "weight": 3.72,
         "imageUrl": "https://cf.geekdo-images.com/gDn7AhrDlmfCLSz9ZqoNFQ__itemrep/img/0FOms0QcPYvwEMWVXsy9p0FjGlM=/fit-in/246x300/filters:strip_icc()/pic5988511.jpg",
-        "totalPlays": 0,
+        "totalPlays": 1,
         "publishedYear": 2016,
         "subtitle": "그레이트웨스턴트레일"
       },
@@ -1232,7 +1232,7 @@
         "weight": 3.38,
         "imageUrl": "https://cf.geekdo-images.com/rc7CQ5l95ZFoKq3iBVqjgg__itemrep@2x/img/fn3uMoZaY_BgX_5hzZmmBXIhuMw=/fit-in/492x600/filters:strip_icc()/pic5543526.jpg",
         "id": "6ebf7c44-9992-4aa2-acbe-eccaf2dca691",
-        "totalPlays": 1,
+        "totalPlays": 2,
         "publishedYear": 2020,
         "subtitle": "마르코 폴로 2: 위대한 칸의 이름으로"
       },
@@ -1766,7 +1766,7 @@
         "imageUrl": "https://cf.geekdo-images.com/AJNJNuzdBjPOMs1GaDxVqw__imagepage/img/jcKsfaIVJRuXHo34SAUVY9lNZJU=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9477510.png",
         "status": "Owned",
         "id": "id-1773981063325-ze51lj5",
-        "totalPlays": 3
+        "totalPlays": 4
       }
     ],
     "players": [
@@ -2319,6 +2319,94 @@
           "/uploads/1774097849382-kakaotalk_20260321_215424495_03.jpg"
         ],
         "id": "id-1774097523082-zaqeqrc"
+      },
+      {
+        "gameId": "6ebf7c44-9992-4aa2-acbe-eccaf2dca691",
+        "date": "2026-03-28T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "84b003e1-7415-4a5b-ae65-2b52ffee0b31",
+            "score": 101
+          },
+          {
+            "playerId": "d8f90837-2493-415b-8c92-811dadd61b7e",
+            "score": 89
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 70
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 69
+          }
+        ],
+        "winnerIds": [
+          "84b003e1-7415-4a5b-ae65-2b52ffee0b31"
+        ],
+        "reviewMemo": "아슬아슬한 꼴지 면하기",
+        "imageUrls": [
+          "/uploads/1774688782555-1000005711.jpg",
+          "/uploads/1774688782885-1000005712.jpg",
+          "/uploads/1774688783241-1000005714.jpg",
+          "/uploads/1774688783591-1000005715.jpg"
+        ],
+        "id": "id-1774688651226-o3jreu8"
+      },
+      {
+        "gameId": "027b38bf-aad4-48db-9cbf-2da5ba98ded2",
+        "date": "2026-03-28T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "84b003e1-7415-4a5b-ae65-2b52ffee0b31",
+            "score": 135
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 103
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 77
+          },
+          {
+            "playerId": "d8f90837-2493-415b-8c92-811dadd61b7e",
+            "score": 32
+          }
+        ],
+        "winnerIds": [
+          "84b003e1-7415-4a5b-ae65-2b52ffee0b31"
+        ],
+        "reviewMemo": "4시간... 이걸 4시간...",
+        "id": "id-1774708650828-78bbi38"
+      },
+      {
+        "gameId": "id-1773981063325-ze51lj5",
+        "date": "2026-03-28T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "84b003e1-7415-4a5b-ae65-2b52ffee0b31",
+            "score": 0
+          },
+          {
+            "playerId": "d8f90837-2493-415b-8c92-811dadd61b7e",
+            "score": 0
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 100
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 100
+          }
+        ],
+        "winnerIds": [
+          "2e967014-673f-4d51-93f2-74fadd6979cd",
+          "31cc758a-0d5a-4725-9482-c581f1074170"
+        ],
+        "reviewMemo": "범인, 공범 승리!",
+        "id": "id-1774708982460-p4c9zoi"
       }
     ]
   },
