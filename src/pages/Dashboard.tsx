@@ -1,9 +1,46 @@
-import { useBoardGameStore } from '../store/useBoardGameStore';
-import { Gamepad2, Trophy, Users, Clock } from 'lucide-react';
+import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
+import { Gamepad2, Trophy, Users, Clock, RefreshCw, Star } from 'lucide-react';
 import { format } from 'date-fns';
+import { useState, useEffect, useCallback } from 'react';
 
 export default function Dashboard() {
   const { games, players, logs } = useBoardGameStore();
+  const [recommendedGames, setRecommendedGames] = useState<Game[]>([]);
+
+  const pickRandomGames = useCallback(() => {
+    if (games.length === 0) return;
+    
+    // Group games by weight categories to ensure diversity
+    const light = games.filter(g => g.weight < 2.0).sort(() => 0.5 - Math.random());
+    const medium = games.filter(g => g.weight >= 2.0 && g.weight < 3.0).sort(() => 0.5 - Math.random());
+    const heavy = games.filter(g => g.weight >= 3.0 && g.weight <= 4.0).sort(() => 0.5 - Math.random());
+    const veryHeavy = games.filter(g => g.weight > 4.0).sort(() => 0.5 - Math.random());
+
+    const selection: Game[] = [];
+    const buckets = [light, medium, heavy, veryHeavy];
+    
+    // Try to take one from each category first
+    buckets.forEach(bucket => {
+      if (bucket.length > 0) {
+        selection.push(bucket[0]);
+      }
+    });
+
+    // If we need more (e.g. some buckets were empty) or have too many
+    if (selection.length > 4) {
+      setRecommendedGames(selection.sort(() => 0.5 - Math.random()).slice(0, 4));
+    } else if (selection.length < 4 && games.length >= 4) {
+      // Fill the rest from all remaining games
+      const remaining = games.filter(g => !selection.find(s => s.id === g.id)).sort(() => 0.5 - Math.random());
+      setRecommendedGames([...selection, ...remaining.slice(0, 4 - selection.length)]);
+    } else {
+      setRecommendedGames(selection);
+    }
+  }, [games]);
+
+  useEffect(() => {
+    pickRandomGames();
+  }, [pickRandomGames]);
 
   const totalPlays = logs.length;
   
@@ -28,7 +65,48 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-display font-bold text-surface-900 dark:text-white">Overview</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-display font-bold text-surface-900 dark:text-white">Overview</h2>
+        <div className="flex items-center gap-2 bg-primary-50 dark:bg-primary-900/20 px-4 py-2 rounded-2xl border border-primary-100 dark:border-primary-800">
+           <Star size={16} className="text-primary-500 animate-spin-slow" />
+           <span className="text-xs font-bold text-primary-700 dark:text-primary-400 uppercase tracking-tighter">Your Daily Picks</span>
+        </div>
+      </div>
+
+      {/* Recommended Games */}
+      {games.length > 0 && (
+        <div className="card border-primary-100 dark:border-primary-900/50 bg-gradient-to-br from-white to-primary-50/30 dark:from-surface-800 dark:to-primary-900/10">
+          <div className="p-4 border-b border-primary-100 dark:border-primary-900/30 flex justify-between items-center">
+            <h3 className="font-bold flex items-center gap-2 text-primary-900 dark:text-primary-100">
+              <Star size={18} className="text-amber-500 fill-amber-500" />
+              Recommended for You
+            </h3>
+            <button 
+              onClick={pickRandomGames}
+              className="p-1.5 hover:bg-primary-100 dark:hover:bg-primary-900/50 text-primary-600 dark:text-primary-400 rounded-lg transition-all active:rotate-180 duration-500"
+              title="Refresh recommendations"
+            >
+              <RefreshCw size={18} />
+            </button>
+          </div>
+          <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {recommendedGames.map(game => (
+              <div key={game.id} className="flex items-center gap-3 p-3 bg-white/50 dark:bg-surface-900/50 rounded-xl border border-primary-50 dark:border-primary-900/20 hover:shadow-md transition-shadow group">
+                <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 shadow-sm">
+                  <img src={game.imageUrl} alt={game.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-bold text-sm text-surface-900 dark:text-white truncate">{game.title}</h4>
+                  <p className="text-[10px] text-surface-500 font-medium uppercase tracking-wider">{game.players} • {game.playTime}m</p>
+                  <div className="mt-1 flex items-center gap-1">
+                    <span className="bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-tighter">Weight {game.weight}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

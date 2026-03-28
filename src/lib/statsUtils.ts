@@ -25,18 +25,19 @@ export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<s
 
   sortedLogs.forEach(log => {
     const logPlayerIds = log.players.map(p => p.playerId);
-    const winners = new Set(log.winnerIds);
     const n = logPlayerIds.length;
     if (n < 2) return;
 
     const changes: Record<string, number> = {};
     logPlayerIds.forEach(id => { changes[id] = 0; });
 
-    // Treat as series of 1v1 matchups
+    // Treat as series of 1v1 matchups based on scores
     for (let i = 0; i < n; i++) {
       for (let j = i + 1; j < n; j++) {
-        const idA = logPlayerIds[i];
-        const idB = logPlayerIds[j];
+        const scoreA = log.players[i].score;
+        const scoreB = log.players[j].score;
+        const idA = log.players[i].playerId;
+        const idB = log.players[j].playerId;
         
         const ratingA = eloScores[idA];
         const ratingB = eloScores[idB];
@@ -45,20 +46,20 @@ export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<s
         const expectedB = 1 - expectedA;
 
         let actualA = 0.5;
-        if (winners.has(idA) && !winners.has(idB)) actualA = 1;
-        else if (!winners.has(idA) && winners.has(idB)) actualA = 0;
+        if (scoreA > scoreB) actualA = 1;
+        else if (scoreA < scoreB) actualA = 0;
         
         const actualB = 1 - actualA;
 
         // Normalizing by (n-1) to avoid inflation in large games
-        changes[idA] += (K / (n - 1)) * (actualA - expectedA);
-        changes[idB] += (K / (n - 1)) * (actualB - expectedB);
+        changes[idA] = (changes[idA] || 0) + (K / (n - 1)) * (actualA - expectedA);
+        changes[idB] = (changes[idB] || 0) + (K / (n - 1)) * (actualB - expectedB);
       }
     }
 
     // Apply changes
     logPlayerIds.forEach(id => {
-      eloScores[id] = Math.round(eloScores[id] + changes[id]);
+      eloScores[id] = Math.round(eloScores[id] + (changes[id] || 0));
     });
   });
 
@@ -76,12 +77,14 @@ export function calculatePlayerPerformance(
   const wins = playerLogs.filter(l => l.winnerIds.includes(player.id)).length;
   const winRate = plays > 0 ? Math.round((wins / plays) * 100) : 0;
 
-  // Favorite game: game this player has played the most
+  // Favorite game: game this player has played the most (min 2 plays)
   const gamePlayCounts: Record<string, number> = {};
   playerLogs.forEach(log => {
     gamePlayCounts[log.gameId] = (gamePlayCounts[log.gameId] || 0) + 1;
   });
-  const favoriteGameId = Object.entries(gamePlayCounts).sort((a, b) => b[1] - a[1])[0]?.[0];
+  const favoriteGameId = Object.entries(gamePlayCounts)
+    .filter(([_, count]) => count >= 2)
+    .sort((a, b) => b[1] - a[1])[0]?.[0];
   const favoriteGame = games.find(g => g.id === favoriteGameId);
   const favoriteGameTitle = favoriteGame?.title || '';
   const favoriteGamePlays = favoriteGameId ? gamePlayCounts[favoriteGameId] : 0;

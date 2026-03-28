@@ -1,6 +1,6 @@
 import { useBoardGameStore } from '../store/useBoardGameStore';
 import { calculatePlayerPerformance, getPlayerGameHistory, calculateEloScores } from '../lib/statsUtils';
-import { User, Gamepad2, History, X } from 'lucide-react';
+import { User, Gamepad2, History, X, Crown, Medal, Award } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface PlayerDetailsModalProps {
@@ -34,7 +34,7 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface-900/50 backdrop-blur-sm overflow-y-auto">
       <div 
-        className="bg-white dark:bg-surface-900 rounded-3xl shadow-xl w-full max-w-2xl my-8 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white dark:bg-surface-900 rounded-3xl shadow-xl w-full max-w-2xl max-h-[90vh] my-8 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -56,7 +56,7 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
           </div>
         </div>
         
-        <div className="pt-16 px-8 pb-8">
+        <div className="flex-1 overflow-y-auto pt-16 px-8 pb-8 custom-scrollbar">
           <div className="flex items-end justify-between mb-8">
             <div>
               <h2 className="text-2xl font-bold text-surface-900 dark:text-white">{player.name}</h2>
@@ -102,7 +102,6 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
             <div className="space-y-3">
               {history.map(log => {
                 const game = store.games.find(g => g.id === log.gameId);
-                const isWinner = log.winnerIds.includes(player.id);
                 return (
                   <div key={log.id} className="flex items-center gap-4 p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-100 dark:border-surface-700">
                     <div className="shrink-0 w-10 h-10 rounded-lg overflow-hidden">
@@ -113,11 +112,32 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
                       <p className="text-xs text-surface-500">{format(new Date(log.date), 'MMM d, yyyy')}</p>
                     </div>
                     <div className="text-right">
-                      {isWinner ? (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 uppercase tracking-wider">Win</span>
-                      ) : (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-surface-200 text-surface-600 dark:bg-surface-700 dark:text-surface-400 uppercase tracking-wider">Play</span>
-                      )}
+                      {(() => {
+                        const sortedScores = [...log.players].sort((a, b) => b.score - a.score);
+                        const playerIndex = sortedScores.findIndex(ps => ps.playerId === player.id);
+                        
+                        // Handle ties (if someone else has the same score and a lower index, they share the rank)
+                        const displayRank = sortedScores.findIndex(ps => ps.score === sortedScores[playerIndex].score) + 1;
+                        
+                        const suffixes: Record<number, string> = { 1: 'st', 2: 'nd', 3: 'rd' };
+                        const getSuffix = (r: number) => suffixes[r] || 'th';
+
+                        const getRankStyles = (r: number) => {
+                          if (r === 1) return 'bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-700 shadow-amber-100/50';
+                          if (r === 2) return 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 shadow-slate-100/50';
+                          if (r === 3) return 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800 shadow-orange-100/50';
+                          return 'bg-surface-50 dark:bg-surface-800 text-surface-400 dark:text-surface-500 border-surface-200 dark:border-surface-700';
+                        };
+
+                        return (
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold font-display uppercase tracking-tight border shadow-sm transition-all hover:scale-105 ${getRankStyles(displayRank)}`}>
+                            {displayRank === 1 && <Crown size={14} strokeWidth={2.5} className="animate-pulse" />}
+                            {displayRank === 2 && <Medal size={14} strokeWidth={2.5} />}
+                            {displayRank === 3 && <Award size={14} strokeWidth={2.5} />}
+                            <span className="leading-none">{displayRank}{getSuffix(displayRank)}</span>
+                          </span>
+                        );
+                      })()}
                     </div>
                   </div>
                 );

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
 import GameModal from '../components/GameModal';
+import GameHistoryModal from '../components/GameHistoryModal';
 import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter, ArrowUpDown } from 'lucide-react';
 
 export type SortOption = 'most_played' | 'least_played' | 'most_photos' | 'abc' | 'zyx' | 'published';
@@ -10,6 +11,7 @@ export default function GameCollection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingGame, setEditingGame] = useState<Game | null>(null);
   const [gameToDelete, setGameToDelete] = useState<{id: string, title: string} | null>(null);
+  const [viewingHistoryGameId, setViewingHistoryGameId] = useState<string | null>(null);
   
   // Filter & Sort States
   const [playerFilter, setPlayerFilter] = useState<string>('');
@@ -256,9 +258,12 @@ export default function GameCollection() {
                   );
                 })()}
               </div>
-              <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg pointer-events-none">
+              <button 
+                onClick={() => setViewingHistoryGameId(game.id)}
+                className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg transition-colors z-20"
+              >
                  Play Count: {game.totalPlays}
-              </div>
+              </button>
             </div>
             
             <div className="p-5 flex-1 flex flex-col">
@@ -366,6 +371,13 @@ export default function GameCollection() {
         onClose={() => setIsModalOpen(false)} 
         gameToEdit={editingGame} 
       />
+
+      {viewingHistoryGameId && (
+        <GameHistoryModal 
+          gameId={viewingHistoryGameId} 
+          onClose={() => setViewingHistoryGameId(null)} 
+        />
+      )}
     </div>
   );
 }

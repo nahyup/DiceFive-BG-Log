@@ -5,6 +5,7 @@ import GameCollection from './pages/GameCollection';
 import PlayLog from './pages/PlayLog';
 import Statistics from './pages/Statistics';
 import PlayerManagement from './pages/PlayerManagement';
+import GameRecommend from './pages/GameRecommend';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="players" element={<PlayerManagement />} />
           <Route path="play-log" element={<PlayLog />} />
           <Route path="statistics" element={<Statistics />} />
+          <Route path="recommend" element={<GameRecommend />} />
         </Route>
       </Routes>
     </BrowserRouter>

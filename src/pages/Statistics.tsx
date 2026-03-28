@@ -300,23 +300,25 @@ export default function Statistics() {
               const maxPlays = sortedGames[0]?.totalPlays || 1;
               const width = Math.max(5, (game.totalPlays / maxPlays) * 100);
               
-              // Find top player for this game
-              const gameLogs = logs.filter(l => l.gameId === game.id);
+              // Find top player(s) for this game
+              const gameLogs = filteredLogs.filter(l => l.gameId === game.id);
               const winCounts: Record<string, number> = {};
               gameLogs.forEach(log => {
                 log.winnerIds.forEach(id => { winCounts[id] = (winCounts[id] || 0) + 1; });
               });
               
-              let topPlayerId = '';
               let maxWins = 0;
-              Object.entries(winCounts).forEach(([id, counts]) => {
-                if (counts > maxWins) {
-                  maxWins = counts;
-                  topPlayerId = id;
-                }
+              Object.entries(winCounts).forEach(([_, counts]) => {
+                if (counts > maxWins) maxWins = counts;
               });
               
-              const topPlayer = players.find(p => p.id === topPlayerId);
+              const topPlayerIds = maxWins > 0 
+                ? Object.entries(winCounts)
+                    .filter(([_, counts]) => counts === maxWins)
+                    .map(([id]) => id)
+                : [];
+              
+              const topPlayers = topPlayerIds.map(id => players.find(p => p.id === id)).filter(Boolean);
               
               return (
                 <div key={game.id} className="relative">
@@ -324,20 +326,24 @@ export default function Statistics() {
                     <span className="font-medium text-surface-900 dark:text-surface-100 line-clamp-1">{game.title}</span>
                     <div className="flex items-center gap-2">
                        <span className="text-surface-500 whitespace-nowrap">{game.totalPlays} plays</span>
-                       {topPlayer && maxWins > 0 && (
-                          <div 
-                            className="w-6 h-6 rounded-full border border-amber-400 bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center shrink-0 overflow-hidden"
-                            title={`${topPlayer.name} has the most wins: ${maxWins}`}
-                          >
-                             {topPlayer.imageUrl ? (
-                               <img src={topPlayer.imageUrl} alt={topPlayer.name} className="w-full h-full object-cover" />
-                             ) : (
-                               <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400">
-                                 {topPlayer.name.charAt(0).toUpperCase()}
-                               </span>
-                             )}
-                          </div>
-                       )}
+                       <div className="flex -space-x-2 overflow-hidden">
+                         {topPlayers.map((p, pIdx) => (
+                           <div 
+                             key={p!.id}
+                             className="w-6 h-6 rounded-full border-2 border-white dark:border-surface-800 bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center shrink-0 overflow-hidden shadow-sm"
+                             title={`${p!.name} has the most wins: ${maxWins}`}
+                             style={{ zIndex: topPlayers.length - pIdx }}
+                           >
+                              {p!.imageUrl ? (
+                                <img src={p!.imageUrl} alt={p!.name} className="w-full h-full object-cover" />
+                              ) : (
+                                <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400">
+                                  {p!.name.charAt(0).toUpperCase()}
+                                </span>
+                              )}
+                           </div>
+                         ))}
+                       </div>
                     </div>
                   </div>
                   <div className="w-full bg-surface-100 dark:bg-surface-800 rounded h-8 absolute top-0 left-0 overflow-hidden">

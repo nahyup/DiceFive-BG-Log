@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import { LayoutDashboard, Library, PenSquare, BarChart3, Dice5, Download, Upload, Users, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Library, PenSquare, BarChart3, Dice5, Dices, Download, Upload, Users, Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import clsx from 'clsx';
 import { useBoardGameStore } from '../store/useBoardGameStore';
@@ -12,6 +12,7 @@ export default function Layout() {
     { to: '/players', icon: Users, label: 'Players' },
     { to: '/play-log', icon: PenSquare, label: 'Play Log' },
     { to: '/statistics', icon: BarChart3, label: 'Statistics' },
+    { to: '/recommend', icon: Dices, label: 'Recommend' },
   ];
 
   const fileInputRef = useRef<HTMLInputElement>(null);
