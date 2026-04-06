@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useBoardGameStore, type Player } from '../store/useBoardGameStore';
 import { Users, UserPlus, Trash2, Shield, User, Pencil, Upload } from 'lucide-react';
 import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
+import { compressImage } from '../lib/imageUtils';
 
 export default function PlayerManagement() {
   const store = useBoardGameStore();
@@ -23,6 +24,7 @@ export default function PlayerManagement() {
     setImageUrl('');
     setPreviewImage(null);
     setEditingPlayerId(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleOpenAddModal = () => {
@@ -40,43 +42,38 @@ export default function PlayerManagement() {
     setIsModalOpen(true);
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Resize image to ~200x200 max to save space
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const MAX_SIZE = 200;
-        let width = img.width;
-        let height = img.height;
+    try {
+      // Show loading indicator in preview while processing
+      setPreviewImage('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgY2xhc3M9ImFuaW1hdGUtc3BpbiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiAvPjxwYXRoIGQ9Ik0xMiA0YS41LjUgMCAwIDEtLjVhLjUuNSAwIDAgMS0xIDAgMTAgMTAgMCAwIDEgMCAyMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPjwvc3ZnPg==');
+      
+      const compressedBase64 = await compressImage(file, 200, 200, 0.8);
+      
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          image: compressedBase64,
+          name: file.name
+        }),
+      });
 
-        if (width > height) {
-          if (width > MAX_SIZE) {
-            height *= MAX_SIZE / width;
-            width = MAX_SIZE;
-          }
-        } else {
-          if (height > MAX_SIZE) {
-            width *= MAX_SIZE / height;
-            height = MAX_SIZE;
-          }
-        }
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.statusText}`);
+      }
 
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx?.drawImage(img, 0, 0, width, height);
-        
-        const resizedDataUrl = canvas.toDataURL('image/webp', 0.8);
-        setPreviewImage(resizedDataUrl);
-      };
-      img.src = event.target?.result as string;
-    };
-    reader.readAsDataURL(file);
+      const { url } = await response.json();
+      setPreviewImage(url);
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+      alert('Failed to process image. It might be corrupted or too large.');
+      setPreviewImage(null);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {

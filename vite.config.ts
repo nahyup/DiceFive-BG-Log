@@ -122,6 +122,9 @@ const localDataPlugin = () => ({
 export default defineConfig({
   plugins: [react(), tailwindcss(), localDataPlugin()],
   server: {
-    host: true
+    host: true,
+    watch: {
+      ignored: ['**/data.json']
+    }
   }
 })

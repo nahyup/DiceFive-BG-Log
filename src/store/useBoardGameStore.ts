@@ -49,6 +49,8 @@ interface BoardGameState {
   games: Game[];
   players: Player[];
   logs: PlayLog[];
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
   
   // Actions
   addGame: (game: Omit<Game, 'id' | 'totalPlays'>) => void;
@@ -1919,6 +1921,8 @@ export const useBoardGameStore = create<BoardGameState>()(
       games: initialGames,
       players: initialPlayers,
       logs: [],
+      _hasHydrated: false,
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
 
       addGame: (gameData) => set((state) => ({
         games: [...state.games, { ...gameData, id: generateId(), totalPlays: 0 }]
@@ -2011,6 +2015,9 @@ export const useBoardGameStore = create<BoardGameState>()(
           });
         }
         return state;
+      },
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
       },
     }
   )

@@ -6,8 +6,13 @@ import PlayLog from './pages/PlayLog';
 import Statistics from './pages/Statistics';
 import PlayerManagement from './pages/PlayerManagement';
 import GameRecommend from './pages/GameRecommend';
+import { useBoardGameStore } from './store/useBoardGameStore';
 
 function App() {
+  const hasHydrated = useBoardGameStore(state => state._hasHydrated);
+
+  if (!hasHydrated) return null;
+
   return (
     <BrowserRouter>
       <Routes>

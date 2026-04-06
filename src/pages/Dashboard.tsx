@@ -52,12 +52,12 @@ export default function Dashboard() {
     return acc;
   }, {} as Record<string, number>);
   
-  let topPlayer: { id: string, name: string, wins: number } | null = null;
+  let topPlayer: { id: string, name: string, wins: number, imageUrl?: string } | null = null;
   const topWinnerEntry = Object.entries(playerWins).sort((a, b) => b[1] - a[1])[0];
   if (topWinnerEntry) {
     const p = players.find(p => p.id === topWinnerEntry[0]);
     if (p) {
-      topPlayer = { id: p.id, name: p.name, wins: topWinnerEntry[1] };
+      topPlayer = { id: p.id, name: p.name, wins: topWinnerEntry[1], imageUrl: p.imageUrl };
     }
   }
 
@@ -140,15 +140,26 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="card p-6 flex items-center gap-4 border-l-4 border-l-accent-rose">
-          <div className="p-3 bg-rose-100 text-rose-600 rounded-xl dark:bg-rose-900/40 dark:text-rose-400">
+        <div className="card p-6 flex items-center gap-4 border-l-4 border-l-accent-rose overflow-hidden relative">
+          <div className="p-3 bg-rose-100 text-rose-600 rounded-xl dark:bg-rose-900/40 dark:text-rose-400 z-10 shrink-0">
             <Trophy size={24} />
           </div>
-          <div>
+          <div className="z-10 min-w-0 flex-1">
             <p className="text-sm font-medium text-surface-500 dark:text-surface-400">Top Winner</p>
-            <p className="text-2xl font-bold">{topPlayer ? topPlayer.name : '-'}</p>
+            <div className="flex items-center gap-2 mt-0.5">
+              {topPlayer?.imageUrl && (
+                <img src={topPlayer.imageUrl} alt={topPlayer.name} className="w-6 h-6 rounded-full object-cover shrink-0 border border-surface-200 dark:border-surface-700" />
+              )}
+              <p className="text-2xl font-bold truncate">{topPlayer ? topPlayer.name : '-'}</p>
+            </div>
             {topPlayer && <p className="text-xs text-surface-500">{topPlayer.wins} wins</p>}
           </div>
+          {/* Subtle background image of the top player */}
+          {topPlayer?.imageUrl && (
+            <div className="absolute right-0 top-0 bottom-0 w-24 opacity-10 dark:opacity-20 pointer-events-none">
+               <img src={topPlayer.imageUrl} alt="" className="w-full h-full object-cover rounded-l-full scale-110" />
+            </div>
+          )}
         </div>
       </div>
 
