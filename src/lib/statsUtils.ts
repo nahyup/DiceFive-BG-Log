@@ -125,3 +125,63 @@ export function getPlayerGameHistory(playerId: string, logs: PlayLog[]) {
     .filter(l => l.players.some(ps => ps.playerId === playerId))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
+
+export interface HeadToHeadStat {
+  opponentId: string;
+  opponentName: string;
+  opponentImageUrl?: string;
+  gamesPlayed: number;
+  wins: number;
+  losses: number;
+  ties: number;
+  winRate: number;
+}
+
+export function calculateHeadToHeadStats(playerId: string, players: Player[], logs: PlayLog[]): HeadToHeadStat[] {
+  const statsMap: Record<string, HeadToHeadStat> = {};
+
+  players.forEach(p => {
+    if (p.id !== playerId) {
+      statsMap[p.id] = {
+        opponentId: p.id,
+        opponentName: p.name,
+        opponentImageUrl: p.imageUrl,
+        gamesPlayed: 0,
+        wins: 0,
+        losses: 0,
+        ties: 0,
+        winRate: 0,
+      };
+    }
+  });
+
+  logs.forEach(log => {
+    const playerLog = log.players.find(p => p.playerId === playerId);
+    if (!playerLog) return;
+
+    log.players.forEach(opponentLog => {
+      if (opponentLog.playerId === playerId) return;
+      
+      const opponentId = opponentLog.playerId;
+      const stat = statsMap[opponentId];
+      if (!stat) return;
+
+      stat.gamesPlayed++;
+      if (playerLog.score > opponentLog.score) {
+        stat.wins++;
+      } else if (playerLog.score < opponentLog.score) {
+        stat.losses++;
+      } else {
+        stat.ties++;
+      }
+    });
+  });
+
+  return Object.values(statsMap)
+    .filter(stat => stat.gamesPlayed > 0)
+    .map(stat => ({
+      ...stat,
+      winRate: Math.round((stat.wins / stat.gamesPlayed) * 100)
+    }))
+    .sort((a, b) => b.gamesPlayed - a.gamesPlayed);
+}

@@ -2,10 +2,12 @@ import { useState, useRef } from 'react';
 import { useBoardGameStore, type Player } from '../store/useBoardGameStore';
 import { Users, UserPlus, Trash2, Shield, User, Pencil, Upload } from 'lucide-react';
 import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
+import { calculatePlayerPerformance, calculateEloScores } from '../lib/statsUtils';
 import { compressImage } from '../lib/imageUtils';
 
 export default function PlayerManagement() {
   const store = useBoardGameStore();
+  const eloScores = calculateEloScores(store.players, store.logs);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPlayerId, setEditingPlayerId] = useState<string | null>(null);
@@ -121,7 +123,9 @@ export default function PlayerManagement() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {store.players.map((player) => (
+        {store.players.map((player) => {
+          const stats = calculatePlayerPerformance(player, store.logs, store.games, eloScores[player.id]);
+          return (
           <div 
             key={player.id} 
             onClick={() => setSelectedPlayerId(player.id)}
@@ -139,6 +143,11 @@ export default function PlayerManagement() {
             
             <h3 className="text-lg font-bold text-surface-900 dark:text-white mb-1">{player.name}</h3>
             <GroupBadge group={player.group} />
+            
+            <div className="mt-2 flex flex-col items-center gap-0.5">
+              <span className="text-xl font-display font-bold text-primary-600 dark:text-primary-400">{stats.winRate}%</span>
+              <span className="text-xs text-surface-500 dark:text-surface-400 font-medium">Win Rate ({stats.wins}W / {stats.plays}P)</span>
+            </div>
             
             <div className="mt-4 pt-4 border-t border-surface-100 dark:border-surface-700 w-full flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
               <button 
@@ -164,7 +173,8 @@ export default function PlayerManagement() {
               </button>
             </div>
           </div>
-        ))}
+          );
+        })}
 
         {store.players.length === 0 && (
            <div className="col-span-full bg-white dark:bg-surface-800 rounded-2xl p-8 border border-surface-200 dark:border-surface-700 text-center">

@@ -1,6 +1,6 @@
 import { useBoardGameStore } from '../store/useBoardGameStore';
-import { calculatePlayerPerformance, getPlayerGameHistory, calculateEloScores } from '../lib/statsUtils';
-import { User, Gamepad2, History, X, Crown, Medal, Award } from 'lucide-react';
+import { calculatePlayerPerformance, getPlayerGameHistory, calculateEloScores, calculateHeadToHeadStats } from '../lib/statsUtils';
+import { User, Gamepad2, History, X, Crown, Medal, Award, Users } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface PlayerDetailsModalProps {
@@ -30,6 +30,7 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
   const eloScores = calculateEloScores(store.players, store.logs);
   const stats = calculatePlayerPerformance(player, store.logs, store.games, eloScores[playerId]);
   const history = getPlayerGameHistory(playerId, store.logs).slice(0, 10);
+  const headToHead = calculateHeadToHeadStats(playerId, store.players, store.logs);
   
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface-900/50 backdrop-blur-sm overflow-y-auto">
@@ -93,6 +94,57 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
             </div>
           </div>
           
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Users size={18} className="text-primary-500" />
+              <h3 className="font-bold text-surface-900 dark:text-white">Head-to-Head</h3>
+            </div>
+            {headToHead.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {headToHead.slice(0, 6).map(stat => (
+                  <div key={stat.opponentId} className="flex items-center gap-3 p-3 bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-100 dark:border-surface-700">
+                    <div className="shrink-0 w-10 h-10 rounded-full overflow-hidden border-2 border-surface-200 dark:border-surface-600 bg-surface-100 dark:bg-surface-700 flex items-center justify-center">
+                      {stat.opponentImageUrl ? (
+                        <img src={stat.opponentImageUrl} alt={stat.opponentName} className="w-full h-full object-cover" />
+                      ) : (
+                        <User size={20} className="text-surface-400" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-center mb-1">
+                        <h4 className="font-bold text-sm text-surface-900 dark:text-white truncate">{stat.opponentName}</h4>
+                        <span className="text-xs font-bold text-primary-600 dark:text-primary-400">{stat.winRate}%</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-[10px] text-surface-500 font-medium">
+                        <span className="text-emerald-600 dark:text-emerald-400">{stat.wins}W</span>
+                        <span>-</span>
+                        <span className="text-rose-600 dark:text-rose-400">{stat.losses}L</span>
+                        {stat.ties > 0 && (
+                          <>
+                            <span>-</span>
+                            <span className="text-amber-600 dark:text-amber-400">{stat.ties}T</span>
+                          </>
+                        )}
+                        <span className="ml-auto bg-surface-200 dark:bg-surface-700 px-1.5 py-0.5 rounded text-surface-600 dark:text-surface-300">
+                          {stat.gamesPlayed} plays
+                        </span>
+                      </div>
+                      <div className="w-full h-1.5 bg-rose-100 dark:bg-rose-900/30 rounded-full mt-1.5 overflow-hidden flex">
+                        <div className="h-full bg-emerald-500" style={{ width: `${(stat.wins / stat.gamesPlayed) * 100}%` }} />
+                        <div className="h-full bg-amber-400" style={{ width: `${(stat.ties / stat.gamesPlayed) * 100}%` }} />
+                        <div className="h-full bg-rose-500" style={{ width: `${(stat.losses / stat.gamesPlayed) * 100}%` }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-6 bg-surface-50 dark:bg-surface-800/50 rounded-2xl border border-surface-100 dark:border-surface-700">
+                <p className="text-sm text-surface-500">No head-to-head records yet</p>
+              </div>
+            )}
+          </div>
+
           <div>
             <div className="flex items-center gap-2 mb-4">
               <History size={18} className="text-primary-500" />
