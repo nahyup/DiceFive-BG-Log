@@ -8,7 +8,7 @@
         "playTime": 150,
         "weight": 3.8,
         "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-        "totalPlays": 0,
+        "totalPlays": 5,
         "publishedYear": 2021,
         "subtitle": "아크 노바"
       },
@@ -375,7 +375,8 @@
         "imageUrl": "https://cf.geekdo-images.com/k7lG683LBZdvFyS-FH-MpA__opengraph/img/UrxC7YZkJ2pyWgBfLIIGp8DWj-I=/0x49:1423x796/fit-in/1200x630/filters:strip_icc()/pic6746812.png",
         "totalPlays": 0,
         "publishedYear": 1999,
-        "subtitle": "태양신 라"
+        "subtitle": "태양신 라",
+        "status": "Preorder"
       },
       {
         "id": "6dcaae7b-6db3-4aee-8e47-6e99c4c4bb33",
@@ -1742,7 +1743,8 @@
         "imageUrl": "/uploads/1773453544884-1768969107_327281_fit_850x850.png",
         "id": "c6026c73-9422-418f-8cd2-95335ca1f1b4",
         "totalPlays": 0,
-        "subtitle": "핫스트릭"
+        "subtitle": "핫스트릭",
+        "status": "Owned by Friends"
       },
       {
         "title": "Shackleton Base: A Journey to the Moon",
@@ -1838,7 +1840,7 @@
         "imageUrl": "https://cf.geekdo-images.com/aE1EoOzr530gQin8bj8QDA__itemrep@2x/img/3mUXQjTkzPaYTYFpI5yjUZbc7V0=/fit-in/492x600/filters:strip_icc()/pic4460401.jpg",
         "status": "Owned",
         "id": "id-1775912299322-cv61i9v",
-        "totalPlays": 0
+        "totalPlays": 2
       },
       {
         "title": "Muffin Time",
@@ -1898,6 +1900,30 @@
         "imageUrl": "https://cf.geekdo-images.com/xA_1GtRi_ITuRkXgZOTzrg__itemrep@2x/img/xtB4bSoVlr1DKpK4plCGP1ZN_1g=/fit-in/492x600/filters:strip_icc()/pic8903961.png",
         "status": "Owned",
         "id": "id-1775912645836-oc6avt2",
+        "totalPlays": 0
+      },
+      {
+        "title": "Luthier: the art of the instrument",
+        "subtitle": "루티어",
+        "publishedYear": 2025,
+        "players": "1-4",
+        "playTime": 150,
+        "weight": 3.78,
+        "imageUrl": "https://cf.geekdo-images.com/NNOCMpxKchQb_ByLmvDfRQ__itemrep@2x/img/M2J4tdnr99xVfOF538q3SDFYFLw=/fit-in/492x600/filters:strip_icc()/pic8145392.png",
+        "status": "Owned",
+        "id": "id-1776910841699-6g4136o",
+        "totalPlays": 0
+      },
+      {
+        "title": "Pandemic Legacy: Season 1",
+        "subtitle": "팬데믹 레거시: 시즌1",
+        "publishedYear": 2015,
+        "players": "2-4",
+        "playTime": 60,
+        "weight": 2.83,
+        "imageUrl": "https://cf.geekdo-images.com/-Qer2BBPG7qGGDu6KcVDIw__itemrep@2x/img/MjhzWks7Vu-ZhEOtwQYrzSfmoYk=/fit-in/492x600/filters:strip_icc()/pic2452831.png",
+        "status": "Preorder",
+        "id": "id-1776910963602-jdckuzu",
         "totalPlays": 0
       }
     ],
@@ -2901,12 +2927,12 @@
         "date": "2026-04-18T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
-            "score": 0
-          },
-          {
             "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
             "score": 100
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 0
           }
         ],
         "winnerIds": [
@@ -2914,6 +2940,172 @@
         ],
         "reviewMemo": "",
         "id": "id-1776484386610-z91ymz1"
+      },
+      {
+        "gameId": "id-1775912299322-cv61i9v",
+        "date": "2026-04-19T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 36
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 34
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 25
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": -5
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "타이니타운! 초보 모드",
+        "imageUrls": [
+          "/uploads/1776582241135-dji_20260419142131_0034_d.jpg",
+          "/uploads/1776582265254-dji_20260419142217_0039_d.jpg"
+        ],
+        "id": "id-1776582266841-qtavvi8"
+      },
+      {
+        "gameId": "id-1775912299322-cv61i9v",
+        "date": "2026-04-19T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 31
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 19
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 18
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "엄마는 타이니타운의 시장이다!!!!",
+        "imageUrls": [
+          "/uploads/1776582304624-dji_20260419145445_0043_d.jpg",
+          "/uploads/1776582311053-dji_20260419145423_0042_d.jpg"
+        ],
+        "id": "id-1776582316528-t0ra5wx"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-04-19T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 141
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 134
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "좋은 승부였다. 후후",
+        "imageUrls": [
+          "/uploads/1776609512003-screenshot_from_2026_04_19_23_37_36.png",
+          "/uploads/1776609557571-screenshot_from_2026_04_19_23_39_11.png"
+        ],
+        "id": "id-1776609561417-las5rgx"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-04-23T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 123
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 102
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "버그다 버그. 핵이네.",
+        "id": "id-1776910673143-8ighjjr"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-04-23T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 142
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 127
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "새로운 맵",
+        "imageUrls": [
+          "/uploads/1776925759791-screenshot_from_2026_04_23_15_28_22.png"
+        ],
+        "id": "id-1776925764134-z2i5npg"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-04-23T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 120
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 118
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "이 것 이 실 력",
+        "imageUrls": [
+          "/uploads/1776930766604-screenshot_from_2026_04_23_16_52_01.png"
+        ],
+        "id": "id-1776930770949-56wxymi"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-04-23T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 132
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 137
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "아... 이건 좀 아까비",
+        "imageUrls": [
+          "/uploads/1776935883848-screenshot_from_2026_04_23_17_57_58.png"
+        ],
+        "id": "id-1776935887809-tlklj23"
       }
     ],
     "_hasHydrated": true
