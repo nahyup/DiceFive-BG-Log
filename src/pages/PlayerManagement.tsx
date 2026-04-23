@@ -7,7 +7,7 @@ import { compressImage } from '../lib/imageUtils';
 
 export default function PlayerManagement() {
   const store = useBoardGameStore();
-  const eloScores = calculateEloScores(store.players, store.logs);
+  const eloScores = calculateEloScores(store.players, store.logs, store.games);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPlayerId, setEditingPlayerId] = useState<string | null>(null);

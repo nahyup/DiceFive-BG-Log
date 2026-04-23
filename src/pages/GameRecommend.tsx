@@ -27,7 +27,7 @@ export default function GameRecommend() {
   const { games, players, logs } = useBoardGameStore();
   const [selectedPlayerIds, setSelectedPlayerIds] = useState<string[]>([]);
   
-  const eloScores = useMemo(() => calculateEloScores(players, logs), [players, logs]);
+  const eloScores = useMemo(() => calculateEloScores(players, logs, games), [players, logs, games]);
 
   const togglePlayer = (id: string) => {
     setSelectedPlayerId(prev => 

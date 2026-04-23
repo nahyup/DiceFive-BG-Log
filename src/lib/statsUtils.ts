@@ -9,15 +9,29 @@ export interface PlayerStats {
   favoriteGamePlays: number;
   bestGameTitle: string;
   bestGameWinRate: number;
+  xp: number;
+  title: string;
 }
 
-export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<string, number> {
+export function calculateXP(plays: number): number {
+  return plays * 10;
+}
+
+export function getPlayerTitle(xp: number): string {
+  if (xp < 50) return 'Novice';
+  if (xp < 200) return 'Regular';
+  if (xp < 500) return 'Veteran';
+  return 'Game Master';
+}
+
+export function calculateEloScores(players: Player[], logs: PlayLog[], games: Game[] = []): Record<string, number> {
   const eloScores: Record<string, number> = {};
-  const K = 32;
+  const playerPlayCounts: Record<string, number> = {};
 
   // Initialize everyone at 1200
   players.forEach(p => {
     eloScores[p.id] = 1200;
+    playerPlayCounts[p.id] = 0;
   });
 
   // Process logs in chronological order
@@ -28,8 +42,20 @@ export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<s
     const n = logPlayerIds.length;
     if (n < 2) return;
 
+    // Get game weight
+    const game = games.find(g => g.id === log.gameId);
+    const weight = game?.weight || 2.5; // Default to medium weight if not found
+    
+    let baseK = 16; // very light: < 2.0
+    if (weight >= 3.5) baseK = 40; // heavy
+    else if (weight >= 2.5) baseK = 32; // medium: < 3.5
+    else if (weight >= 2.0) baseK = 24; // light: < 2.5
+
     const changes: Record<string, number> = {};
-    logPlayerIds.forEach(id => { changes[id] = 0; });
+    logPlayerIds.forEach(id => { 
+      changes[id] = 0; 
+      playerPlayCounts[id] = (playerPlayCounts[id] || 0) + 1;
+    });
 
     // Treat as series of 1v1 matchups based on scores
     for (let i = 0; i < n; i++) {
@@ -42,6 +68,10 @@ export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<s
         const ratingA = eloScores[idA];
         const ratingB = eloScores[idB];
 
+        // Dynamic K-factor (doubled for first 10 games)
+        const kA = playerPlayCounts[idA] <= 10 ? baseK * 2 : baseK;
+        const kB = playerPlayCounts[idB] <= 10 ? baseK * 2 : baseK;
+
         const expectedA = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
         const expectedB = 1 - expectedA;
 
@@ -52,14 +82,14 @@ export function calculateEloScores(players: Player[], logs: PlayLog[]): Record<s
         const actualB = 1 - actualA;
 
         // Normalizing by (n-1) to avoid inflation in large games
-        changes[idA] = (changes[idA] || 0) + (K / (n - 1)) * (actualA - expectedA);
-        changes[idB] = (changes[idB] || 0) + (K / (n - 1)) * (actualB - expectedB);
+        changes[idA] = (changes[idA] || 0) + (kA / (n - 1)) * (actualA - expectedA);
+        changes[idB] = (changes[idB] || 0) + (kB / (n - 1)) * (actualB - expectedB);
       }
     }
 
-    // Apply changes
+    // Apply changes and Participation Bonus (+2 per game)
     logPlayerIds.forEach(id => {
-      eloScores[id] = Math.round(eloScores[id] + (changes[id] || 0));
+      eloScores[id] = Math.round(eloScores[id] + (changes[id] || 0)) + 2;
     });
   });
 
@@ -76,6 +106,9 @@ export function calculatePlayerPerformance(
   const plays = playerLogs.length;
   const wins = playerLogs.filter(l => l.winnerIds.includes(player.id)).length;
   const winRate = plays > 0 ? Math.round((wins / plays) * 100) : 0;
+  
+  const xp = calculateXP(plays);
+  const title = getPlayerTitle(xp);
 
   // Favorite game: game this player has played the most (min 2 plays)
   const gamePlayCounts: Record<string, number> = {};
@@ -116,7 +149,9 @@ export function calculatePlayerPerformance(
     favoriteGameTitle,
     favoriteGamePlays,
     bestGameTitle,
-    bestGameWinRate
+    bestGameWinRate,
+    xp,
+    title
   };
 }
 

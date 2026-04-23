@@ -27,7 +27,7 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
   
   if (!player) return null;
   
-  const eloScores = calculateEloScores(store.players, store.logs);
+  const eloScores = calculateEloScores(store.players, store.logs, store.games);
   const stats = calculatePlayerPerformance(player, store.logs, store.games, eloScores[playerId]);
   const history = getPlayerGameHistory(playerId, store.logs).slice(0, 10);
   const headToHead = calculateHeadToHeadStats(playerId, store.players, store.logs);
@@ -61,7 +61,16 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
           <div className="flex items-end justify-between mb-8">
             <div>
               <h2 className="text-2xl font-bold text-surface-900 dark:text-white">{player.name}</h2>
-              <div className="mt-1">
+              <div className="mt-2 flex items-center gap-3">
+                <div className="flex items-center gap-1.5 bg-primary-50 dark:bg-primary-900/20 px-2.5 py-1 rounded-lg border border-primary-100 dark:border-primary-800">
+                  <Award size={14} className="text-primary-500" />
+                  <span className="font-bold text-primary-700 dark:text-primary-300 text-xs tracking-wide">
+                    {stats.title}
+                  </span>
+                  <span className="text-[10px] font-bold text-primary-400 dark:text-primary-500 ml-1">
+                    {stats.xp} XP
+                  </span>
+                </div>
                 <GroupBadge group={player.group} />
               </div>
             </div>

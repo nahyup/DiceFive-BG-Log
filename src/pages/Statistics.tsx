@@ -32,13 +32,25 @@ export default function Statistics() {
       }).filter(g => g.totalPlays > 0);
 
   // Calculate ELO scores for all players based on all logs
-  const eloScores = calculateEloScores(players, logs);
+  const eloScores = calculateEloScores(players, logs, games);
+
+  const MIN_PLACEMENT_GAMES = 3;
 
   // Compute stats for filtered players
   const playerStats = filteredPlayers.map(p => {
     const perf = calculatePlayerPerformance(p, filteredLogs, games, eloScores[p.id]);
     return { ...p, ...perf };
-  }).sort((a, b) => b.elo - a.elo);
+  }).sort((a, b) => {
+    const aIsProvisional = a.plays < MIN_PLACEMENT_GAMES;
+    const bIsProvisional = b.plays < MIN_PLACEMENT_GAMES;
+
+    if (aIsProvisional && !bIsProvisional) return 1;
+    if (!aIsProvisional && bIsProvisional) return -1;
+
+    // Both are provisional, or both are fully ranked.
+    // Sort by Elo (Participation Bonus already handles activity weight)
+    return b.elo - a.elo;
+  });
 
   // Compute top games from filtered games
   const sortedGames = [...filteredGames].sort((a, b) => b.totalPlays - a.totalPlays).slice(0, 10);
@@ -139,12 +151,13 @@ export default function Statistics() {
                     <td className="px-6 py-4 text-center">
                       <div className={`
                         inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm
-                        ${index === 0 ? 'bg-amber-100 text-amber-600 border border-amber-200' : 
+                        ${stat.plays < MIN_PLACEMENT_GAMES ? 'bg-surface-100 dark:bg-surface-800 text-surface-400 border border-surface-200 dark:border-surface-700 border-dashed' : 
+                          index === 0 ? 'bg-amber-100 text-amber-600 border border-amber-200' : 
                           index === 1 ? 'bg-slate-100 text-slate-500 border border-slate-200' :
                           index === 2 ? 'bg-orange-100 text-orange-600 border border-orange-200' :
                           'text-surface-400'}
                       `}>
-                        {index + 1}
+                        {stat.plays < MIN_PLACEMENT_GAMES ? '-' : index + 1}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -159,17 +172,23 @@ export default function Statistics() {
                           )}
                         </div>
                         <div>
-                          <div className="font-bold text-surface-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          <div className="font-bold text-surface-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors flex items-center gap-2">
                             {stat.name}
                           </div>
-                          <div className="text-xs text-surface-500">{stat.group}</div>
+                          <div className="text-xs text-surface-500">
+                            <span className="font-medium text-primary-600 dark:text-primary-400">{stat.title}</span>
+                            <span className="mx-1.5 opacity-50">•</span>
+                            {stat.group}
+                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-center">
                       <div className="flex flex-col items-center">
-                        <span className="text-lg font-bold text-primary-600 dark:text-primary-400">{stat.elo}</span>
-                        <span className="text-[10px] text-surface-400 uppercase tracking-wider font-medium">Rating</span>
+                        <span className={`text-lg font-bold ${stat.plays < MIN_PLACEMENT_GAMES ? 'text-surface-400' : 'text-primary-600 dark:text-primary-400'}`}>{stat.elo}</span>
+                        <span className="text-[10px] text-surface-400 uppercase tracking-wider font-medium">
+                          {stat.plays < MIN_PLACEMENT_GAMES ? 'Provisional' : 'Rating'}
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
