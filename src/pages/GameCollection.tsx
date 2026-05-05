@@ -4,7 +4,7 @@ import GameModal from '../components/GameModal';
 import GameHistoryModal from '../components/GameHistoryModal';
 import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter, ArrowUpDown } from 'lucide-react';
 
-export type SortOption = 'most_played' | 'least_played' | 'most_photos' | 'abc' | 'zyx' | 'published';
+export type SortOption = 'most_played' | 'least_played' | 'recently_played' | 'most_photos' | 'abc' | 'zyx' | 'published';
 
 export default function GameCollection() {
   const { games, logs, deleteGame } = useBoardGameStore();
@@ -92,6 +92,13 @@ export default function GameCollection() {
           return b.totalPlays - a.totalPlays;
         case 'least_played':
           return a.totalPlays - b.totalPlays;
+        case 'recently_played': {
+          const logsA = logs.filter(l => l.gameId === a.id);
+          const logsB = logs.filter(l => l.gameId === b.id);
+          const dateA = logsA.length > 0 ? Math.max(...logsA.map(l => new Date(l.date).getTime())) : 0;
+          const dateB = logsB.length > 0 ? Math.max(...logsB.map(l => new Date(l.date).getTime())) : 0;
+          return dateB - dateA;
+        }
         case 'most_photos': {
           const photosA = getGameImages(a.id, a.imageUrl).length;
           const photosB = getGameImages(b.id, b.imageUrl).length;
@@ -181,6 +188,7 @@ export default function GameCollection() {
           >
             <option value="most_played">Most Played</option>
             <option value="least_played">Least Played</option>
+            <option value="recently_played">Recently Played</option>
             <option value="most_photos">Most Photographs</option>
             <option value="abc">A to Z</option>
             <option value="zyx">Z to A</option>
