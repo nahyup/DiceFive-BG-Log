@@ -8,7 +8,7 @@
         "playTime": 150,
         "weight": 3.8,
         "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-        "totalPlays": 5,
+        "totalPlays": 8,
         "publishedYear": 2021,
         "subtitle": "아크 노바"
       },
@@ -304,7 +304,7 @@
         "playTime": 60,
         "weight": 2.99,
         "imageUrl": "https://upload.wikimedia.org/wikipedia/en/1/1c/Rftg_cover.jpg",
-        "totalPlays": 0,
+        "totalPlays": 1,
         "publishedYear": 2007,
         "subtitle": "레이스 포 더 갤럭시"
       },
@@ -578,17 +578,6 @@
         "publishedYear": 1999,
         "subtitle": "차이나타운",
         "status": "Owned by Friends"
-      },
-      {
-        "id": "7cace0d1-df7e-4103-b180-47ec10fbefb5",
-        "title": "Bohnanza",
-        "players": "2-7",
-        "playTime": 45,
-        "weight": 1.8,
-        "imageUrl": "https://www.firetoys.co.uk/cdn/shop/files/Screenshot_3.png?v=1747651285&width=1440",
-        "totalPlays": 0,
-        "publishedYear": 1997,
-        "subtitle": "보난자"
       },
       {
         "id": "1edffd91-a484-4b50-8b78-625c851609df",
@@ -1619,7 +1608,7 @@
         "weight": 1.73,
         "imageUrl": "https://cf.geekdo-images.com/rGomBfj0FGrZM-w3h5HFWQ__itemrep@2x/img/jjp97z9cm3bbV1oaBcl65QJ8pTw=/fit-in/492x600/filters:strip_icc()/pic8250341.png",
         "id": "7c8f7153-9700-4d05-b326-3fa37240f34b",
-        "totalPlays": 0,
+        "totalPlays": 1,
         "publishedYear": 2024,
         "subtitle": "캐슬콤보"
       },
@@ -1736,7 +1725,7 @@
       },
       {
         "title": "Hot Streak",
-        "publishedYear": 2026,
+        "publishedYear": 2025,
         "players": "2-8",
         "playTime": 20,
         "weight": 1.24,
@@ -1828,7 +1817,7 @@
         "imageUrl": "https://cf.geekdo-images.com/bDUgQ1CfnrTniZytZ5UlQA__itemrep/img/r2kyVH5XVwCeWZr9n6rVMBPx75s=/fit-in/246x300/filters:strip_icc()/pic6618432.jpg",
         "status": "Owned",
         "id": "id-1775912237311-emjy5oq",
-        "totalPlays": 0
+        "totalPlays": 1
       },
       {
         "title": "Tiny Towns",
@@ -3090,12 +3079,12 @@
         "date": "2026-04-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
-            "score": 132
-          },
-          {
             "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
             "score": 137
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 132
           }
         ],
         "winnerIds": [
@@ -3106,6 +3095,153 @@
           "/uploads/1776935883848-screenshot_from_2026_04_23_17_57_58.png"
         ],
         "id": "id-1776935887809-tlklj23"
+      },
+      {
+        "gameId": "843aadef-cdd8-4f37-be5b-da232e432c26",
+        "date": "2026-04-25T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 41
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 32
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "기억을 더듬으며...",
+        "imageUrls": [
+          "/uploads/1777112015546-screenshot_from_2026_04_25_19_12_58.png"
+        ],
+        "id": "id-1777112018238-ozqqqwf"
+      },
+      {
+        "gameId": "7c8f7153-9700-4d05-b326-3fa37240f34b",
+        "date": "2026-04-25T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 92
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 89
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 85
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 80
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "서아의 첫번째 캐슬콤보",
+        "id": "id-1777117196190-qzuos4m"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-05-03T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 122
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 118
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "휴우~",
+        "imageUrls": [
+          "/uploads/1777807326389-screenshot_from_2026_05_03_20_21_32.png"
+        ],
+        "id": "id-1777807339453-luwxn4i"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-05-03T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 135
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 128
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "아이참. 이기면 안됐는데.... 아이참.",
+        "imageUrls": [
+          "/uploads/1777811697070-screenshot_from_2026_05_03_21_34_26.png"
+        ],
+        "id": "id-1777811707459-grn1ovf"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-05-03T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 118
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 71
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "버근듯.",
+        "imageUrls": [
+          "/uploads/1777815205374-screenshot_from_2026_05_03_22_32_52.png"
+        ],
+        "id": "id-1777815208599-ho91k92"
+      },
+      {
+        "gameId": "id-1775912237311-emjy5oq",
+        "date": "2026-05-05T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 103
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 73
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 73
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 106
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "구텐베르크 개봉 첫플",
+        "imageUrls": [
+          "/uploads/1777969457014-1000005694.jpg",
+          "/uploads/1777969457211-1000005695.jpg",
+          "/uploads/1777969457432-1000005698.jpg"
+        ],
+        "id": "id-1777969463796-dlw7t9n"
       }
     ],
     "_hasHydrated": true
