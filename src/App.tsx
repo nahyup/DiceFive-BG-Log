@@ -6,6 +6,7 @@ import PlayLog from './pages/PlayLog';
 import Statistics from './pages/Statistics';
 import PlayerManagement from './pages/PlayerManagement';
 import GameRecommend from './pages/GameRecommend';
+import Story from './pages/Story';
 import { useBoardGameStore } from './store/useBoardGameStore';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="play-log" element={<PlayLog />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="recommend" element={<GameRecommend />} />
+          <Route path="story" element={<Story />} />
         </Route>
       </Routes>
     </BrowserRouter>

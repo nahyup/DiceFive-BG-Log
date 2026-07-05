@@ -45,10 +45,21 @@ export interface PlayLog {
   imageUrls?: string[]; // New: support for uploaded photographs
 }
 
+export interface BoardGameStory {
+  id: string;
+  title: string;
+  description: string;
+  startDate: string; // YYYY-MM-DD
+  endDate: string; // YYYY-MM-DD
+  coverGradient: string; // Tailwind gradient class, e.g., "from-indigo-950 via-slate-900 to-blue-900"
+  createdDate: string; // ISO string
+}
+
 interface BoardGameState {
   games: Game[];
   players: Player[];
   logs: PlayLog[];
+  stories: BoardGameStory[];
   _hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
   
@@ -65,7 +76,11 @@ interface BoardGameState {
   updateLog: (id: string, logData: Partial<PlayLog>) => void;
   deleteLog: (id: string) => void;
   
-  importData: (data: { games: Game[], players: Player[], logs: PlayLog[] }) => void;
+  addStory: (story: Omit<BoardGameStory, 'id' | 'createdDate'>) => void;
+  updateStory: (id: string, story: Partial<BoardGameStory>) => void;
+  deleteStory: (id: string) => void;
+  
+  importData: (data: { games: Game[], players: Player[], logs: PlayLog[], stories?: BoardGameStory[] }) => void;
 }
 
 // Initial dummy data to showcase the app
@@ -1921,6 +1936,7 @@ export const useBoardGameStore = create<BoardGameState>()(
       games: initialGames,
       players: initialPlayers,
       logs: [],
+      stories: [],
       _hasHydrated: false,
       setHasHydrated: (state) => set({ _hasHydrated: state }),
 
@@ -1989,12 +2005,25 @@ export const useBoardGameStore = create<BoardGameState>()(
           games: updatedGames
         };
       }),
+
+      addStory: (storyData) => set((state) => ({
+        stories: [...(state.stories || []), { ...storyData, id: generateId(), createdDate: new Date().toISOString() }]
+      })),
+
+      updateStory: (id, storyData) => set((state) => ({
+        stories: (state.stories || []).map(s => s.id === id ? { ...s, ...storyData } : s)
+      })),
+
+      deleteStory: (id) => set((state) => ({
+        stories: (state.stories || []).filter(s => s.id !== id)
+      })),
       
       importData: (data) => set(() => {
         return {
           games: data.games || [],
           players: data.players || [],
-          logs: data.logs || []
+          logs: data.logs || [],
+          stories: data.stories || []
         };
       })
     }),
@@ -2003,7 +2032,7 @@ export const useBoardGameStore = create<BoardGameState>()(
       storage: createJSONStorage(() => customApiStorage),
       version: 1,
       migrate: (persistedState: unknown, fromVersion: number) => {
-        const state = persistedState as { games: Game[]; players: Player[]; logs: PlayLog[] };
+        const state = persistedState as { games: Game[]; players: Player[]; logs: PlayLog[]; stories?: BoardGameStory[] };
         if (fromVersion < 1 && state.logs) {
           // Remove legacy winnerId field; ensure winnerIds is always a string[]
           state.logs = state.logs.map((log: PlayLog & { winnerId?: string | null }) => {
@@ -2013,6 +2042,9 @@ export const useBoardGameStore = create<BoardGameState>()(
               winnerIds: winnerIds ?? (winnerId ? [winnerId] : []),
             } as PlayLog;
           });
+        }
+        if (!state.stories) {
+          state.stories = [];
         }
         return state;
       },
