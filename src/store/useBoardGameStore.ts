@@ -8,7 +8,7 @@ const generateId = () => {
   return 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
 };
 
-export type GameStatus = 'Owned' | 'Owned by Friends' | 'Wishlist' | 'Preorder';
+export type GameStatus = 'Owned' | 'Owned by Friends' | 'Wishlist' | 'Preorder' | 'None';
 
 export interface Game {
   id: string;

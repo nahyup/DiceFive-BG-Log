@@ -187,6 +187,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
                 <option value="Owned by Friends">Owned by Friends</option>
                 <option value="Wishlist">Wishlist</option>
                 <option value="Preorder">Preorder</option>
+                <option value="None">None</option>
               </select>
             </div>
           </div>

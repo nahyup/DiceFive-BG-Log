@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
 import GameModal from '../components/GameModal';
 import GameHistoryModal from '../components/GameHistoryModal';
@@ -34,7 +34,7 @@ export default function GameCollection() {
   };
 
 // Helper to get all images for a game (cover + log photos)
-  const getGameImages = (gameId: string, coverImage?: string) => {
+  const getGameImages = useCallback((gameId: string, coverImage?: string) => {
     const images: string[] = [];
     if (coverImage) images.push(coverImage);
     
@@ -46,7 +46,7 @@ export default function GameCollection() {
     });
     
     return images;
-  };
+  }, [logs]);
 
   const filteredGames = useMemo(() => {
     let result = games.filter(game => {
@@ -116,7 +116,7 @@ export default function GameCollection() {
     });
 
     return result;
-  }, [games, playerFilter, weightFilter, statusFilter, sortOption, logs]);
+  }, [games, playerFilter, weightFilter, statusFilter, sortOption, logs, getGameImages]);
 
   return (
     <div className="space-y-6">
@@ -172,6 +172,7 @@ export default function GameCollection() {
               <option value="Owned by Friends">Owned by Friends</option>
               <option value="Wishlist">Wishlist</option>
               <option value="Preorder">Preorder</option>
+              <option value="None">None</option>
             </select>
           </div>
         </div>
@@ -258,6 +259,7 @@ export default function GameCollection() {
                     'Owned by Friends': 'bg-teal-500/90 text-white',
                     Wishlist: 'bg-violet-500/90 text-white',
                     Preorder: 'bg-amber-500/90 text-white',
+                    None: 'bg-slate-500/90 text-white',
                   };
                   return (
                     <span className={`text-xs font-bold px-2.5 py-1 rounded-full backdrop-blur-md shadow-lg ${styles[status]}`}>

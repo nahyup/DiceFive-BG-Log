@@ -149,9 +149,6 @@ export default function PlayLog() {
     setIsFormOpen(true);
   };
     
-  const availablePlayers = players.filter(
-    p => !formData.playerScores.some(ps => ps.playerId === p.id)
-  );
 
   // Functions for delete confirmation modal
   const confirmDelete = () => {
@@ -308,60 +305,98 @@ export default function PlayLog() {
               </div>
             </div>
 
-            <div className="bg-surface-50 dark:bg-surface-800/50 p-4 rounded-xl border border-surface-200 dark:border-surface-700">
-              <label className="label flex justify-between items-center mb-3">
-                <span>Players & Scores</span>
-                {availablePlayers.length > 0 && (
-                  <select 
-                    className="text-sm bg-white dark:bg-surface-700 border border-surface-300 dark:border-surface-600 rounded px-2 py-1"
-                    onChange={e => {
-                      if (e.target.value) {
-                        handleAddPlayerScore(e.target.value);
-                        e.target.value = '';
-                      }
-                    }}
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Add Player...</option>
-                    {availablePlayers.map(p => (
-                      <option key={p.id} value={p.id}>{p.name} ({p.group})</option>
-                    ))}
-                  </select>
-                )}
-              </label>
-              
-              {formData.playerScores.length === 0 ? (
-                <div className="text-center py-4 text-surface-500 text-sm">
-                  Add players from the dropdown above
-                </div>
-              ) : (
+            <div className="bg-surface-50 dark:bg-surface-800/50 p-4 rounded-xl border border-surface-200 dark:border-surface-700 space-y-4">
+              <div>
+                <span className="block text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-2">
+                  Select Players
+                </span>
                 <div className="space-y-3">
-                  {formData.playerScores.map(ps => {
-                    const player = players.find(p => p.id === ps.playerId);
+                  {(['User', 'Family', 'Friend'] as const).map(groupName => {
+                    const groupPlayers = players.filter(p => p.group === groupName);
+                    if (groupPlayers.length === 0) return null;
                     return (
-                      <div key={ps.playerId} className="flex items-center gap-3 bg-white dark:bg-surface-800 p-2 rounded-lg border border-surface-200 dark:border-surface-700 shadow-sm">
-                        <span className="flex-1 font-medium pl-2">{player?.name}</span>
-                        <div className="flex items-center gap-2">
-                          <label className="text-sm text-surface-500">Score:</label>
-                          <input 
-                            type="number" 
-                            className="input !py-1 !px-2 w-24 text-right"
-                            value={ps.score}
-                            onChange={e => handleScoreChange(ps.playerId, Number(e.target.value))}
-                          />
-                          <button 
-                            type="button" 
-                            onClick={() => handleRemovePlayerScore(ps.playerId)}
-                            className="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1.5 rounded"
-                          >
-                            <Trash2 size={16} />
-                          </button>
+                      <div key={groupName} className="space-y-1.5">
+                        <span className="text-[10px] uppercase font-bold text-surface-400 tracking-wider">
+                          {groupName}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {groupPlayers.map(p => {
+                            const isSelected = formData.playerScores.some(ps => ps.playerId === p.id);
+                            return (
+                              <button
+                                key={p.id}
+                                type="button"
+                                onClick={() => {
+                                  if (isSelected) {
+                                    handleRemovePlayerScore(p.id);
+                                  } else {
+                                    handleAddPlayerScore(p.id);
+                                  }
+                                }}
+                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer select-none ${
+                                  isSelected
+                                    ? 'bg-primary-500 border-primary-500 text-white shadow-sm transform scale-[0.98]'
+                                    : 'bg-white dark:bg-surface-800 border-surface-200 dark:border-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-700 hover:scale-[1.02]'
+                                }`}
+                              >
+                                {p.imageUrl ? (
+                                  <img src={p.imageUrl} alt={p.name} className="w-5 h-5 rounded-full object-cover" />
+                                ) : (
+                                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold uppercase ${
+                                    isSelected ? 'bg-white/20 text-white' : 'bg-surface-200 dark:bg-surface-700 text-surface-600 dark:text-surface-300'
+                                  }`}>
+                                    {p.name.charAt(0)}
+                                  </div>
+                                )}
+                                <span>{p.name}</span>
+                                {isSelected && <span className="text-[10px] ml-0.5">✓</span>}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     );
                   })}
                 </div>
-              )}
+              </div>
+
+              <div className="border-t border-surface-200 dark:border-surface-700 pt-3">
+                <span className="block text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-2">
+                  Scores
+                </span>
+                {formData.playerScores.length === 0 ? (
+                  <div className="text-center py-4 text-surface-400 text-sm italic">
+                    Tap players above to add them to this session
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {formData.playerScores.map(ps => {
+                      const player = players.find(p => p.id === ps.playerId);
+                      return (
+                        <div key={ps.playerId} className="flex items-center gap-3 bg-white dark:bg-surface-800 p-2 rounded-lg border border-surface-200 dark:border-surface-700 shadow-sm">
+                          <span className="flex-1 font-medium pl-2">{player?.name}</span>
+                          <div className="flex items-center gap-2">
+                            <label className="text-sm text-surface-500">Score:</label>
+                            <input 
+                              type="number" 
+                              className="input !py-1 !px-2 w-24 text-right"
+                              value={ps.score}
+                              onChange={e => handleScoreChange(ps.playerId, Number(e.target.value))}
+                            />
+                            <button 
+                              type="button" 
+                              onClick={() => handleRemovePlayerScore(ps.playerId)}
+                              className="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 p-1.5 rounded"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div>
