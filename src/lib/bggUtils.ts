@@ -320,7 +320,7 @@ const KNOWN_BGG_MAP: Record<string, string> = {
   "섀클턴 베이스": "415516",
   "冷たい彼女が目覚める前に (embalming girl)": "348398",
   "차가운 그녀가 눈을 뜨기 전에": "348398",
-  "abaone": "1134",
+  "abalone": "1134",
   "아발론": "1134",
   "clans of caledonia": "216132",
   "클랜 오브 칼레도니아": "216132",

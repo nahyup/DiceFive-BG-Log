@@ -2164,7 +2164,7 @@ const initialGames: Game[] = [
     "duration": "15-30"
   },
   {
-    "title": "Abaone",
+    "title": "Abalone",
     "subtitle": "아발론",
     "publishedYear": 1987,
     "players": "2",
@@ -2178,7 +2178,7 @@ const initialGames: Game[] = [
     "duration": "30"
   },
   {
-    "title": " Clans of Caledonia",
+    "title": "Clans of Caledonia",
     "subtitle": "클랜 오브 칼레도니아",
     "publishedYear": 2017,
     "players": "1-4",
@@ -2192,7 +2192,7 @@ const initialGames: Game[] = [
     "duration": "30-120"
   },
   {
-    "title": " Ora et Labora",
+    "title": "Ora et Labora",
     "subtitle": "기도하고 일하라",
     "publishedYear": 2011,
     "players": "1-4",
