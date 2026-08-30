@@ -94,7 +94,7 @@ const initialGames: Game[] = [
     "playTime": "90-150",
     "weight": 3.8,
     "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-    "totalPlays": 32,
+    "totalPlays": 33,
     "publishedYear": 2021,
     "subtitle": "아크 노바",
     "bggUrl": "https://boardgamegeek.com/boardgame/342942",
@@ -150,8 +150,9 @@ const initialGames: Game[] = [
     "totalPlays": 2,
     "publishedYear": 2011,
     "subtitle": "버건디의 성",
-    "bggUrl": "https://boardgamegeek.com/boardgame/179353",
-    "duration": "70-120"
+    "bggUrl": "https://boardgamegeek.com/boardgame/271320",
+    "duration": "70-120",
+    "status": "Owned"
   },
   {
     "id": "2db3540f-0551-44cd-b924-064c308e5224",
@@ -222,16 +223,16 @@ const initialGames: Game[] = [
   },
   {
     "id": "b5642a64-35f9-4839-b4d7-77fed19a06dc",
-    "title": "Orléans",
+    "title": "Orléans: Big Box",
     "players": "2-5",
     "playTime": "90",
     "weight": 3.04,
     "imageUrl": "https://www.thegamesteward.com/cdn/shop/products/orleans-deluxe-edition-kickstarter-special-kickstarter-board-game-tasty-minstrel-games-34726879035544.png?v=1634372506&width=1141",
     "totalPlays": 2,
-    "publishedYear": 2014,
-    "subtitle": "오를레앙",
+    "publishedYear": 2024,
+    "subtitle": "오를레앙 빅박스",
     "status": "Owned",
-    "bggUrl": "https://boardgamegeek.com/boardgame/164928",
+    "bggUrl": "https://boardgamegeek.com/boardgame/420068",
     "duration": "90"
   },
   {
@@ -617,7 +618,7 @@ const initialGames: Game[] = [
     "imageUrl": "https://cf.geekdo-images.com/jEPmWvvYpqkWrKOzqIHFsg__itemrep@2x/img/aS773dDJTpgmO9UxQF-emlZpBeI=/fit-in/492x600/filters:strip_icc()/pic4336469.png",
     "totalPlays": 0,
     "publishedYear": 2019,
-    "subtitle": "버라지",
+    "subtitle": "버라��",
     "bggUrl": "https://boardgamegeek.com/boardgame/257499",
     "duration": "60-120"
   },
@@ -1425,7 +1426,7 @@ const initialGames: Game[] = [
     "totalPlays": 2,
     "publishedYear": 2018,
     "subtitle": "서쪽 왕국의 건축가",
-    "bggUrl": "https://boardgamegeek.com/boardgame/256858",
+    "bggUrl": "https://boardgamegeek.com/boardgame/236457",
     "duration": "60-80"
   },
   {
@@ -1529,8 +1530,9 @@ const initialGames: Game[] = [
     "totalPlays": 6,
     "publishedYear": 2020,
     "subtitle": "마르코 폴로 2: 위대한 칸의 이름으로",
-    "bggUrl": "https://boardgamegeek.com/boardgame/280894",
-    "duration": "60-120"
+    "bggUrl": "https://boardgamegeek.com/boardgame/283948",
+    "duration": "60-120",
+    "status": "Owned"
   },
   {
     "title": "Revive",
@@ -2158,7 +2160,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1773981063325-ze51lj5",
     "totalPlays": 7,
-    "bggUrl": "https://boardgamegeek.com/boardgame/348398",
+    "bggUrl": "https://boardgamegeek.com/boardgame/326054",
     "duration": "15-30"
   },
   {
