@@ -232,7 +232,7 @@ const initialGames: Game[] = [
     "publishedYear": 2024,
     "subtitle": "오를레앙 빅박스",
     "status": "Owned",
-    "bggUrl": "https://boardgamegeek.com/boardgame/420068",
+    "bggUrl": "https://boardgamegeek.com/boardgame/164928",
     "duration": "90"
   },
   {
@@ -486,7 +486,7 @@ const initialGames: Game[] = [
     "publishedYear": 2015,
     "subtitle": "엘 그란데 빅 박스",
     "status": "Owned by Friends",
-    "bggUrl": "https://boardgamegeek.com/boardgame/36537",
+    "bggUrl": "https://boardgamegeek.com/boardgame/171908",
     "duration": "60-120"
   },
   {
@@ -646,7 +646,7 @@ const initialGames: Game[] = [
     "publishedYear": 2020,
     "subtitle": "니다벨리르",
     "status": "Owned by Friends",
-    "bggUrl": "https://boardgamegeek.com/boardgame/296575",
+    "bggUrl": "https://boardgamegeek.com/boardgame/293014",
     "duration": "45"
   },
   {
@@ -765,7 +765,7 @@ const initialGames: Game[] = [
     "publishedYear": 1999,
     "subtitle": "차이나타운",
     "status": "Owned by Friends",
-    "bggUrl": "https://boardgamegeek.com/boardgame/181",
+    "bggUrl": "https://boardgamegeek.com/boardgame/47",
     "duration": "60"
   },
   {
@@ -791,7 +791,7 @@ const initialGames: Game[] = [
     "totalPlays": 1,
     "publishedYear": 2023,
     "subtitle": "월드 원더스",
-    "bggUrl": "https://boardgamegeek.com/boardgame/392308",
+    "bggUrl": "https://boardgamegeek.com/boardgame/365258",
     "duration": "50-70"
   },
   {
@@ -804,7 +804,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2022,
     "subtitle": "폭시",
-    "bggUrl": "https://boardgamegeek.com/boardgame/392942",
+    "bggUrl": "https://boardgamegeek.com/boardgame/359318",
     "duration": "15-20"
   },
   {
@@ -894,7 +894,7 @@ const initialGames: Game[] = [
     "id": "b3d8e443-3dbc-4558-ab8f-7eb557374286",
     "totalPlays": 0,
     "subtitle": "크라스 카리어트",
-    "bggUrl": "https://boardgamegeek.com/boardgame/246734",
+    "bggUrl": "https://boardgamegeek.com/boardgame/243430",
     "duration": "30"
   },
   {
@@ -959,7 +959,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2019,
     "subtitle": "리버 플로우",
-    "bggUrl": "https://boardgamegeek.com/boardgame/381014",
+    "bggUrl": "https://boardgamegeek.com/boardgame/271693",
     "duration": "20"
   },
   {
@@ -998,7 +998,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 1984,
     "subtitle": "위자드",
-    "bggUrl": "https://boardgamegeek.com/boardgame/475",
+    "bggUrl": "https://boardgamegeek.com/boardgame/1465",
     "duration": "45"
   },
   {
@@ -1063,7 +1063,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2011,
     "subtitle": "로스트 템플",
-    "bggUrl": "https://boardgamegeek.com/boardgame/97341",
+    "bggUrl": "https://boardgamegeek.com/boardgame/89139",
     "duration": "40"
   },
   {
@@ -1075,7 +1075,7 @@ const initialGames: Game[] = [
     "id": "10b846d7-3301-4475-9400-114d36bc8ab2",
     "totalPlays": 0,
     "publishedYear": 2008,
-    "subtitle": "쓰루 디 에이지스: 청동기 시대",
+    "subtitle": "롤 쓰루 디 에이지스: 청동기 시대",
     "bggUrl": "https://boardgamegeek.com/boardgame/37380",
     "duration": "35"
   },
@@ -1128,7 +1128,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2021,
     "subtitle": "로빈 후드의 모험",
-    "bggUrl": "https://boardgamegeek.com/boardgame/320186",
+    "bggUrl": "https://boardgamegeek.com/boardgame/326494",
     "duration": "60"
   },
   {
@@ -1141,7 +1141,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2021,
     "subtitle": "용의자들: 클레어 하퍼의 수사일지",
-    "bggUrl": "https://boardgamegeek.com/boardgame/328643",
+    "bggUrl": "https://boardgamegeek.com/boardgame/322785",
     "duration": "60"
   },
   {
@@ -1154,7 +1154,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2018,
     "subtitle": "진저브레드 하우스",
-    "bggUrl": "https://boardgamegeek.com/boardgame/252900",
+    "bggUrl": "https://boardgamegeek.com/boardgame/258444",
     "duration": "30-45"
   },
   {
@@ -1180,7 +1180,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 1994,
     "subtitle": "아임 더 보스!",
-    "bggUrl": "https://boardgamegeek.com/boardgame/15",
+    "bggUrl": "https://boardgamegeek.com/boardgame/115",
     "duration": "60"
   },
   {
@@ -1193,7 +1193,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "카멜업: 카드 게임",
-    "bggUrl": "https://boardgamegeek.com/boardgame/209228",
+    "bggUrl": "https://boardgamegeek.com/boardgame/378848",
     "duration": "30-45"
   },
   {
@@ -1245,7 +1245,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2019,
     "subtitle": "르네상스의 거장들: 위대한 로렌초 - 카드게임",
-    "bggUrl": "https://boardgamegeek.com/boardgame/280308",
+    "bggUrl": "https://boardgamegeek.com/boardgame/280453",
     "duration": "30-45"
   },
   {
@@ -1258,7 +1258,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2011,
     "subtitle": "플래시 포인트: 화재 구조",
-    "bggUrl": "https://boardgamegeek.com/boardgame/108667",
+    "bggUrl": "https://boardgamegeek.com/boardgame/100901",
     "duration": "45"
   },
   {
@@ -1283,7 +1283,7 @@ const initialGames: Game[] = [
     "id": "0f239040-856d-4147-9b8f-4168068bcdee",
     "totalPlays": 0,
     "subtitle": "우드랜드의 탐험가",
-    "bggUrl": "https://boardgamegeek.com/boardgame/336113",
+    "bggUrl": "https://boardgamegeek.com/boardgame/344078",
     "duration": "30-45"
   },
   {
@@ -1296,7 +1296,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2024,
     "subtitle": "별의 소원",
-    "bggUrl": "https://boardgamegeek.com/boardgame/368307",
+    "bggUrl": "https://boardgamegeek.com/boardgame/424567",
     "duration": "30-45"
   },
   {
@@ -1335,7 +1335,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2017,
     "subtitle": "파라메딕스 클리어",
-    "bggUrl": "https://boardgamegeek.com/boardgame/231652",
+    "bggUrl": "https://boardgamegeek.com/boardgame/207010",
     "duration": "30-45"
   },
   {
@@ -1452,7 +1452,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "디스틸드",
-    "bggUrl": "https://boardgamegeek.com/boardgame/294702",
+    "bggUrl": "https://boardgamegeek.com/boardgame/295895",
     "duration": "30-150"
   },
   {
@@ -1465,7 +1465,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "동인도 회사",
-    "bggUrl": "https://boardgamegeek.com/boardgame/358504",
+    "bggUrl": "https://boardgamegeek.com/boardgame/354132",
     "duration": "90-120"
   },
   {
@@ -1478,7 +1478,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2020,
     "subtitle": "파이윰",
-    "bggUrl": "https://boardgamegeek.com/boardgame/318986",
+    "bggUrl": "https://boardgamegeek.com/boardgame/318983",
     "duration": "60-120"
   },
   {
@@ -1504,7 +1504,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2018,
     "subtitle": "코임브라",
-    "bggUrl": "https://boardgamegeek.com/boardgame/247000",
+    "bggUrl": "https://boardgamegeek.com/boardgame/245638",
     "duration": "60-90"
   },
   {
@@ -1583,7 +1583,7 @@ const initialGames: Game[] = [
     "totalPlays": 1,
     "publishedYear": 2022,
     "subtitle": "카네기",
-    "bggUrl": "https://boardgamegeek.com/boardgame/310870",
+    "bggUrl": "https://boardgamegeek.com/boardgame/310873",
     "duration": "90-120"
   },
   {
@@ -1635,7 +1635,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 1993,
     "subtitle": "로보 77",
-    "bggUrl": "https://boardgamegeek.com/boardgame/2358",
+    "bggUrl": "https://boardgamegeek.com/boardgame/3337",
     "duration": "15"
   },
   {
@@ -1714,7 +1714,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2021,
     "subtitle": "미크로 마크로: 크라임 시티- 풀하우스",
-    "bggUrl": "https://boardgamegeek.com/boardgame/343606",
+    "bggUrl": "https://boardgamegeek.com/boardgame/338834",
     "duration": "15-45"
   },
   {
@@ -1753,7 +1753,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "파러웨이",
-    "bggUrl": "https://boardgamegeek.com/boardgame/394747",
+    "bggUrl": "https://boardgamegeek.com/boardgame/385761",
     "duration": "15-25"
   },
   {
@@ -1779,7 +1779,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2025,
     "subtitle": "러브크래프트 레터: 아컴호러",
-    "bggUrl": "https://boardgamegeek.com/boardgame/225574",
+    "bggUrl": "https://boardgamegeek.com/boardgame/424784",
     "duration": "20"
   },
   {
@@ -1792,7 +1792,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2022,
     "subtitle": "퀵샷 서바이벌",
-    "bggUrl": "https://boardgamegeek.com/boardgame/338575",
+    "bggUrl": "https://boardgamegeek.com/boardgame/368837",
     "duration": "10-15"
   },
   {
@@ -1805,7 +1805,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2017,
     "subtitle": "광란의 푸드트럭: 이것은 요식업이 아닌 전쟁",
-    "bggUrl": "https://boardgamegeek.com/boardgame/210080",
+    "bggUrl": "https://boardgamegeek.com/boardgame/217020",
     "duration": "30"
   },
   {
@@ -1831,7 +1831,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2024,
     "subtitle": "파티사우루스 20s",
-    "bggUrl": "https://boardgamegeek.com/boardgame/376483",
+    "bggUrl": "https://boardgamegeek.com/boardgame/427278",
     "duration": "15-20"
   },
   {
@@ -1844,7 +1844,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2024,
     "subtitle": "피쉬 앤 트릭",
-    "bggUrl": "https://boardgamegeek.com/boardgame/392270",
+    "bggUrl": "https://boardgamegeek.com/boardgame/419195",
     "duration": "20"
   },
   {
@@ -1883,7 +1883,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2025,
     "subtitle": "컵 더 크랩",
-    "bggUrl": "https://boardgamegeek.com/boardgame/385627",
+    "bggUrl": "https://boardgamegeek.com/boardgame/437879",
     "duration": "15"
   },
   {
@@ -1896,7 +1896,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 1998,
     "subtitle": "할라피-노!",
-    "bggUrl": "https://boardgamegeek.com/boardgame/367980",
+    "bggUrl": "https://boardgamegeek.com/boardgame/206",
     "duration": "15"
   },
   {
@@ -1909,7 +1909,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "가지각새",
-    "bggUrl": "https://boardgamegeek.com/boardgame/376510",
+    "bggUrl": "https://boardgamegeek.com/boardgame/387388",
     "duration": "10-15"
   },
   {
@@ -1922,7 +1922,7 @@ const initialGames: Game[] = [
     "totalPlays": 1,
     "publishedYear": 2021,
     "subtitle": "지킬 vs 하이드",
-    "bggUrl": "https://boardgamegeek.com/boardgame/316165",
+    "bggUrl": "https://boardgamegeek.com/boardgame/297129",
     "duration": "20"
   },
   {
@@ -1935,7 +1935,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2024,
     "subtitle": "오딘",
-    "bggUrl": "https://boardgamegeek.com/boardgame/372076",
+    "bggUrl": "https://boardgamegeek.com/boardgame/406854",
     "duration": "15"
   },
   {
@@ -1948,7 +1948,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2007,
     "subtitle": "바퀴벌레 샐러드",
-    "bggUrl": "https://boardgamegeek.com/boardgame/33160",
+    "bggUrl": "https://boardgamegeek.com/boardgame/32341",
     "duration": "10-20"
   },
   {
@@ -1961,7 +1961,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2024,
     "subtitle": "갱스터",
-    "bggUrl": "https://boardgamegeek.com/boardgame/413009",
+    "bggUrl": "https://boardgamegeek.com/boardgame/419266",
     "duration": "20"
   },
   {
@@ -1974,7 +1974,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "프린세스의 반란",
-    "bggUrl": "https://boardgamegeek.com/boardgame/392264",
+    "bggUrl": "https://boardgamegeek.com/boardgame/381249",
     "duration": "30"
   },
   {
@@ -1987,7 +1987,7 @@ const initialGames: Game[] = [
     "totalPlays": 2,
     "publishedYear": 2024,
     "subtitle": "캐슬콤보",
-    "bggUrl": "https://boardgamegeek.com/boardgame/417724",
+    "bggUrl": "https://boardgamegeek.com/boardgame/416851",
     "duration": "25"
   },
   {
@@ -2000,7 +2000,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "여섯불꽃",
-    "bggUrl": "https://boardgamegeek.com/boardgame/382728",
+    "bggUrl": "https://boardgamegeek.com/boardgame/410338",
     "duration": "15"
   },
   {
@@ -2013,7 +2013,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 1993,
     "subtitle": "옛날 옛적에",
-    "bggUrl": "https://boardgamegeek.com/boardgame/934",
+    "bggUrl": "https://boardgamegeek.com/boardgame/1234",
     "duration": "30"
   },
   {
@@ -2039,7 +2039,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2023,
     "subtitle": "티켓 투 라이드 레거시: 서부개척",
-    "bggUrl": "https://boardgamegeek.com/boardgame/379036",
+    "bggUrl": "https://boardgamegeek.com/boardgame/390092",
     "duration": "20-60"
   },
   {
@@ -2052,7 +2052,7 @@ const initialGames: Game[] = [
     "totalPlays": 1,
     "publishedYear": 2024,
     "subtitle": "플립 7",
-    "bggUrl": "https://boardgamegeek.com/boardgame/420138",
+    "bggUrl": "https://boardgamegeek.com/boardgame/420087",
     "duration": "20"
   },
   {
@@ -2132,7 +2132,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "subtitle": "핫스트릭",
     "status": "Owned by Friends",
-    "bggUrl": "https://boardgamegeek.com/boardgame/417537",
+    "bggUrl": "https://boardgamegeek.com/boardgame/446497",
     "duration": "15-30"
   },
   {
@@ -2146,7 +2146,7 @@ const initialGames: Game[] = [
     "status": "Preorder",
     "id": "9097ae7d-28d9-46c3-b7ad-5ac873932942",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/415516",
+    "bggUrl": "https://boardgamegeek.com/boardgame/408180",
     "duration": "60-120"
   },
   {
@@ -2160,7 +2160,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1773981063325-ze51lj5",
     "totalPlays": 7,
-    "bggUrl": "https://boardgamegeek.com/boardgame/348398",
+    "bggUrl": "https://boardgamegeek.com/boardgame/326054",
     "duration": "15-30"
   },
   {
@@ -2178,7 +2178,7 @@ const initialGames: Game[] = [
     "duration": "30"
   },
   {
-    "title": "Clans of Caledonia",
+    "title": " Clans of Caledonia",
     "subtitle": "클랜 오브 칼레도니아",
     "publishedYear": 2017,
     "players": "1-4",
@@ -2216,7 +2216,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912179914-kqoep85",
     "totalPlays": 2,
-    "bggUrl": "https://boardgamegeek.com/boardgame/383377",
+    "bggUrl": "https://boardgamegeek.com/boardgame/429405",
     "duration": "30-60"
   },
   {
@@ -2230,7 +2230,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912237311-emjy5oq",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/343354",
+    "bggUrl": "https://boardgamegeek.com/boardgame/339958",
     "duration": "60-120"
   },
   {
@@ -2258,7 +2258,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912358184-svhjvpb",
     "totalPlays": 5,
-    "bggUrl": "https://boardgamegeek.com/boardgame/277028",
+    "bggUrl": "https://boardgamegeek.com/boardgame/286735",
     "duration": "20-40"
   },
   {
@@ -2272,7 +2272,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912412695-m5xteke",
     "totalPlays": 2,
-    "bggUrl": "https://boardgamegeek.com/boardgame/345388",
+    "bggUrl": "https://boardgamegeek.com/boardgame/428787",
     "duration": "20-30"
   },
   {
@@ -2286,7 +2286,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912478822-3j6xv5a",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/345389",
+    "bggUrl": "https://boardgamegeek.com/boardgame/260704",
     "duration": "20"
   },
   {
@@ -2300,7 +2300,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912594052-jdiacxj",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/368742",
+    "bggUrl": "https://boardgamegeek.com/boardgame/421630",
     "duration": "15-20"
   },
   {
@@ -2314,7 +2314,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1775912645836-oc6avt2",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/378036",
+    "bggUrl": "https://boardgamegeek.com/boardgame/431284",
     "duration": "15"
   },
   {
@@ -2328,7 +2328,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1776910841699-6g4136o",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/375374",
+    "bggUrl": "https://boardgamegeek.com/boardgame/371330",
     "duration": "60-150"
   },
   {
@@ -2356,7 +2356,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1781959614163-1rcqrmi",
     "totalPlays": 2,
-    "bggUrl": "https://boardgamegeek.com/boardgame/245524",
+    "bggUrl": "https://boardgamegeek.com/boardgame/465137",
     "duration": "15"
   },
   {
@@ -2370,7 +2370,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1782647096728-z6wlgvn",
     "totalPlays": 0,
-    "bggUrl": "https://boardgamegeek.com/boardgame/387498",
+    "bggUrl": "https://boardgamegeek.com/boardgame/428029",
     "duration": "15"
   },
   {
@@ -2384,7 +2384,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783221255503-ksmivru",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/397022",
+    "bggUrl": "https://boardgamegeek.com/boardgame/462896",
     "duration": "15-20"
   },
   {
@@ -2398,7 +2398,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783221618981-bwvnpmq",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/408119",
+    "bggUrl": "https://boardgamegeek.com/boardgame/450039",
     "duration": "15"
   },
   {
@@ -2426,7 +2426,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783222243391-ozzgwoa",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/389470",
+    "bggUrl": "https://boardgamegeek.com/boardgame/450700",
     "duration": "15"
   },
   {
@@ -2440,7 +2440,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783222457748-trncmhv",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/416550",
+    "bggUrl": "https://boardgamegeek.com/boardgame/436843",
     "duration": "30"
   },
   {
@@ -2454,7 +2454,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783222596754-w30rm3b",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/162624",
+    "bggUrl": "https://boardgamegeek.com/boardgame/467434",
     "duration": "30"
   },
   {
@@ -2468,7 +2468,7 @@ const initialGames: Game[] = [
     "status": "Owned by Friends",
     "id": "id-1783222729960-w0hdsv7",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/8323",
+    "bggUrl": "https://boardgamegeek.com/boardgame/454103",
     "duration": "20-30"
   },
   {
@@ -2482,7 +2482,7 @@ const initialGames: Game[] = [
     "status": "Owned by Friends",
     "id": "id-1783222902134-pashoz1",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/391487",
+    "bggUrl": "https://boardgamegeek.com/boardgame/2310",
     "duration": "15"
   },
   {
@@ -2496,7 +2496,7 @@ const initialGames: Game[] = [
     "status": "None",
     "id": "id-1783223071364-mzj7vdk",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/396820",
+    "bggUrl": "https://boardgamegeek.com/boardgame/453526",
     "duration": "15"
   },
   {
@@ -2510,7 +2510,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1787414643332-sdjpzqc",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/412702",
+    "bggUrl": "https://boardgamegeek.com/boardgame/411617",
     "duration": "15"
   },
   {
