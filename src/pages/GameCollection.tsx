@@ -18,6 +18,7 @@ export default function GameCollection() {
   const [playerFilter, setPlayerFilter] = useState<string>('');
   const [weightFilter, setWeightFilter] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<SortOption>('most_played');
 
   const handleEdit = (game: Game) => {
@@ -51,6 +52,13 @@ export default function GameCollection() {
 
   const filteredGames = useMemo(() => {
     let result = games.filter(game => {
+      // Name search
+      let matchSearch = true;
+      if (searchQuery.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        matchSearch = (game.title || '').toLowerCase().includes(q) || (game.subtitle || '').toLowerCase().includes(q);
+      }
+
       // Player match
       let matchPlayer = true;
       if (playerFilter) {
@@ -71,10 +79,13 @@ export default function GameCollection() {
       // Weight match
       let matchWeight = true;
       if (weightFilter) {
-        if (weightFilter === 'light') matchWeight = game.weight < 2.0;
-        else if (weightFilter === 'medium') matchWeight = game.weight >= 2.0 && game.weight < 3.0;
-        else if (weightFilter === 'heavy') matchWeight = game.weight >= 3.0 && game.weight <= 4.0;
-        else if (weightFilter === 'very_heavy') matchWeight = game.weight > 4.0;
+        const max = parseFloat(weightFilter);
+        if (!isNaN(max)) {
+          const buckets = [1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
+          const idx = buckets.findIndex((b) => b === max);
+          const min = idx > 0 ? buckets[idx - 1] : 0;
+          matchWeight = game.weight <= max && game.weight > min;
+        }
       }
 
       // Status match
@@ -83,7 +94,7 @@ export default function GameCollection() {
         matchStatus = (game.status || 'Owned') === statusFilter;
       }
 
-      return matchPlayer && matchWeight && matchStatus;
+      return matchSearch && matchPlayer && matchWeight && matchStatus;
     });
 
     // Sort the results globally
@@ -117,7 +128,7 @@ export default function GameCollection() {
     });
 
     return result;
-  }, [games, playerFilter, weightFilter, statusFilter, sortOption, logs, getGameImages]);
+  }, [games, playerFilter, weightFilter, statusFilter, searchQuery, sortOption, logs, getGameImages]);
 
   return (
     <div className="space-y-6">
@@ -138,7 +149,15 @@ export default function GameCollection() {
           <div className="flex items-center gap-2 text-surface-500 font-medium px-2">
             <Filter size={18} /> Filters:
           </div>
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="flex-1 flex flex-col gap-4">
+            <input
+              type="text"
+              className="input"
+              placeholder="Search by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <select 
               className="input"
               value={playerFilter}
@@ -158,10 +177,14 @@ export default function GameCollection() {
               onChange={(e) => setWeightFilter(e.target.value)}
             >
               <option value="">All Weights (Complexity)</option>
-              <option value="light">Light (&lt; 2.0)</option>
-              <option value="medium">Medium (2.0 - 2.99)</option>
-              <option value="heavy">Heavy (3.0 - 4.0)</option>
-              <option value="very_heavy">Very Heavy (&gt; 4.0)</option>
+              <option value="1.5">&lt; 1.5</option>
+              <option value="2.0">1.5 - 2.0</option>
+              <option value="2.5">2.0 - 2.5</option>
+              <option value="3.0">2.5 - 3.0</option>
+              <option value="3.5">3.0 - 3.5</option>
+              <option value="4.0">3.5 - 4.0</option>
+              <option value="4.5">4.0 - 4.5</option>
+              <option value="5.0">4.5 - 5.0</option>
             </select>
             <select
               className="input"
@@ -175,7 +198,8 @@ export default function GameCollection() {
               <option value="Preorder">Preorder</option>
               <option value="None">None</option>
             </select>
-          </div>
+            </div>
+            </div>
         </div>
 
         {/* Sort */}
