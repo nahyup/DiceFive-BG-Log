@@ -8,7 +8,7 @@
         "playTime": 150,
         "weight": 3.8,
         "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-        "totalPlays": 20,
+        "totalPlays": 32,
         "publishedYear": 2021,
         "subtitle": "아크 노바"
       },
@@ -33,7 +33,7 @@
         "totalPlays": 0,
         "publishedYear": 2016,
         "subtitle": "사이드",
-        "status": "Wishlist"
+        "status": "Owned"
       },
       {
         "id": "14130fcb-a8c4-4e99-83a4-ff0ff6096452",
@@ -53,7 +53,7 @@
         "playTime": 90,
         "weight": 2.99,
         "imageUrl": "https://media.printables.com/media/prints/941234/images/7195899_f7bb400f-4021-4776-a7e5-7a0b3b7a0919_c9c39d5e-ac34-44a4-ab88-05b12c59974d/thumbs/inside/1280x960/jpg/duchy_comparison.webp",
-        "totalPlays": 1,
+        "totalPlays": 2,
         "publishedYear": 2011,
         "subtitle": "버건디의 성"
       },
@@ -117,11 +117,11 @@
       {
         "id": "b5642a64-35f9-4839-b4d7-77fed19a06dc",
         "title": "Orléans",
-        "players": "2-4",
+        "players": "2-5",
         "playTime": 90,
         "weight": 3.04,
         "imageUrl": "https://www.thegamesteward.com/cdn/shop/products/orleans-deluxe-edition-kickstarter-special-kickstarter-board-game-tasty-minstrel-games-34726879035544.png?v=1634372506&width=1141",
-        "totalPlays": 1,
+        "totalPlays": 2,
         "publishedYear": 2014,
         "subtitle": "오를레앙",
         "status": "Owned"
@@ -519,7 +519,7 @@
         "playTime": 75,
         "weight": 2.4,
         "imageUrl": "https://cf.geekdo-images.com/NItjtztEUAKOpaTWZddu9A__itemrep@2x/img/7oi5XRLpf7AMj8SgYuFmsgdBqoQ=/fit-in/492x600/filters:strip_icc()/pic5744928.jpg",
-        "totalPlays": 0,
+        "totalPlays": 6,
         "publishedYear": 2020,
         "subtitle": "행성 X를 찾아서"
       },
@@ -750,7 +750,7 @@
         "weight": 1.69,
         "imageUrl": "https://cf.geekdo-images.com/es3F2drfUOIVnqsTds3BDQ__itemrep@2x/img/Qft9La9Wtz54bF0UR8PYIXJ-dWY=/fit-in/492x600/filters:strip_icc()/pic8940639.png",
         "id": "5919619d-b95e-45b6-962f-a531efd7e484",
-        "totalPlays": 0,
+        "totalPlays": 1,
         "publishedYear": 2024,
         "subtitle": "세 번째 이야기"
       },
@@ -1134,7 +1134,7 @@
         "weight": 2.76,
         "imageUrl": "https://cf.geekdo-images.com/OAX7HfOz-9N60StgADzd0g__itemrep@2x/img/Thdq9gV27yx_bMAueNjD2e4jdw8=/fit-in/492x600/filters:strip_icc()/pic3781944.png",
         "id": "0baae0d2-a74a-491a-a116-58c1b4df26a6",
-        "totalPlays": 1,
+        "totalPlays": 2,
         "publishedYear": 2018,
         "subtitle": "서쪽 왕국의 건축가"
       },
@@ -1145,7 +1145,7 @@
         "weight": 2.82,
         "imageUrl": "https://cf.geekdo-images.com/6irYLjUf_o0rK7E_4qI-gw__itemrep@2x/img/VDYAHaQAAjgwL_Nrl9KMKVp0FcQ=/fit-in/492x600/filters:strip_icc()/pic6990829.png",
         "id": "1ce431a0-8294-42a5-af6a-93b6756bbba4",
-        "totalPlays": 0,
+        "totalPlays": 2,
         "publishedYear": 2022,
         "subtitle": "더 울브즈"
       },
@@ -1277,7 +1277,7 @@
         "weight": 4.27,
         "imageUrl": "https://cf.geekdo-images.com/D1vrcFEptCEoD8Z6s_iRfw__itemrep@2x/img/hp3aw2I9vgAjr88P3ueeocZSSCI=/fit-in/492x600/filters:strip_icc()/pic7430993.jpg",
         "id": "684e129c-f134-4fe1-b749-62556d11f132",
-        "totalPlays": 0,
+        "totalPlays": 3,
         "publishedYear": 2023,
         "subtitle": "혁신의 시대"
       },
@@ -1608,7 +1608,7 @@
         "weight": 1.73,
         "imageUrl": "https://cf.geekdo-images.com/rGomBfj0FGrZM-w3h5HFWQ__itemrep@2x/img/jjp97z9cm3bbV1oaBcl65QJ8pTw=/fit-in/492x600/filters:strip_icc()/pic8250341.png",
         "id": "7c8f7153-9700-4d05-b326-3fa37240f34b",
-        "totalPlays": 1,
+        "totalPlays": 2,
         "publishedYear": 2024,
         "subtitle": "캐슬콤보"
       },
@@ -1757,7 +1757,7 @@
         "imageUrl": "https://cf.geekdo-images.com/AJNJNuzdBjPOMs1GaDxVqw__imagepage/img/jcKsfaIVJRuXHo34SAUVY9lNZJU=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9477510.png",
         "status": "Owned",
         "id": "id-1773981063325-ze51lj5",
-        "totalPlays": 5
+        "totalPlays": 7
       },
       {
         "title": "Abaone",
@@ -1779,7 +1779,7 @@
         "playTime": 120,
         "weight": 3.47,
         "imageUrl": "https://cf.geekdo-images.com/SPuwc6RJ6y4PnTH36Pegsg__imagepage@2x/img/r5wyWByPawrxbmHvQKRjGYs76Xw=/fit-in/1800x1200/filters:strip_icc()/pic3511783.png",
-        "status": "Wishlist",
+        "status": "Preorder",
         "id": "id-1775269094936-zlw6t4t",
         "totalPlays": 0
       },
@@ -2046,6 +2046,30 @@
         "status": "None",
         "id": "id-1783223071364-mzj7vdk",
         "totalPlays": 1
+      },
+      {
+        "title": "Quoridor Pac-Man",
+        "subtitle": "쿼리도 팩맨",
+        "publishedYear": 2024,
+        "players": "2-5",
+        "playTime": 15,
+        "weight": 1.44,
+        "imageUrl": "https://cf.geekdo-images.com/2QqBn4MfWghniZok35dnsw__itemrep@2x/img/2cIQGbcdLgwGuUtS_SJAZnI2JHs=/fit-in/492x600/filters:strip_icc()/pic7974977.png",
+        "status": "Owned",
+        "id": "id-1787414643332-sdjpzqc",
+        "totalPlays": 1
+      },
+      {
+        "title": "Lost Ruins of Arnak",
+        "subtitle": "아르낙의 잊혀진 유적",
+        "publishedYear": 2020,
+        "players": "1-4",
+        "playTime": 120,
+        "weight": 2.93,
+        "imageUrl": "https://cf.geekdo-images.com/6GqH14TJJhza86BX5HCLEQ__itemrep@2x/img/hX4PzEbU71mE4VPlo3l-mLFC2W0=/fit-in/492x600/filters:strip_icc()/pic5674958.jpg",
+        "status": "Owned",
+        "id": "id-1787665558856-ymxrhh0",
+        "totalPlays": 0
       }
     ],
     "players": [
@@ -4254,12 +4278,12 @@
         "date": "2026-07-05T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
-            "score": 96
-          },
-          {
             "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
             "score": 122
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 96
           }
         ],
         "winnerIds": [
@@ -4273,6 +4297,748 @@
           "/uploads/1783257924856-kakaotalk_20260705_222217639_10.jpg"
         ],
         "id": "id-1783257926146-u7zx4fz"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-07-07T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 124
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 118
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "저항으로 붙은 점수를 몰랐다. -_-",
+        "id": "id-1783434678657-z2r07ta"
+      },
+      {
+        "gameId": "b5642a64-35f9-4839-b4d7-77fed19a06dc",
+        "date": "2026-07-08T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 144
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 118
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "BGA에서는 승리~!",
+        "imageUrls": [
+          "/uploads/1783521512703-screenshot_from_2026_07_08_23_37_52.png"
+        ],
+        "id": "id-1783521524007-btzvnkd"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-07-09T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 141
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 120
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1783603286399-ma581xp"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-07-14T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 122
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 119
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1784036476584-szgm9np"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-07-17T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 143
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 142
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1784294440518-nt0ytdc"
+      },
+      {
+        "gameId": "0baae0d2-a74a-491a-a116-58c1b4df26a6",
+        "date": "2026-07-26T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 47
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 42
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 40
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "꼴지 했당. ㅠ_ㅠ\n서쪽왕국의 건축가들 + 장인의 시대 확장",
+        "imageUrls": [
+          "/uploads/1785075526590-kakaotalk_20260726_231803284_03.jpg",
+          "/uploads/1785075526718-kakaotalk_20260726_231803284_02.jpg",
+          "/uploads/1785075526818-kakaotalk_20260726_231803284_01.jpg",
+          "/uploads/1785075526910-kakaotalk_20260726_231803284.jpg"
+        ],
+        "id": "id-1785075532970-sfxpug4"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-07T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 127
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 94
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "플레티넘한테 이기니까 각별하구만 휘유휘유휘유휘유",
+        "imageUrls": [
+          "/uploads/1786114185329-screenshot_from_2026_08_07_23_49_23.png"
+        ],
+        "id": "id-1786114211091-foztckz"
+      },
+      {
+        "gameId": "1ce431a0-8294-42a5-af6a-93b6756bbba4",
+        "date": "2026-08-09T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 67
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 62
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 50
+          }
+        ],
+        "winnerIds": [
+          "a6ace485-ec6f-46ca-ba76-f832d18fa43b"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1786329651056-1000006551.jpg",
+          "/uploads/1786329651325-1000006541.jpg"
+        ],
+        "id": "id-1786329654119-c9hymfz"
+      },
+      {
+        "gameId": "id-1773981063325-ze51lj5",
+        "date": "2026-08-09T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 10
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 0
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 0
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 0
+          }
+        ],
+        "winnerIds": [
+          "a6ace485-ec6f-46ca-ba76-f832d18fa43b"
+        ],
+        "reviewMemo": "범인 승리",
+        "id": "id-1786329721241-fuo0okg"
+      },
+      {
+        "gameId": "id-1773981063325-ze51lj5",
+        "date": "2026-08-09T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 10
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 0
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 0
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 0
+          }
+        ],
+        "winnerIds": [
+          "87253b71-031f-4e92-bed9-3de068e52d21"
+        ],
+        "reviewMemo": "외계인 승리",
+        "id": "id-1786329749218-suvon0u"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-10T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 131
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 129
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "플레티넘에게 1승 후후",
+        "imageUrls": [
+          "/uploads/1786347796208-screenshot_from_2026_08_10_16_42_30.png"
+        ],
+        "id": "id-1786347798669-o6ma1t8"
+      },
+      {
+        "gameId": "684e129c-f134-4fe1-b749-62556d11f132",
+        "date": "2026-08-08T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 129
+          },
+          {
+            "playerId": "84b003e1-7415-4a5b-ae65-2b52ffee0b31",
+            "score": 105
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 100
+          },
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 95
+          },
+          {
+            "playerId": "d8f90837-2493-415b-8c92-811dadd61b7e",
+            "score": 93
+          }
+        ],
+        "winnerIds": [
+          "31cc758a-0d5a-4725-9482-c581f1074170"
+        ],
+        "reviewMemo": "혁신의 시대 개봉플!!! 역사적인 4점대 진입 +_+",
+        "imageUrls": [
+          "/uploads/1786348088471-kakaotalk_20260810_164638090_01.jpg",
+          "/uploads/1786348100608-kakaotalk_20260810_164638090_03.jpg",
+          "/uploads/1786348110870-kakaotalk_20260810_164638090_05.jpg",
+          "/uploads/1786348122706-kakaotalk_20260810_164638090_08.jpg"
+        ],
+        "id": "id-1786348125272-m5sdp4m"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-16T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 114
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 105
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1786883993570-xoz7fzh"
+      },
+      {
+        "gameId": "684e129c-f134-4fe1-b749-62556d11f132",
+        "date": "2026-08-16T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 135
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 117
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "",
+        "id": "id-1786891039701-uyffeq8"
+      },
+      {
+        "gameId": "684e129c-f134-4fe1-b749-62556d11f132",
+        "date": "2026-08-15T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 1
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 0
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "엄마가 안되겠다고 기권함. 아빠 예상점수는 170점 대.",
+        "id": "id-1786891089068-u6osm8p"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-18T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 27
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 21
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 15
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787063408324-q333bqe"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-17T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 19
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 18
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 14
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 8
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787063630339-y2ks3py"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-17T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 33
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 19
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 14
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 4
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787063674585-210xc1g"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-17T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 23
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 15
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 7
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 3
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787063727872-06g67jr"
+      },
+      {
+        "gameId": "id-1787414643332-sdjpzqc",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 10
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 0
+          }
+        ],
+        "winnerIds": [
+          "50f25ae7-14f2-4b65-a0a5-b291d88af0e5"
+        ],
+        "reviewMemo": "팩맨을 이길수가 없다.",
+        "id": "id-1787414665771-akwlfxs"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 20
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 10
+          },
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 0
+          }
+        ],
+        "winnerIds": [
+          "31cc758a-0d5a-4725-9482-c581f1074170"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1787414747433-kakaotalk_20260823_010021228_24.jpg"
+        ],
+        "id": "id-1787414751154-vuwibmq"
+      },
+      {
+        "gameId": "7c8f7153-9700-4d05-b326-3fa37240f34b",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 102
+          },
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 85
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 83
+          }
+        ],
+        "winnerIds": [
+          "2e967014-673f-4d51-93f2-74fadd6979cd"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1787414896164-kakaotalk_20260823_010021228.jpg",
+          "/uploads/1787414910953-kakaotalk_20260823_010021228_02.jpg"
+        ],
+        "id": "id-1787414913624-j0orzep"
+      },
+      {
+        "gameId": "5919619d-b95e-45b6-962f-a531efd7e484",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 21
+          },
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 19
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 15
+          }
+        ],
+        "winnerIds": [
+          "31cc758a-0d5a-4725-9482-c581f1074170"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787414947360-bq1nbpb"
+      },
+      {
+        "gameId": "1ce431a0-8294-42a5-af6a-93b6756bbba4",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 51
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 49
+          },
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 47
+          }
+        ],
+        "winnerIds": [
+          "2e967014-673f-4d51-93f2-74fadd6979cd"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1787415015657-kakaotalk_20260823_005925161_07.jpg"
+        ],
+        "id": "id-1787415018727-jy1s6qy"
+      },
+      {
+        "gameId": "14f668cf-4ecd-433f-af6a-1e90a1177721",
+        "date": "2026-08-22T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "50f25ae7-14f2-4b65-a0a5-b291d88af0e5",
+            "score": 199
+          },
+          {
+            "playerId": "31cc758a-0d5a-4725-9482-c581f1074170",
+            "score": 190
+          },
+          {
+            "playerId": "2e967014-673f-4d51-93f2-74fadd6979cd",
+            "score": 183
+          }
+        ],
+        "winnerIds": [
+          "50f25ae7-14f2-4b65-a0a5-b291d88af0e5"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1787415100309-kakaotalk_20260823_005902902_03.jpg"
+        ],
+        "id": "id-1787415114992-brtmhb7"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-25T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 136
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 130
+          }
+        ],
+        "winnerIds": [
+          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+        ],
+        "reviewMemo": "",
+        "imageUrls": [
+          "/uploads/1787665450321-screenshot_from_2026_08_25_22_43_36.png"
+        ],
+        "id": "id-1787665452857-5lsai5z"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-28T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 26
+          },
+          {
+            "playerId": "f03f59af-84be-49b4-bf1c-882fd0344d4b",
+            "score": 22
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 16
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 7
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787981013854-aoh3fwy"
+      },
+      {
+        "gameId": "ccfea8ef-b52e-470f-a35c-4f515a83e5b0",
+        "date": "2026-08-28T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 19
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 19
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 17
+          },
+          {
+            "playerId": "f03f59af-84be-49b4-bf1c-882fd0344d4b",
+            "score": 15
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2",
+          "87253b71-031f-4e92-bed9-3de068e52d21"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787981064916-vgf2o3d"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-29T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 134
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 129
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1787981127372-1nlqoka"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-29T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 116
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 103
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788004456345-f2gld04"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-29T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 85
+          },
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 128
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788007272317-hr9v2ur"
+      }
+    ],
+    "stories": [
+      {
+        "title": "2026 우리들의 보드게임 연대기",
+        "description": "함께 웃고 울었던 지난 1년간의 플레이 세션과 엄마 아빠의 아크 노바 라이벌전",
+        "startDate": "2026-01-01",
+        "endDate": "2026-07-04",
+        "coverGradient": "from-indigo-950 via-slate-900 to-blue-900",
+        "id": "id-1783259368077-mzux3hg",
+        "createdDate": "2026-07-05T13:49:28.077Z"
       }
     ],
     "_hasHydrated": true
