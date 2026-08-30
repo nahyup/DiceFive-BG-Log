@@ -446,7 +446,7 @@ const initialGames: Game[] = [
     "totalPlays": 1,
     "publishedYear": 2007,
     "subtitle": "레이스 포 더 갤럭시",
-    "bggUrl": "https://boardgamegeek.com/boardgame/24073",
+    "bggUrl": "https://boardgamegeek.com/boardgame/28143",
     "duration": "30-60"
   },
   {
@@ -619,7 +619,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2019,
     "subtitle": "버라��",
-    "bggUrl": "https://boardgamegeek.com/boardgame/257499",
+    "bggUrl": "https://boardgamegeek.com/boardgame/251247",
     "duration": "60-120"
   },
   {
