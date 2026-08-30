@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { useBoardGameStore } from '../store/useBoardGameStore';
 import { calculatePlayerPerformance, getPlayerGameHistory, calculateEloScores, calculateHeadToHeadStats } from '../lib/statsUtils';
-import { User, Gamepad2, History, X, Crown, Medal, Award, Users } from 'lucide-react';
+import { User, History, X, Crown, Medal, Award, Users, Trophy } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface PlayerDetailsModalProps {
@@ -24,12 +25,14 @@ const GroupBadge = ({ group }: { group: string }) => {
 export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProps) {
   const store = useBoardGameStore();
   const player = store.players.find(p => p.id === playerId);
+  const [resultFilter, setResultFilter] = useState<'all' | 'wins'>('all');
   
   if (!player) return null;
   
   const eloScores = calculateEloScores(store.players, store.logs, store.games);
   const stats = calculatePlayerPerformance(player, store.logs, store.games, eloScores[playerId]);
-  const history = getPlayerGameHistory(playerId, store.logs).slice(0, 10);
+  const allHistory = getPlayerGameHistory(playerId, store.logs);
+  const history = (resultFilter === 'all' ? allHistory : allHistory.filter(l => (l.winnerIds || []).includes(playerId))).slice(0, 10);
   const headToHead = calculateHeadToHeadStats(playerId, store.players, store.logs);
   
   return (
@@ -155,9 +158,26 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
           </div>
 
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <History size={18} className="text-primary-500" />
-              <h3 className="font-bold text-surface-900 dark:text-white">Recent Activity</h3>
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center gap-2">
+                <History size={18} className="text-primary-500" />
+                <h3 className="font-bold text-surface-900 dark:text-white">Recent Activity</h3>
+              </div>
+              <div className="flex bg-surface-100 dark:bg-surface-800 p-0.5 rounded-lg border border-surface-200 dark:border-surface-700">
+                <button
+                  onClick={() => setResultFilter('all')}
+                  className={`px-3 py-1 rounded-md text-xs font-bold transition-colors ${resultFilter === 'all' ? 'bg-white dark:bg-surface-700 text-primary-600 dark:text-primary-300 shadow-sm' : 'text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200'}`}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => setResultFilter('wins')}
+                  className={`flex items-center gap-1 px-3 py-1 rounded-md text-xs font-bold transition-colors ${resultFilter === 'wins' ? 'bg-white dark:bg-surface-700 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200'}`}
+                >
+                  <Trophy size={12} />
+                  Wins
+                </button>
+              </div>
             </div>
             
             <div className="space-y-3">
@@ -206,8 +226,10 @@ export function PlayerDetailsModal({ playerId, onClose }: PlayerDetailsModalProp
               
               {history.length === 0 && (
                 <div className="text-center py-8 bg-surface-50 dark:bg-surface-800/50 rounded-2xl border-2 border-dashed border-surface-200 dark:border-surface-700">
-                  <Gamepad2 size={32} className="mx-auto text-surface-300 mb-2" />
-                  <p className="text-sm text-surface-500 font-medium">No games logged yet</p>
+                  <Trophy size={28} className="mx-auto text-surface-300 mb-2" />
+                  <p className="text-sm text-surface-500 font-medium">
+                    {resultFilter === 'wins' ? 'No wins logged yet' : 'No games logged yet'}
+                  </p>
                 </div>
               )}
             </div>
