@@ -907,7 +907,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2018,
     "subtitle": "카멜업",
-    "bggUrl": "https://boardgamegeek.com/boardgame/260516",
+    "bggUrl": "https://boardgamegeek.com/boardgame/260605",
     "duration": "30-45"
   },
   {
@@ -2174,7 +2174,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1774773758114-cgensy2",
     "totalPlays": 1,
-    "bggUrl": "https://boardgamegeek.com/boardgame/1134",
+    "bggUrl": "https://boardgamegeek.com/boardgame/526",
     "duration": "30"
   },
   {
