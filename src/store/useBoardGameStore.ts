@@ -1439,7 +1439,7 @@ const initialGames: Game[] = [
     "totalPlays": 2,
     "publishedYear": 2022,
     "subtitle": "더 울브즈",
-    "bggUrl": "https://boardgamegeek.com/boardgame/364467",
+    "bggUrl": "https://boardgamegeek.com/boardgame/368058",
     "duration": "60-75"
   },
   {

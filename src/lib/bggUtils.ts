@@ -123,7 +123,7 @@ const KNOWN_BGG_MAP: Record<string, string> = {
   'carolus magnus': '481',
   'the taverns of tiefenthal': '269207',
   'architects of the west kingdom': '236457',
-  'the wolves': '364467',
+  'the wolves': '368058',
   'distilled': '294702',
   'east india companies': '358504',
   'faiyum': '318986',
