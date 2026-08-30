@@ -150,7 +150,7 @@ const initialGames: Game[] = [
     "totalPlays": 2,
     "publishedYear": 2011,
     "subtitle": "버건디의 성",
-    "bggUrl": "https://boardgamegeek.com/boardgame/271320",
+    "bggUrl": "https://boardgamegeek.com/boardgame/179353",
     "duration": "70-120",
     "status": "Owned"
   },
@@ -907,7 +907,7 @@ const initialGames: Game[] = [
     "totalPlays": 0,
     "publishedYear": 2018,
     "subtitle": "카멜업",
-    "bggUrl": "https://boardgamegeek.com/boardgame/153936",
+    "bggUrl": "https://boardgamegeek.com/boardgame/260516",
     "duration": "30-45"
   },
   {
@@ -2160,7 +2160,7 @@ const initialGames: Game[] = [
     "status": "Owned",
     "id": "id-1773981063325-ze51lj5",
     "totalPlays": 7,
-    "bggUrl": "https://boardgamegeek.com/boardgame/326054",
+    "bggUrl": "https://boardgamegeek.com/boardgame/348398",
     "duration": "15-30"
   },
   {
