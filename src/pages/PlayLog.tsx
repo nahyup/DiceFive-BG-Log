@@ -311,7 +311,7 @@ export default function PlayLog() {
                   Select Players
                 </span>
                 <div className="space-y-3">
-                  {(['User', 'Family', 'Friend'] as const).map(groupName => {
+                  {(['User', 'Family', 'Couple', 'Friend'] as const).map(groupName => {
                     const groupPlayers = players.filter(p => p.group === groupName);
                     if (groupPlayers.length === 0) return null;
                     return (

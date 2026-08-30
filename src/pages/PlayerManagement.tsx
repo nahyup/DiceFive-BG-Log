@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useBoardGameStore, type Player } from '../store/useBoardGameStore';
-import { Users, UserPlus, Trash2, Shield, User, Pencil, Upload } from 'lucide-react';
+import { Users, UserPlus, Trash2, Shield, User, Heart, Pencil, Upload } from 'lucide-react';
 import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
 import { calculatePlayerPerformance, calculateEloScores } from '../lib/statsUtils';
 import { compressImage } from '../lib/imageUtils';
@@ -15,7 +15,7 @@ export default function PlayerManagement() {
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   
   const [name, setName] = useState('');
-  const [group, setGroup] = useState<'Family' | 'Friend' | 'User'>('Friend');
+  const [group, setGroup] = useState<'Family' | 'Friend' | 'Couple' | 'User'>('Friend');
   const [imageUrl, setImageUrl] = useState('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -95,10 +95,12 @@ export default function PlayerManagement() {
     resetForm();
   };
 
-  const GroupBadge = ({ group }: { group: 'Family' | 'Friend' | 'User' }) => {
+  const GroupBadge = ({ group }: { group: 'Family' | 'Friend' | 'Couple' | 'User' }) => {
     switch (group) {
       case 'Family':
         return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400"><Users size={12} /> Family</span>;
+      case 'Couple':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-400"><Heart size={12} /> Couple</span>;
       case 'User':
         return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400"><Shield size={12} /> User</span>;
       default:

@@ -28,7 +28,7 @@ export interface Game {
 export interface Player {
   id: string;
   name: string;
-  group: 'Family' | 'Friend' | 'User';
+  group: 'Family' | 'Friend' | 'Couple' | 'User';
   imageUrl?: string;
 }
 
@@ -2539,6 +2539,8 @@ const initialPlayers: Player[] = [
   { id: 'f03f59af-84be-49b4-bf1c-882fd0344d4b', name: 'Dad', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dad' },
   { id: 'a6ace485-ec6f-46ca-ba76-f832d18fa43b', name: 'Sister', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sister' },
   { id: '87253b71-031f-4e92-bed9-3de068e52d21', name: 'Brother', group: 'Family', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Brother' },
+  { id: '4e541792-81fe-4ade-89e1-0415bced06b1', name: 'Wife', group: 'Couple', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Wife' },
+  { id: '4e9e985e-6141-47b6-88ae-89afc5889baf', name: 'Husband', group: 'Couple', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Husband' },
 ];
 
 const customApiStorage: StateStorage = {

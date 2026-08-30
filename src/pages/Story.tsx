@@ -533,7 +533,7 @@ export default function Story() {
         </div>
         <div>
           <h4 class="font-bold text-sm">\${p.name}</h4>
-          <span class="text-[10px] bg-slate-100 dark:bg-surface-700 text-slate-500 px-2 py-0.5 rounded font-semibold uppercase">\${p.group === 'Family' ? '가족' : '친구'}</span>
+          <span class="text-[10px] bg-slate-100 dark:bg-surface-700 text-slate-500 px-2 py-0.5 rounded font-semibold uppercase">\${p.group === 'Family' ? '가족' : p.group === 'Couple' ? '부부' : '친구'}</span>
         </div>
         <div class="grid grid-cols-2 w-full pt-2 border-t border-surface-100 text-center gap-1">
           <div>
@@ -1048,7 +1048,7 @@ export default function Story() {
                 <div>
                   <h4 className="font-bold text-sm text-surface-900 dark:text-white truncate max-w-[120px]">{p.name}</h4>
                   <span className="text-[10px] bg-slate-100 dark:bg-surface-700 text-slate-500 dark:text-surface-400 px-2 py-0.5 rounded font-semibold uppercase tracking-wider">
-                    {p.group === 'Family' ? '가족' : '친구'}
+                    {p.group === 'Family' ? '가족' : p.group === 'Couple' ? '부부' : '친구'}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 w-full pt-2 border-t border-surface-150 dark:border-surface-700 text-center">
@@ -1257,7 +1257,7 @@ export default function Story() {
                       const player = playerMap.get(lp.playerId);
                       const isWinner = selectedLog.winnerIds.includes(lp.playerId);
                       const name = player ? player.name : '알 수 없는 플레이어';
-                      const group = player ? (player.group === 'Family' ? '가족' : '친구') : '';
+                      const group = player ? (player.group === 'Family' ? '가족' : player.group === 'Couple' ? '부부' : '친구') : '';
                       const scoreVal = typeof lp.score === 'number' ? lp.score + '점' : '점수 없음';
 
                       return (

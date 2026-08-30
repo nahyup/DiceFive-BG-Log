@@ -6,7 +6,7 @@ import { PlayerDetailsModal } from '../components/PlayerDetailsModal';
 
 export default function Statistics() {
   const { games, players, logs } = useBoardGameStore();
-  const [groupFilter, setGroupFilter] = useState<'All' | 'Family' | 'Friend'>('All');
+  const [groupFilter, setGroupFilter] = useState<'All' | 'Family' | 'Friend' | 'Couple'>('All');
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 
   // Filter players based on group
@@ -105,7 +105,7 @@ export default function Statistics() {
         </div>
         
         <div className="flex bg-surface-100 dark:bg-surface-800 p-1 rounded-xl w-fit border border-surface-200 dark:border-surface-700">
-          {(['All', 'Family', 'Friend'] as const).map((group) => (
+          {(['All', 'Family', 'Friend', 'Couple'] as const).map((group) => (
             <button
               key={group}
               onClick={() => setGroupFilter(group)}

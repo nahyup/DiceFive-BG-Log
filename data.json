@@ -2518,6 +2518,18 @@
         "group": "Friend",
         "imageUrl": "/uploads/extracted-1775488257041-6-f731cf7a.webp",
         "id": "31cc758a-0d5a-4725-9482-c581f1074170"
+      },
+      {
+        "id": "4e541792-81fe-4ade-89e1-0415bced06b1",
+        "name": "아내",
+        "group": "Couple",
+        "imageUrl": "/uploads/extracted-1775488257041-1-d8e7a988.webp"
+      },
+      {
+        "id": "4e9e985e-6141-47b6-88ae-89afc5889baf",
+        "name": "남편",
+        "group": "Couple",
+        "imageUrl": "/uploads/extracted-1775488257040-0-464c8c68.webp"
       }
     ],
     "logs": [
@@ -2818,16 +2830,16 @@
         "date": "2026-03-20T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 118
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 70
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "마르코폴로2 테스트 플레이",
         "imageUrls": [
@@ -3158,16 +3170,16 @@
         "date": "2026-04-06T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 96
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 90
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "아... 초반엔 압살이었는데... ㅠ_ㅠ",
         "imageUrls": [
@@ -3180,16 +3192,16 @@
         "date": "2026-04-05T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 98
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 71
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "실력을 보여주었다.",
         "imageUrls": [
@@ -3202,16 +3214,16 @@
         "date": "2026-04-05T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 88
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 68
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "BGA 첫게임 에러플 두개 잡음.\n계약서 도시 도착하면 하나 받고, 다음 라운드 서책은 열어서 보여준다.",
         "imageUrls": [
@@ -3224,17 +3236,17 @@
         "date": "2026-04-11T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 93
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 93
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0",
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf",
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "동점!!!?!?!?!?!?",
         "imageUrls": [
@@ -3523,16 +3535,16 @@
         "date": "2026-04-19T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 141
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 134
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "좋은 승부였다. 후후",
         "imageUrls": [
@@ -3546,16 +3558,16 @@
         "date": "2026-04-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 123
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 102
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "버그다 버그. 핵이네.",
         "id": "id-1776910673143-8ighjjr"
@@ -3565,16 +3577,16 @@
         "date": "2026-04-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 142
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 127
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "새로운 맵",
         "imageUrls": [
@@ -3587,16 +3599,16 @@
         "date": "2026-04-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 120
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 118
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "이 것 이 실 력",
         "imageUrls": [
@@ -3609,16 +3621,16 @@
         "date": "2026-04-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 137
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 132
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "아... 이건 좀 아까비",
         "imageUrls": [
@@ -3631,16 +3643,16 @@
         "date": "2026-04-25T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 41
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 32
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "기억을 더듬으며...",
         "imageUrls": [
@@ -3680,16 +3692,16 @@
         "date": "2026-05-03T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 122
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 118
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "휴우~",
         "imageUrls": [
@@ -3702,16 +3714,16 @@
         "date": "2026-05-03T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 135
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 128
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "아이참. 이기면 안됐는데.... 아이참.",
         "imageUrls": [
@@ -3724,16 +3736,16 @@
         "date": "2026-05-03T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 118
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 71
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "버근듯.",
         "imageUrls": [
@@ -3778,16 +3790,16 @@
         "date": "2026-05-05T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 152
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 131
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "이것이 바로 완승!",
         "imageUrls": [
@@ -3800,16 +3812,16 @@
         "date": "2026-05-08T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 128
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 95
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "망겜이네 망겜.",
         "imageUrls": [
@@ -3822,16 +3834,16 @@
         "date": "2026-05-09T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 135
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 120
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "회복하였다.",
         "imageUrls": [
@@ -3844,16 +3856,16 @@
         "date": "2026-05-09T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 116
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 113
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "1보호 차이 -_-;",
         "imageUrls": [
@@ -3889,16 +3901,16 @@
         "date": "2026-05-09T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 78
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 75
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "BGA 룰체크\n- 건물 버릴때는 무조건 제국으로",
         "imageUrls": [
@@ -3911,16 +3923,16 @@
         "date": "2026-05-10T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 142
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 138
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "승리!",
         "imageUrls": [
@@ -3933,16 +3945,16 @@
         "date": "2026-05-23T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 186
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 180
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "오를로이 테스트 플레이\n\n직관적이고 적응하기 쉬운!",
         "imageUrls": [
@@ -3962,16 +3974,16 @@
         "date": "2026-05-25T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 155
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 145
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "에러플 다잡고 드디어 완플!",
         "imageUrls": [
@@ -4057,16 +4069,16 @@
         "date": "2026-06-27T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 123
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 114
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1782562937978-aebm43n"
@@ -4109,16 +4121,16 @@
         "date": "2026-06-27T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 133
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 90
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1782566178290-dxmlgge"
@@ -4128,16 +4140,16 @@
         "date": "2026-06-27T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 145
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 117
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "이래야지",
         "id": "id-1782569625622-qs5nbdf"
@@ -4147,16 +4159,16 @@
         "date": "2026-07-02T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 118
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 83
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1783090573753-5w2ynpd"
@@ -4166,16 +4178,16 @@
         "date": "2026-07-02T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 125
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 98
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1783090590568-kkz4xoi"
@@ -4185,16 +4197,16 @@
         "date": "2026-07-02T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 119
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 101
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1783090605536-bp14nwc"
@@ -4204,16 +4216,16 @@
         "date": "2026-07-03T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 143
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 116
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "",
         "id": "id-1783090618088-5ueyi0r"
@@ -4652,16 +4664,16 @@
         "date": "2026-07-05T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 122
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 96
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "오를레앙 빅박스 테스트 플레이~!\n",
         "imageUrls": [
@@ -4677,16 +4689,16 @@
         "date": "2026-07-07T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 124
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 118
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "저항으로 붙은 점수를 몰랐다. -_-",
         "id": "id-1783434678657-z2r07ta"
@@ -4696,16 +4708,16 @@
         "date": "2026-07-08T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 144
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 118
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "BGA에서는 승리~!",
         "imageUrls": [
@@ -4718,16 +4730,16 @@
         "date": "2026-07-09T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 141
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 120
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1783603286399-ma581xp"
@@ -4737,16 +4749,16 @@
         "date": "2026-07-14T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 122
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 119
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1784036476584-szgm9np"
@@ -4756,16 +4768,16 @@
         "date": "2026-07-17T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 143
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 142
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1784294440518-nt0ytdc"
@@ -4804,16 +4816,16 @@
         "date": "2026-08-07T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 127
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 94
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "플레티넘한테 이기니까 각별하구만 휘유휘유휘유휘유",
         "imageUrls": [
@@ -4907,16 +4919,16 @@
         "date": "2026-08-10T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 131
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 129
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "플레티넘에게 1승 후후",
         "imageUrls": [
@@ -4966,16 +4978,16 @@
         "date": "2026-08-16T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 114
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 105
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1786883993570-xoz7fzh"
@@ -4985,16 +4997,16 @@
         "date": "2026-08-16T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 135
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 117
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "",
         "id": "id-1786891039701-uyffeq8"
@@ -5004,16 +5016,16 @@
         "date": "2026-08-15T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 1
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 0
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "엄마가 안되겠다고 기권함. 아빠 예상점수는 170점 대.",
         "id": "id-1786891089068-u6osm8p"
@@ -5274,16 +5286,16 @@
         "date": "2026-08-25T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 136
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 130
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "",
         "imageUrls": [
@@ -5351,16 +5363,16 @@
         "date": "2026-08-29T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 134
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 129
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1787981127372-1nlqoka"
@@ -5370,16 +5382,16 @@
         "date": "2026-08-29T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 116
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 103
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1788004456345-f2gld04"
@@ -5389,16 +5401,16 @@
         "date": "2026-08-29T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 128
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 85
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1788007272317-hr9v2ur"
@@ -5408,16 +5420,16 @@
         "date": "2026-08-30T00:00:00.000Z",
         "players": [
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 144
           },
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 127
           }
         ],
         "winnerIds": [
-          "08add8ea-3158-4a27-ac53-a17353dc20b0"
+          "4e9e985e-6141-47b6-88ae-89afc5889baf"
         ],
         "reviewMemo": "",
         "id": "id-1788068767601-od3a2to"
@@ -5427,16 +5439,16 @@
         "date": "2026-08-30T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 132
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 116
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1788091157733-aq7xc9e"
@@ -5446,16 +5458,16 @@
         "date": "2026-08-30T00:00:00.000Z",
         "players": [
           {
-            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
             "score": 139
           },
           {
-            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
             "score": 114
           }
         ],
         "winnerIds": [
-          "6436820c-af37-4b2d-89e0-1644503329d2"
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
         ],
         "reviewMemo": "",
         "id": "id-1788091172205-r5f2pl8"
