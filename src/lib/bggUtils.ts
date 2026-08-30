@@ -294,7 +294,11 @@ export interface BggFetchedInfo {
  */
 export async function lookupBggInfo(input: string, gamesList: Game[] = []): Promise<BggFetchedInfo | null> {
   const bggId = extractBggId(input);
-  if (!bggId) return null;
+  if (!bggId) {
+    const formatted = formatBggUrl(input);
+    if (formatted) return { bggUrl: formatted };
+    return null;
+  }
 
   const targetBggUrl = `https://boardgamegeek.com/boardgame/${bggId}`;
 
@@ -315,7 +319,18 @@ export async function lookupBggInfo(input: string, gamesList: Game[] = []): Prom
     };
   }
 
-  // 2. Fetch from backend endpoint /api/bgg-info
+  // 2. Reverse lookup from KNOWN_BGG_MAP
+  for (const [titleKey, id] of Object.entries(KNOWN_BGG_MAP)) {
+    if (id === bggId) {
+      const titleCap = titleKey.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      return {
+        title: titleCap,
+        bggUrl: targetBggUrl
+      };
+    }
+  }
+
+  // 3. Fetch from backend endpoint /api/bgg-info
   try {
     const res = await fetch(`/api/bgg-info?id=${bggId}`);
     if (res.ok) {
@@ -339,17 +354,7 @@ export async function lookupBggInfo(input: string, gamesList: Game[] = []): Prom
     console.warn('Failed to fetch from /api/bgg-info:', err);
   }
 
-  // 3. Reverse lookup from KNOWN_BGG_MAP
-  for (const [titleKey, id] of Object.entries(KNOWN_BGG_MAP)) {
-    if (id === bggId) {
-      const titleCap = titleKey.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-      return {
-        title: titleCap,
-        bggUrl: targetBggUrl
-      };
-    }
-  }
-
+  // 4. Return formatted direct URL fallback
   return {
     bggUrl: targetBggUrl
   };

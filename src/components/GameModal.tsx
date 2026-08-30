@@ -82,28 +82,33 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
 
     try {
       const info = await lookupBggInfo(formData.bggUrl, games);
-      if (info && (info.title || info.players || info.duration || info.playTime)) {
+      if (info) {
         setFormData(prev => {
           const dur = info.duration || info.playTime || prev.duration;
           return {
             ...prev,
             title: info.title || prev.title,
-            subtitle: info.subtitle !== undefined ? info.subtitle : prev.subtitle,
+            subtitle: info.subtitle !== undefined && info.subtitle !== '' ? info.subtitle : prev.subtitle,
             publishedYear: info.publishedYear || prev.publishedYear,
             players: info.players || prev.players,
             duration: dur,
             playTime: dur,
             weight: info.weight || prev.weight,
             imageUrl: info.imageUrl || prev.imageUrl,
-            bggUrl: info.bggUrl || prev.bggUrl
+            bggUrl: info.bggUrl || formatBggUrl(prev.bggUrl) || prev.bggUrl
           };
         });
-        setBggStatusMsg({ text: '✨ BGG 정보(제목, 인원, 시간, 난이도, 이미지 등)를 자동으로 채웠습니다!', isError: false });
+
+        if (info.title || info.players || info.duration || info.playTime) {
+          setBggStatusMsg({ text: '✨ BGG 정보(제목, 인원, 시간, 난이도 등)를 성공적으로 불러왔습니다!', isError: false });
+        } else {
+          setBggStatusMsg({ text: '🔗 BGG 직결 링크(https://boardgamegeek.com/boardgame/...)로 자동 변환되었습니다!', isError: false });
+        }
       } else {
-        setBggStatusMsg({ text: '⚠️ BGG 정보를 찾을 수 없습니다. BGG ID를 확인해 주세요.', isError: true });
+        setBggStatusMsg({ text: '⚠️ 올바른 BGG ID 숫자(예: 342942) 또는 URL을 입력해 주세요.', isError: true });
       }
     } catch (err) {
-      setBggStatusMsg({ text: '⚠️ BGG 정보를 가져오는데 실패했습니다.', isError: true });
+      setBggStatusMsg({ text: '⚠️ BGG 정보를 불러오는 중 오류가 발생했습니다.', isError: true });
     } finally {
       setIsFetchingBgg(false);
     }
