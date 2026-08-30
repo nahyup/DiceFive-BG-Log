@@ -138,7 +138,10 @@ export default function GameRecommend() {
 
     // 5. Quick Pick-me-ups: Fast games
     const quickPicks: { game: Game; reason: string }[] = [];
-    games.filter(g => g.playTime <= 45 && g.weight < 2.5).forEach(game => {
+    games.filter(g => {
+      const durationNum = typeof g.playTime === 'number' ? g.playTime : (parseInt(String(g.playTime), 10) || 0);
+      return durationNum <= 45 && g.weight < 2.5;
+    }).forEach(game => {
       quickPicks.push({ 
         game, 
         reason: `Perfect for a quick session. Estimated time: ${game.playTime}m.` 
@@ -266,7 +269,7 @@ export default function GameRecommend() {
                       <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-tighter text-surface-400 mt-0.5">
                         <span>{game.players} players</span>
                         <span>•</span>
-                        <span>{game.playTime}m</span>
+                        <span>{game.duration ?? game.playTime}m</span>
                         <span>•</span>
                         <span className="text-primary-500">Weight {game.weight}</span>
                       </div>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useBoardGameStore, type Game, type GameStatus } from '../store/useBoardGameStore';
-import { X } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 import ImageUpload from './ImageUpload';
+import { formatBggUrl, lookupBggInfo } from '../lib/bggUtils';
+
 interface GameModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -11,30 +13,49 @@ interface GameModalProps {
 export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProps) {
   const { games, addGame, updateGame } = useBoardGameStore();
   const [error, setError] = useState<string | null>(null);
+  const [isFetchingBgg, setIsFetchingBgg] = useState(false);
+  const [bggStatusMsg, setBggStatusMsg] = useState<{ text: string; isError: boolean } | null>(null);
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    subtitle: string;
+    publishedYear: number;
+    players: string;
+    duration: number | string;
+    playTime: number | string;
+    weight: number;
+    imageUrl: string;
+    status: GameStatus;
+    bggUrl: string;
+  }>({
     title: '',
     subtitle: '',
     publishedYear: new Date().getFullYear(),
     players: '',
+    duration: 60,
     playTime: 60,
     weight: 2.5,
     imageUrl: '',
-    status: 'Owned' as GameStatus
+    status: 'Owned',
+    bggUrl: ''
   });
 
   useEffect(() => {
     setError(null);
+    setBggStatusMsg(null);
     if (gameToEdit) {
+      const dur = gameToEdit.duration ?? gameToEdit.playTime ?? 60;
       setFormData({
         title: gameToEdit.title,
         subtitle: gameToEdit.subtitle || '',
         publishedYear: gameToEdit.publishedYear || new Date().getFullYear(),
         players: gameToEdit.players,
-        playTime: gameToEdit.playTime,
+        duration: dur,
+        playTime: dur,
         weight: gameToEdit.weight,
         imageUrl: gameToEdit.imageUrl,
-        status: gameToEdit.status || 'Owned'
+        status: gameToEdit.status || 'Owned',
+        bggUrl: gameToEdit.bggUrl || ''
       });
     } else {
       setFormData({
@@ -42,15 +63,51 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         subtitle: '',
         publishedYear: new Date().getFullYear(),
         players: '',
+        duration: 60,
         playTime: 60,
         weight: 2.5,
         imageUrl: '',
-        status: 'Owned'
+        status: 'Owned',
+        bggUrl: ''
       });
     }
   }, [gameToEdit, isOpen]);
 
   if (!isOpen) return null;
+
+  const handleAutoFillBgg = async () => {
+    if (!formData.bggUrl.trim()) return;
+    setIsFetchingBgg(true);
+    setBggStatusMsg(null);
+
+    try {
+      const info = await lookupBggInfo(formData.bggUrl, games);
+      if (info && (info.title || info.players || info.duration || info.playTime)) {
+        setFormData(prev => {
+          const dur = info.duration || info.playTime || prev.duration;
+          return {
+            ...prev,
+            title: info.title || prev.title,
+            subtitle: info.subtitle !== undefined ? info.subtitle : prev.subtitle,
+            publishedYear: info.publishedYear || prev.publishedYear,
+            players: info.players || prev.players,
+            duration: dur,
+            playTime: dur,
+            weight: info.weight || prev.weight,
+            imageUrl: info.imageUrl || prev.imageUrl,
+            bggUrl: info.bggUrl || prev.bggUrl
+          };
+        });
+        setBggStatusMsg({ text: '✨ BGG 정보(제목, 인원, 시간, 난이도, 이미지 등)를 자동으로 채웠습니다!', isError: false });
+      } else {
+        setBggStatusMsg({ text: '⚠️ BGG 정보를 찾을 수 없습니다. BGG ID를 확인해 주세요.', isError: true });
+      }
+    } catch (err) {
+      setBggStatusMsg({ text: '⚠️ BGG 정보를 가져오는데 실패했습니다.', isError: true });
+    } finally {
+      setIsFetchingBgg(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,10 +123,19 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
       return;
     }
 
+    const formattedBgg = formatBggUrl(formData.bggUrl) || formData.bggUrl.trim();
+    const dur = formData.duration;
+    const payload = {
+      ...formData,
+      duration: dur,
+      playTime: dur,
+      bggUrl: formattedBgg
+    };
+
     if (gameToEdit) {
-      updateGame(gameToEdit.id, formData);
+      updateGame(gameToEdit.id, payload);
     } else {
-      addGame(formData);
+      addGame(payload);
     }
     onClose();
   };
@@ -92,6 +158,45 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
               <span>⚠️</span> {error}
             </div>
           )}
+
+          {/* BGG Auto-Fill Quick Section */}
+          <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 space-y-2">
+            <label className="label text-amber-900 dark:text-amber-300 font-bold flex justify-between items-center text-xs">
+              <span>BGG ID / 링크로 정보 자동 채우기</span>
+              {isFetchingBgg && (
+                <span className="text-xs text-amber-600 dark:text-amber-400 font-normal animate-pulse flex items-center gap-1">
+                  <Sparkles size={12} className="animate-spin" /> 불러오는 중...
+                </span>
+              )}
+            </label>
+            <div className="flex gap-2">
+              <input 
+                type="text" 
+                className="input text-sm flex-1 bg-white dark:bg-surface-900" 
+                value={formData.bggUrl}
+                onChange={(e) => {
+                  setFormData({...formData, bggUrl: e.target.value});
+                  if (bggStatusMsg) setBggStatusMsg(null);
+                }}
+                placeholder="예: 342942 또는 https://boardgamegeek.com/boardgame/342942"
+              />
+              <button
+                type="button"
+                onClick={handleAutoFillBgg}
+                disabled={!formData.bggUrl.trim() || isFetchingBgg}
+                className="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shrink-0 flex items-center gap-1.5 transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
+              >
+                <Sparkles size={14} />
+                <span>정보 불러오기</span>
+              </button>
+            </div>
+            {bggStatusMsg && (
+              <p className={`text-[11px] font-medium ${bggStatusMsg.isError ? 'text-red-500' : 'text-emerald-700 dark:text-emerald-400'}`}>
+                {bggStatusMsg.text}
+              </p>
+            )}
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Game Title</label>
@@ -150,14 +255,19 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
               />
             </div>
             <div>
-              <label className="label">Play Time (min)</label>
+              <label className="label">Duration (min)</label>
               <input 
                 required
-                type="number" 
-                min="1"
+                type="text" 
                 className="input" 
-                value={formData.playTime}
-                onChange={(e) => setFormData({...formData, playTime: Number(e.target.value)})}
+                value={formData.duration}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  const num = Number(val);
+                  const parsed = !isNaN(num) && val.trim() !== '' ? num : val;
+                  setFormData({...formData, duration: parsed, playTime: parsed});
+                }}
+                placeholder="e.g. 60 or 45-60"
               />
             </div>
           </div>

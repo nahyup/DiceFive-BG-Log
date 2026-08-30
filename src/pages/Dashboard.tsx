@@ -97,7 +97,7 @@ export default function Dashboard() {
                 </div>
                 <div className="min-w-0">
                   <h4 className="font-bold text-sm text-surface-900 dark:text-white truncate">{game.title}</h4>
-                  <p className="text-[10px] text-surface-500 font-medium uppercase tracking-wider">{game.players} • {game.playTime}m</p>
+                  <p className="text-[10px] text-surface-500 font-medium uppercase tracking-wider">{game.players} • {game.duration ?? game.playTime}m</p>
                   <div className="mt-1 flex items-center gap-1">
                     <span className="bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-tighter">Weight {game.weight}</span>
                   </div>
@@ -224,7 +224,7 @@ export default function Dashboard() {
                     </div>
                     <div>
                       <p className="font-medium text-surface-900 dark:text-surface-50">{game.title}</p>
-                      <p className="text-xs text-surface-500">{game.players} • {game.playTime}m • Weight {game.weight}</p>
+                      <p className="text-xs text-surface-500">{game.players} • {game.duration ?? game.playTime}m • Weight {game.weight}</p>
                     </div>
                   </div>
                   <div className="text-right">

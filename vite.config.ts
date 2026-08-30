@@ -113,6 +113,61 @@ const localDataPlugin = () => ({
           return
         }
 
+        // Handle /api/bgg-info
+        if (url === '/api/bgg-info' && (req.method === 'GET' || req.method === 'OPTIONS')) {
+          console.log(`[API] ${req.method} ${req.url}`)
+          res.setHeader('Content-Type', 'application/json')
+          setCorsHeaders(res)
+
+          if (req.method === 'OPTIONS') {
+            res.statusCode = 204
+            res.end()
+            return
+          }
+
+          try {
+            const reqUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`)
+            const bggId = reqUrl.searchParams.get('id')
+            
+            if (!bggId) {
+              res.statusCode = 400
+              res.end(JSON.stringify({ error: 'Missing BGG ID' }))
+              return
+            }
+
+            if (fs.existsSync(dataFilePath)) {
+              const fileContent = fs.readFileSync(dataFilePath, 'utf-8')
+              const parsed = JSON.parse(fileContent)
+              const games = parsed?.state?.games || []
+              const match = games.find((g: any) => g.bggUrl && (g.bggUrl.includes(`/boardgame/${bggId}`) || g.bggUrl.endsWith(`/${bggId}`)))
+              
+              if (match) {
+                res.end(JSON.stringify({
+                  success: true,
+                  game: {
+                    title: match.title,
+                    subtitle: match.subtitle || '',
+                    publishedYear: match.publishedYear,
+                    players: match.players,
+                    playTime: match.playTime,
+                    weight: match.weight,
+                    imageUrl: match.imageUrl,
+                    bggUrl: match.bggUrl
+                  }
+                }))
+                return
+              }
+            }
+
+            res.end(JSON.stringify({ success: false, error: 'Game not found for BGG ID' }))
+          } catch (error) {
+            console.error('Error in /api/bgg-info:', error)
+            res.statusCode = 500
+            res.end(JSON.stringify({ error: 'Failed to fetch BGG info' }))
+          }
+          return
+        }
+
         next()
       })
   }

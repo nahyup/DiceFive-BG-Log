@@ -589,10 +589,10 @@ export default function PlayLog() {
                             )}
                             
                             <div className="flex flex-wrap gap-1.5 mt-2">
-                              {game?.playTime && (
+                              {(game?.duration ?? game?.playTime) && (
                                 <span className="inline-flex items-center gap-1 bg-surface-50 dark:bg-surface-800 text-surface-600 dark:text-surface-400 text-[10px] font-semibold px-2 py-0.5 rounded-md border border-surface-200/50 dark:border-surface-700/50">
                                   <Clock size={10} />
-                                  {game.playTime}m
+                                  {game.duration ?? game.playTime}m
                                 </span>
                               )}
                               {game?.weight && (

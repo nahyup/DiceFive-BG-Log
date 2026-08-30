@@ -2,7 +2,8 @@ import { useState, useMemo, useCallback } from 'react';
 import { useBoardGameStore, type Game } from '../store/useBoardGameStore';
 import GameModal from '../components/GameModal';
 import GameHistoryModal from '../components/GameHistoryModal';
-import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter, ArrowUpDown } from 'lucide-react';
+import { Plus, Users, Clock, BrainCircuit, Trash2, Edit2, Gamepad2, Filter, ArrowUpDown, ExternalLink } from 'lucide-react';
+import { getBggUrl } from '../lib/bggUtils';
 
 export type SortOption = 'most_played' | 'least_played' | 'recently_played' | 'most_photos' | 'abc' | 'zyx' | 'published';
 
@@ -207,7 +208,11 @@ export default function GameCollection() {
           const gameImages = getGameImages(game.id, game.imageUrl);
           
           return (
-          <div key={game.id} className="card group flex flex-col h-full hover:border-primary-300 dark:hover:border-primary-700 transition-colors">
+          <div 
+            key={game.id} 
+            onClick={() => setViewingHistoryGameId(game.id)}
+            className="card group flex flex-col h-full hover:border-primary-300 dark:hover:border-primary-700 transition-colors cursor-pointer"
+          >
             <div className="relative h-48 bg-surface-200 dark:bg-surface-800 overflow-hidden">
               {gameImages.length > 0 ? (
                 <div id={`carousel-${game.id}`} className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth">
@@ -269,7 +274,10 @@ export default function GameCollection() {
                 })()}
               </div>
               <button 
-                onClick={() => setViewingHistoryGameId(game.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setViewingHistoryGameId(game.id);
+                }}
                 className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg transition-colors z-20"
               >
                  Play Count: {game.totalPlays}
@@ -287,17 +295,30 @@ export default function GameCollection() {
                       {game.subtitle}
                     </p>
                   )}
-                  {game.publishedYear && (
-                    <span className="text-xs font-medium text-surface-500 bg-surface-100 dark:bg-surface-700/50 px-2 py-0.5 rounded-md mt-1 inline-block">
-                      {game.publishedYear}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                    {game.publishedYear && (
+                      <span className="text-xs font-medium text-surface-500 bg-surface-100 dark:bg-surface-700/50 px-2 py-0.5 rounded-md">
+                        {game.publishedYear}
+                      </span>
+                    )}
+                    <a
+                      href={getBggUrl(game)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 transition-colors"
+                      title="View on BoardGameGeek"
+                    >
+                      <span>BGG</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  </div>
                 </div>
                 <div className="flex opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
-                  <button onClick={() => handleEdit(game)} className="p-1.5 text-surface-500 hover:text-primary-600 rounded-md hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors">
+                  <button onClick={(e) => { e.stopPropagation(); handleEdit(game); }} className="p-1.5 text-surface-500 hover:text-primary-600 rounded-md hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors">
                     <Edit2 size={16} />
                   </button>
-                  <button onClick={() => handleDelete(game.id, game.title)} className="p-1.5 text-surface-500 hover:text-rose-600 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 transition-colors">
+                  <button onClick={(e) => { e.stopPropagation(); handleDelete(game.id, game.title); }} className="p-1.5 text-surface-500 hover:text-rose-600 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 transition-colors">
                     <Trash2 size={16} />
                   </button>
                 </div>
@@ -310,7 +331,7 @@ export default function GameCollection() {
                 </div>
                 <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-50 dark:bg-surface-800/50">
                   <Clock size={16} className="text-surface-500 mb-1" />
-                  <span className="text-xs font-medium">{game.playTime}m</span>
+                  <span className="text-xs font-medium">{game.duration ?? game.playTime}m</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-50 dark:bg-surface-800/50">
                   <BrainCircuit size={16} className="text-surface-500 mb-1" />
