@@ -8,7 +8,7 @@
         "playTime": "90-150",
         "weight": 3.8,
         "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-        "totalPlays": 33,
+        "totalPlays": 35,
         "publishedYear": 2021,
         "subtitle": "아크 노바",
         "bggUrl": "https://boardgamegeek.com/boardgame/342942",
@@ -1003,8 +1003,9 @@
         "totalPlays": 0,
         "publishedYear": 2023,
         "subtitle": "커피 러시",
-        "bggUrl": "https://boardgamegeek.com/boardgame/370008",
-        "duration": "30"
+        "bggUrl": "https://boardgamegeek.com/boardgame/377061",
+        "duration": "30",
+        "status": "Owned"
       },
       {
         "title": "Akropolis",
@@ -1016,8 +1017,9 @@
         "totalPlays": 0,
         "publishedYear": 2022,
         "subtitle": "아크로폴리스",
-        "bggUrl": "https://boardgamegeek.com/boardgame/352142",
-        "duration": "20-30"
+        "bggUrl": "https://boardgamegeek.com/boardgame/357563",
+        "duration": "20-30",
+        "status": "Owned"
       },
       {
         "title": "Shadow Hunters",
@@ -2269,8 +2271,8 @@
         "imageUrl": "https://cf.geekdo-images.com/udNqqRInQRK0lfFaaqVw8w__itemrep@2x/img/ipCGZ0Nm1K26L-r8G7ceR80JRJs=/fit-in/492x600/filters:strip_icc()/pic8902039.jpg",
         "status": "Owned",
         "id": "id-1781959614163-1rcqrmi",
-        "totalPlays": 2,
-        "bggUrl": "https://boardgamegeek.com/boardgame/465137",
+        "totalPlays": 4,
+        "bggUrl": "https://boardgamegeek.com/boardgame/446519",
         "duration": "15"
       },
       {
@@ -5417,6 +5419,102 @@
         ],
         "reviewMemo": "",
         "id": "id-1788068767601-od3a2to"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-30T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 132
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 116
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788091157733-aq7xc9e"
+      },
+      {
+        "gameId": "da80797e-fafc-4cdb-8f7c-78e51e257840",
+        "date": "2026-08-30T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 139
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 114
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788091172205-r5f2pl8"
+      },
+      {
+        "gameId": "id-1781959614163-1rcqrmi",
+        "date": "2026-08-30T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 61
+          },
+          {
+            "playerId": "f03f59af-84be-49b4-bf1c-882fd0344d4b",
+            "score": 30
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 29
+          },
+          {
+            "playerId": "87253b71-031f-4e92-bed9-3de068e52d21",
+            "score": 27
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 24
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788091231772-i7oomj8"
+      },
+      {
+        "gameId": "id-1781959614163-1rcqrmi",
+        "date": "2026-08-30T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "6436820c-af37-4b2d-89e0-1644503329d2",
+            "score": 67
+          },
+          {
+            "playerId": "f03f59af-84be-49b4-bf1c-882fd0344d4b",
+            "score": 51
+          },
+          {
+            "playerId": "08add8ea-3158-4a27-ac53-a17353dc20b0",
+            "score": 48
+          },
+          {
+            "playerId": "a6ace485-ec6f-46ca-ba76-f832d18fa43b",
+            "score": 45
+          }
+        ],
+        "winnerIds": [
+          "6436820c-af37-4b2d-89e0-1644503329d2"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788091269131-tfctfm3"
       }
     ],
     "stories": [
