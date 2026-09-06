@@ -10,6 +10,11 @@ const generateId = () => {
 
 export type GameStatus = 'Owned' | 'Owned by Friends' | 'Wishlist' | 'Preorder' | 'None';
 
+export interface ExpansionRef {
+  bggId: string; // BGG ID of the expansion (can be empty for manual-only titles)
+  title?: string; // Display title (auto-filled from BGG or entered manually)
+}
+
 export interface Game {
   id: string;
   title: string;
@@ -23,7 +28,7 @@ export interface Game {
   publishedYear?: number;
   status?: GameStatus; // Ownership status
   bggUrl?: string; // BGG page URL
-  includedExpansions?: string[]; // Expansion names bundled into this entry (affect player count etc.)
+  expansions?: ExpansionRef[]; // Bundled expansions, referenced by BGG ID
 }
 
 export interface Player {

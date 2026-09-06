@@ -363,14 +363,14 @@ export default function GameCollection() {
                   <span className="text-xs font-medium">{game.weight}</span>
                 </div>
               </div>
-              {game.includedExpansions && game.includedExpansions.length > 0 && (
+              {game.expansions && game.expansions.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {game.includedExpansions.map((exp, idx) => (
+                  {game.expansions.map((exp, idx) => (
                     <span 
                       key={idx}
                       className="text-[11px] font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 px-2 py-0.5 rounded-md border border-primary-200 dark:border-primary-800"
                     >
-                      + {exp}
+                      + {exp.title || `BGG #${exp.bggId}`}
                     </span>
                   ))}
                 </div>

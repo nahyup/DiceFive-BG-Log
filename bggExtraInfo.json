@@ -9,5 +9,26 @@
     "weight": 2.2,
     "imageUrl": "",
     "bggUrl": "https://boardgamegeek.com/boardgame/367396"
+  },
+  "2146": {
+    "title": "Catan: 5-6 Player Extension",
+    "subtitle": "카탄 5-6인 확장",
+    "publishedYear": 1996,
+    "players": "5-6",
+    "playTime": 90,
+    "duration": 90,
+    "weight": 2.0,
+    "imageUrl": "",
+    "bggUrl": "https://boardgamegeek.com/boardgame/2146"
+  },
+  "322454": {
+    "title": "Marco Polo II: The Caravans",
+    "subtitle": "마르코 폴로 2: 대상",
+    "publishedYear": 2020,
+    "players": "2-4",
+    "playTime": 60,
+    "duration": 120,
+    "imageUrl": "",
+    "bggUrl": "https://boardgamegeek.com/boardgame/322454"
   }
 }

@@ -1,8 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useBoardGameStore, type Game, type GameStatus } from '../store/useBoardGameStore';
-import { X, Sparkles } from 'lucide-react';
+import { useBoardGameStore, type Game, type GameStatus, type ExpansionRef } from '../store/useBoardGameStore';
+import { X, Sparkles, Plus, Trash2, Loader2 } from 'lucide-react';
 import ImageUpload from './ImageUpload';
-import { formatBggUrl, lookupBggInfo } from '../lib/bggUtils';
+import { formatBggUrl, lookupBggInfo, extractBggId } from '../lib/bggUtils';
+
+function mergePlayerRanges(base: string, ext: string): string | null {
+  const parseNum = (s: string) => {
+    const g = s.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/);
+    if (!g) return null;
+    return { min: Number(g[1]), max: g[2] ? Number(g[2]) : Number(g[1]) };
+  };
+  const a = parseNum(base);
+  const b = parseNum(ext);
+  if (!b) return null;
+  if (!a) return ext.trim();
+  return `${Math.min(a.min, b.min)}-${Math.max(a.max, b.max)}`;
+}
 
 interface GameModalProps {
   isOpen: boolean;
@@ -15,6 +28,10 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
   const [error, setError] = useState<string | null>(null);
   const [isFetchingBgg, setIsFetchingBgg] = useState(false);
   const [bggStatusMsg, setBggStatusMsg] = useState<{ text: string; isError: boolean } | null>(null);
+  const [expBggInput, setExpBggInput] = useState('');
+  const [expTitleInput, setExpTitleInput] = useState('');
+  const [isLookingUpExp, setIsLookingUpExp] = useState(false);
+  const [expStatusMsg, setExpStatusMsg] = useState<{ text: string; isError: boolean } | null>(null);
   
   const [formData, setFormData] = useState<{
     title: string;
@@ -27,7 +44,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     imageUrl: string;
     status: GameStatus;
     bggUrl: string;
-    includedExpansions: string[];
+    expansions: ExpansionRef[];
   }>({
     title: '',
     subtitle: '',
@@ -39,12 +56,16 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     imageUrl: '',
     status: 'Owned',
     bggUrl: '',
-    includedExpansions: []
+    expansions: []
   });
 
   useEffect(() => {
     setError(null);
     setBggStatusMsg(null);
+    setExpBggInput('');
+    setExpTitleInput('');
+    setExpStatusMsg(null);
+    setIsLookingUpExp(false);
     if (gameToEdit) {
       const dur = gameToEdit.duration ?? gameToEdit.playTime ?? 60;
       setFormData({
@@ -58,7 +79,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         imageUrl: gameToEdit.imageUrl,
         status: gameToEdit.status || 'Owned',
         bggUrl: gameToEdit.bggUrl || '',
-        includedExpansions: gameToEdit.includedExpansions || []
+        expansions: gameToEdit.expansions || []
       });
     } else {
       setFormData({
@@ -72,7 +93,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         imageUrl: '',
         status: 'Owned',
         bggUrl: '',
-        includedExpansions: []
+        expansions: []
       });
     }
   }, [gameToEdit, isOpen]);
@@ -147,6 +168,65 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
       addGame(payload);
     }
     onClose();
+  };
+
+  const handleLookupExpansion = async () => {
+    const id = extractBggId(expBggInput);
+    if (!id) {
+      setExpStatusMsg({ text: '⚠️ 올바른 BGG ID 또는 링크를 입력하세요.', isError: true });
+      return;
+    }
+    setExpStatusMsg(null);
+    setIsLookingUpExp(true);
+    try {
+      const info = await lookupBggInfo(id, games);
+      if (info?.title) {
+        setExpTitleInput(info.title);
+        setExpStatusMsg({ text: `✅ ${info.title} 정보를 찾았습니다.`, isError: false });
+      } else {
+        setExpStatusMsg({ text: '⚠️ BGG 정보를 찾지 못했습니다. 제목을 직접 입력하세요.', isError: true });
+      }
+    } finally {
+      setIsLookingUpExp(false);
+    }
+  };
+
+  const handleAddExpansion = async () => {
+    const id = extractBggId(expBggInput);
+    const rawTitle = expTitleInput.trim();
+    if (!id && !rawTitle) {
+      setExpStatusMsg({ text: '⚠️ BGG ID/링크 또는 제목을 하나 이상 입력하세요.', isError: true });
+      return;
+    }
+    if (id && formData.expansions.some(e => e.bggId === id)) {
+      setExpStatusMsg({ text: '⚠️ 이미 추가된 확장판입니다.', isError: true });
+      return;
+    }
+    let title = rawTitle;
+    let merged: string | null = null;
+    if (id) {
+      setIsLookingUpExp(true);
+      try {
+        const info = await lookupBggInfo(id, games);
+        if (!rawTitle && info?.title) title = info.title;
+        if (info?.players) merged = mergePlayerRanges(formData.players, info.players);
+        if (!info?.title && !rawTitle) {
+          setExpStatusMsg({ text: `⚠️ BGG ${id} 정보를 찾지 못해 제목 없이 추가합니다.`, isError: true });
+        }
+      } finally {
+        setIsLookingUpExp(false);
+      }
+    }
+    const next = [...formData.expansions, { bggId: id || '', title: title || undefined }];
+    setFormData(fd => ({
+      ...fd,
+      expansions: next,
+      players: merged ? merged : fd.players
+    }));
+    const summary = `✅ 추가됨: ${title || 'BGG #' + id}${merged ? ` · 인원 ${formData.players || '?'} → ${merged}` : ''}`;
+    setExpBggInput('');
+    setExpTitleInput('');
+    setExpStatusMsg({ text: summary, isError: false });
   };
 
   return (
@@ -312,27 +392,79 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
           </div>
 
           <div>
-              <label className="label">Included Expansions (optional)</label>
-              <input 
-                type="text" 
-                className="input" 
-                value={formData.includedExpansions.join(', ')}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setFormData({
-                    ...formData,
-                    includedExpansions: val
-                      .split(',')
-                      .map(s => s.trim())
-                      .filter(Boolean)
-                  });
-                }}
-                placeholder="e.g. 5-6 Player Extension, Seafarers of Catan"
+            <label className="label">Expansions</label>
+            {formData.expansions.length > 0 && (
+              <div className="space-y-2 mb-3">
+                {formData.expansions.map((exp, idx) => (
+                  <div key={idx} className="flex items-center justify-between gap-2 bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-[11px] font-semibold text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 px-1.5 py-0.5 rounded">+ 확장</span>
+                      <span className="text-sm truncate">{exp.title || `BGG #${exp.bggId}`}</span>
+                      {exp.bggId && (
+                        <a
+                          href={`https://boardgamegeek.com/boardgame/${exp.bggId}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[11px] text-surface-400 hover:text-primary-600 shrink-0"
+                        >
+                          BGG {exp.bggId}
+                        </a>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, expansions: formData.expansions.filter((_, i) => i !== idx) })}
+                      className="p-1 text-surface-400 hover:text-rose-600 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 shrink-0"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="bg-surface-50 dark:bg-surface-800/50 rounded-xl border border-surface-200 dark:border-surface-700 p-3 space-y-2">
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  className="input flex-1"
+                  value={expBggInput}
+                  onChange={(e) => setExpBggInput(e.target.value)}
+                  placeholder="BGG ID or link (e.g. 2146)"
+                />
+                <button
+                  type="button"
+                  onClick={handleLookupExpansion}
+                  disabled={isLookingUpExp}
+                  className="btn btn-secondary shrink-0"
+                >
+                  {isLookingUpExp ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+                  조회
+                </button>
+              </div>
+              <input
+                type="text"
+                className="input"
+                value={expTitleInput}
+                onChange={(e) => setExpTitleInput(e.target.value)}
+                placeholder="확장판 제목 (자동 채움 또는 직접 입력)"
               />
-              <p className="text-[11px] text-surface-400 mt-1">
-                확장 포함 시 인원수/시간이 달라지면 위 Players·Duration 값을 함께 수정하세요.
+              <button
+                type="button"
+                onClick={handleAddExpansion}
+                className="btn btn-secondary w-full justify-center"
+              >
+                <Plus size={14} /> 확장판 추가
+              </button>
+              <p className="text-[11px] text-surface-400">
+                확장의 인원 정보가 있으면 위 Players 값에 자동 반영됩니다. 직접 입력 시 제목만 저장할 수도 있습니다.
               </p>
+              {expStatusMsg && (
+                <p className={`text-[11px] font-medium ${expStatusMsg.isError ? 'text-rose-600' : 'text-primary-600'}`}>
+                  {expStatusMsg.text}
+                </p>
+              )}
             </div>
+          </div>
 
           <div className="space-y-4">
             <h4 className="font-medium text-surface-900 dark:text-white">Game Image</h4>

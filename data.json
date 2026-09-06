@@ -12,7 +12,14 @@
         "publishedYear": 2021,
         "subtitle": "아크 노바",
         "bggUrl": "https://boardgamegeek.com/boardgame/342942",
-        "duration": "90-150"
+        "duration": "90-150",
+        "status": "Owned",
+        "expansions": [
+          {
+            "bggId": "368966",
+            "title": "Ark Nova: Marine Worlds"
+          }
+        ]
       },
       {
         "id": "167791",
@@ -579,7 +586,7 @@
       {
         "id": "271324",
         "title": "It's a Wonderful World",
-        "players": "1-5",
+        "players": "1-7",
         "playTime": "30-60",
         "weight": 2.3,
         "imageUrl": "https://cf.geekdo-images.com/od4vDTdXGPSVc-kjLqM11w__itemrep@2x/img/8FpWzkugXPnjGHeMnsvh7IJHBEE=/fit-in/492x600/filters:strip_icc()/pic4651175.jpg",
@@ -588,7 +595,13 @@
         "subtitle": "원더풀 월드",
         "status": "Owned",
         "bggUrl": "https://boardgamegeek.com/boardgame/271324",
-        "duration": "30-60"
+        "duration": "30-60",
+        "expansions": [
+          {
+            "bggId": "298851",
+            "title": "It's a Wonderful World: Corruption & Ascension"
+          }
+        ]
       },
       {
         "id": "263918",
@@ -601,7 +614,14 @@
         "publishedYear": 2019,
         "subtitle": "지도 제작자들",
         "bggUrl": "https://boardgamegeek.com/boardgame/263918",
-        "duration": "30-45"
+        "duration": "30-45",
+        "status": "Owned",
+        "expansions": [
+          {
+            "bggId": "322045",
+            "title": "Cartographers Heroes: Collector's Edition"
+          }
+        ]
       },
       {
         "id": "279537",
@@ -1336,7 +1356,7 @@
       },
       {
         "title": "Architects of the West Kingdom",
-        "players": "1-5",
+        "players": "1-6",
         "playTime": "60-80",
         "weight": 2.8,
         "imageUrl": "https://cf.geekdo-images.com/OAX7HfOz-9N60StgADzd0g__itemrep@2x/img/Thdq9gV27yx_bMAueNjD2e4jdw8=/fit-in/492x600/filters:strip_icc()/pic3781944.png",
@@ -1345,7 +1365,18 @@
         "publishedYear": 2018,
         "subtitle": "서쪽 왕국의 건축가",
         "bggUrl": "https://boardgamegeek.com/boardgame/236457",
-        "duration": "60-80"
+        "duration": "60-80",
+        "status": "Owned",
+        "expansions": [
+          {
+            "bggId": "285235",
+            "title": "Architects of the West Kingdom: Age of Artisans"
+          },
+          {
+            "bggId": "327245",
+            "title": "Architects of the West Kingdom: Works of Wonder"
+          }
+        ]
       },
       {
         "title": "The Wolves",
@@ -1450,7 +1481,13 @@
         "subtitle": "마르코 폴로 2: 위대한 칸의 이름으로",
         "bggUrl": "https://boardgamegeek.com/boardgame/283948",
         "duration": "60-120",
-        "status": "Owned"
+        "status": "Owned",
+        "expansions": [
+          {
+            "bggId": "322454",
+            "title": "Marco Polo II: The Caravans"
+          }
+        ]
       },
       {
         "title": "Revive",

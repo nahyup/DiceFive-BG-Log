@@ -1,5 +1,5 @@
 import { useBoardGameStore } from '../store/useBoardGameStore';
-import { Trophy, CalendarDays, X, Play, Users, Clock, BrainCircuit, ExternalLink, Gamepad2 } from 'lucide-react';
+import { Trophy, CalendarDays, X, Play, Users, Clock, BrainCircuit, ExternalLink, Gamepad2, Layers } from 'lucide-react';
 import { format } from 'date-fns';
 import { getBggUrl } from '../lib/bggUtils';
 
@@ -75,6 +75,34 @@ export default function GameHistoryModal({ gameId, onClose }: GameHistoryModalPr
               <span className="text-[10px] text-surface-400">Plays</span>
             </div>
           </div>
+
+          {/* Included Expansions */}
+          {game.expansions && game.expansions.length > 0 && (
+            <div className="rounded-2xl p-4 bg-surface-50 dark:bg-surface-800/40 border border-surface-100 dark:border-surface-700/50">
+              <h4 className="font-bold text-sm text-surface-900 dark:text-white mb-3 flex items-center gap-2">
+                <Layers size={16} className="text-primary-500" /> Included Expansions
+              </h4>
+              <div className="space-y-2">
+                {game.expansions.map((exp, idx) => (
+                  <div key={idx} className="flex items-center justify-between gap-2">
+                    <span className="text-sm text-surface-700 dark:text-surface-300 truncate">
+                      + {exp.title || `BGG #${exp.bggId}`}
+                    </span>
+                    {exp.bggId && (
+                      <a
+                        href={`https://boardgamegeek.com/boardgame/${exp.bggId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-primary-600 dark:text-primary-400 hover:underline shrink-0"
+                      >
+                        BGG {exp.bggId}
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* BGG Link Section */}
           <div className="rounded-2xl p-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/5 dark:from-amber-500/20 dark:via-orange-500/15 dark:to-transparent border border-amber-500/30 flex items-center justify-between gap-3 shadow-xs">
