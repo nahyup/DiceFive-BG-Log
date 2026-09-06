@@ -23,6 +23,7 @@ export interface Game {
   publishedYear?: number;
   status?: GameStatus; // Ownership status
   bggUrl?: string; // BGG page URL
+  includedExpansions?: string[]; // Expansion names bundled into this entry (affect player count etc.)
 }
 
 export interface Player {

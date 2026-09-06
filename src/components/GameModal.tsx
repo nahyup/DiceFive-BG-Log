@@ -27,6 +27,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     imageUrl: string;
     status: GameStatus;
     bggUrl: string;
+    includedExpansions: string[];
   }>({
     title: '',
     subtitle: '',
@@ -37,7 +38,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
     weight: 2.5,
     imageUrl: '',
     status: 'Owned',
-    bggUrl: ''
+    bggUrl: '',
+    includedExpansions: []
   });
 
   useEffect(() => {
@@ -55,7 +57,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         weight: gameToEdit.weight,
         imageUrl: gameToEdit.imageUrl,
         status: gameToEdit.status || 'Owned',
-        bggUrl: gameToEdit.bggUrl || ''
+        bggUrl: gameToEdit.bggUrl || '',
+        includedExpansions: gameToEdit.includedExpansions || []
       });
     } else {
       setFormData({
@@ -68,7 +71,8 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         weight: 2.5,
         imageUrl: '',
         status: 'Owned',
-        bggUrl: ''
+        bggUrl: '',
+        includedExpansions: []
       });
     }
   }, [gameToEdit, isOpen]);
@@ -306,6 +310,29 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
               </select>
             </div>
           </div>
+
+          <div>
+              <label className="label">Included Expansions (optional)</label>
+              <input 
+                type="text" 
+                className="input" 
+                value={formData.includedExpansions.join(', ')}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setFormData({
+                    ...formData,
+                    includedExpansions: val
+                      .split(',')
+                      .map(s => s.trim())
+                      .filter(Boolean)
+                  });
+                }}
+                placeholder="e.g. 5-6 Player Extension, Seafarers of Catan"
+              />
+              <p className="text-[11px] text-surface-400 mt-1">
+                확장 포함 시 인원수/시간이 달라지면 위 Players·Duration 값을 함께 수정하세요.
+              </p>
+            </div>
 
           <div className="space-y-4">
             <h4 className="font-medium text-surface-900 dark:text-white">Game Image</h4>
