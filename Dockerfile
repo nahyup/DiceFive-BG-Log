@@ -22,8 +22,10 @@ RUN npm install --omit=dev
 
 # Copy the build output from the build stage
 COPY --from=build /app/dist ./dist
-# Copy the server script
+# Copy the server script and server-side modules
 COPY --from=build /app/server.js ./server.js
+COPY --from=build /app/bggInfoServer.mjs ./bggInfoServer.mjs
+COPY --from=build /app/bggExtraInfo.json ./bggExtraInfo.json
 # Note: data.json and public/uploads will be mounted via volumes
 
 ENV PORT=3000
