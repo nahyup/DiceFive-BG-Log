@@ -2458,6 +2458,20 @@
         "bggUrl": "https://boardgamegeek.com/boardgame/475499",
         "id": "id-1788668345550-i3lkxbq",
         "totalPlays": 0
+      },
+      {
+        "title": "Avalon: Big Box",
+        "subtitle": "아발론 빅박스",
+        "publishedYear": 2022,
+        "players": "5-10",
+        "duration": 30,
+        "playTime": 30,
+        "weight": 2.2,
+        "imageUrl": "https://img.boardlife.co.kr/wys2/swf_upload/2023/02/14/167630620733388_lg_w300.png",
+        "status": "Owned",
+        "bggUrl": "https://boardgamegeek.com/boardgame/367396",
+        "id": "8a1d754d-a672-46fb-a09f-7da2b3beb61c",
+        "totalPlays": 0
       }
     ],
     "players": [

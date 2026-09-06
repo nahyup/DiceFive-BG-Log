@@ -72,6 +72,8 @@ const KNOWN_BGG_MAP: Record<string, string> = {
   "태양신 라": "12",
   "the resistance: avalon": "128882",
   "레지스탕스: 아발론": "128882",
+  "avalon: big box": "367396",
+  "아발론 빅박스": "367396",
   "stone age": "34635",
   "석기시대": "34635",
   "watergate": "274364",
@@ -484,7 +486,36 @@ export async function lookupBggInfo(input: string, gamesList: Game[] = []): Prom
     };
   }
 
-  // 2. Reverse lookup from KNOWN_BGG_MAP
+  // 2. Fetch full details from server (data.json + bundled DB + Wikidata fallback)
+  let serverInfo: BggFetchedInfo | null = null;
+  try {
+    const res = await fetch(`/api/bgg-info?id=${bggId}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.success && data.game) {
+        const dur = data.game.duration ?? data.game.playTime;
+        serverInfo = {
+          title: data.game.title || undefined,
+          subtitle: data.game.subtitle || undefined,
+          publishedYear: data.game.publishedYear || undefined,
+          players: data.game.players || undefined,
+          duration: dur,
+          playTime: dur,
+          weight: data.game.weight || undefined,
+          imageUrl: data.game.imageUrl || undefined,
+          bggUrl: targetBggUrl
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('Failed to fetch from /api/bgg-info:', err);
+  }
+
+  if (serverInfo && (serverInfo.title || serverInfo.players || serverInfo.duration || serverInfo.playTime || serverInfo.imageUrl)) {
+    return serverInfo;
+  }
+
+  // 3. Reverse lookup from KNOWN_BGG_MAP (title only)
   for (const [titleKey, id] of Object.entries(KNOWN_BGG_MAP)) {
     if (id === bggId) {
       const titleCap = titleKey.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
@@ -493,30 +524,6 @@ export async function lookupBggInfo(input: string, gamesList: Game[] = []): Prom
         bggUrl: targetBggUrl
       };
     }
-  }
-
-  // 3. Fetch from backend endpoint /api/bgg-info
-  try {
-    const res = await fetch(`/api/bgg-info?id=${bggId}`);
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.success && data.game) {
-        const dur = data.game.duration ?? data.game.playTime;
-        return {
-          title: data.game.title,
-          subtitle: data.game.subtitle,
-          publishedYear: data.game.publishedYear,
-          players: data.game.players,
-          duration: dur,
-          playTime: dur,
-          weight: data.game.weight,
-          imageUrl: data.game.imageUrl,
-          bggUrl: targetBggUrl
-        };
-      }
-    }
-  } catch (err) {
-    console.warn('Failed to fetch from /api/bgg-info:', err);
   }
 
   // 4. Return formatted direct URL fallback

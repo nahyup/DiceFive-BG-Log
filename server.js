@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import { lookupBggServerInfo } from './bggInfoServer.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -75,6 +76,42 @@ app.post('/api/upload', (req, res) => {
     console.error('Error handling upload:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+// API: BGG Info Lookup (local data + Wikidata fallback)
+app.get('/api/bgg-info', async (req, res) => {
+  const bggId = req.query.id;
+  console.log(`[API] GET /api/bgg-info (${bggId})`);
+
+  if (!bggId || !/^\d+$/.test(bggId)) {
+    return res.status(400).json({ error: 'Missing BGG ID' });
+  }
+
+  let game = null;
+  try {
+    game = await lookupBggServerInfo(bggId);
+  } catch (error) {
+    console.error('Error in /api/bgg-info:', error);
+    return res.status(500).json({ error: 'Failed to fetch BGG info' });
+  }
+
+  if (game) {
+    return res.json({
+      success: true,
+      game: {
+        title: game.title || '',
+        subtitle: game.subtitle || '',
+        publishedYear: game.publishedYear || null,
+        players: game.players || '',
+        playTime: game.playTime || '',
+        weight: game.weight || null,
+        imageUrl: game.imageUrl || '',
+        bggUrl: game.bggUrl || `https://boardgamegeek.com/boardgame/${bggId}`
+      }
+    });
+  }
+
+  res.json({ success: false, error: 'Game not found for BGG ID' });
 });
 
 // Fallback to index.html for SPA routing

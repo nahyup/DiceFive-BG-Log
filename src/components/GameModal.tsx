@@ -102,7 +102,7 @@ export default function GameModal({ isOpen, onClose, gameToEdit }: GameModalProp
         if (info.title || info.players || info.duration || info.playTime) {
           setBggStatusMsg({ text: '✨ BGG 정보(제목, 인원, 시간, 난이도 등)를 성공적으로 불러왔습니다!', isError: false });
         } else {
-          setBggStatusMsg({ text: '🔗 BGG 직결 링크(https://boardgamegeek.com/boardgame/...)로 자동 변환되었습니다!', isError: false });
+          setBggStatusMsg({ text: '✅ BGG 링크를 인식했습니다. 상세 정보를 찾지 못해 아래 필드를 직접 입력해 주세요.', isError: false });
         }
       } else {
         setBggStatusMsg({ text: '⚠️ 올바른 BGG ID 숫자(예: 342942) 또는 URL을 입력해 주세요.', isError: true });

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
+import { lookupBggServerInfo } from './bggInfoServer.mjs'
 
 const dataFilePath = path.resolve(__dirname, 'data.json')
 
@@ -135,28 +136,23 @@ const localDataPlugin = () => ({
               return
             }
 
-            if (fs.existsSync(dataFilePath)) {
-              const fileContent = fs.readFileSync(dataFilePath, 'utf-8')
-              const parsed = JSON.parse(fileContent)
-              const games = parsed?.state?.games || []
-              const match = games.find((g: any) => g.bggUrl && (g.bggUrl.includes(`/boardgame/${bggId}`) || g.bggUrl.endsWith(`/${bggId}`)))
-              
-              if (match) {
-                res.end(JSON.stringify({
-                  success: true,
-                  game: {
-                    title: match.title,
-                    subtitle: match.subtitle || '',
-                    publishedYear: match.publishedYear,
-                    players: match.players,
-                    playTime: match.playTime,
-                    weight: match.weight,
-                    imageUrl: match.imageUrl,
-                    bggUrl: match.bggUrl
-                  }
-                }))
-                return
-              }
+            const game = await lookupBggServerInfo(bggId)
+
+            if (game) {
+              res.end(JSON.stringify({
+                success: true,
+                game: {
+                  title: game.title || '',
+                  subtitle: game.subtitle || '',
+                  publishedYear: game.publishedYear || null,
+                  players: game.players || '',
+                  playTime: game.playTime || '',
+                  weight: game.weight || null,
+                  imageUrl: game.imageUrl || '',
+                  bggUrl: game.bggUrl || `https://boardgamegeek.com/boardgame/${bggId}`
+                }
+              }))
+              return
             }
 
             res.end(JSON.stringify({ success: false, error: 'Game not found for BGG ID' }))
