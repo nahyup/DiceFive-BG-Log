@@ -8,7 +8,7 @@
         "playTime": "90-150",
         "weight": 3.8,
         "imageUrl": "https://cdn.shoplightspeed.com/shops/636231/files/38772737/1652x1652x2/capstone-games-ark-nova.jpg",
-        "totalPlays": 35,
+        "totalPlays": 37,
         "publishedYear": 2021,
         "subtitle": "아크 노바",
         "bggUrl": "https://boardgamegeek.com/boardgame/342942",
@@ -2444,6 +2444,20 @@
         "totalPlays": 0,
         "bggUrl": "https://boardgamegeek.com/boardgame/312484",
         "duration": "30-120"
+      },
+      {
+        "title": "Right Now",
+        "subtitle": "라잇나우",
+        "publishedYear": 2026,
+        "players": "2-5",
+        "duration": "15-30",
+        "playTime": "15-30",
+        "weight": 1,
+        "imageUrl": "https://cf.geekdo-images.com/A-lQksPJMZPCny6_pjLfXg__itemrep@2x/img/vB7P74VnE-gWsAApatrVMiQYWHE=/fit-in/492x600/filters:strip_icc()/pic9716979.png",
+        "status": "None",
+        "bggUrl": "https://boardgamegeek.com/boardgame/475499",
+        "id": "id-1788668345550-i3lkxbq",
+        "totalPlays": 0
       }
     ],
     "players": [
@@ -5529,6 +5543,44 @@
         ],
         "reviewMemo": "",
         "id": "id-1788091269131-tfctfm3"
+      },
+      {
+        "gameId": "342942",
+        "date": "2026-08-31T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
+            "score": 124
+          },
+          {
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
+            "score": 119
+          }
+        ],
+        "winnerIds": [
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788186878597-fc9pxpw"
+      },
+      {
+        "gameId": "342942",
+        "date": "2026-09-06T00:00:00.000Z",
+        "players": [
+          {
+            "playerId": "4e541792-81fe-4ade-89e1-0415bced06b1",
+            "score": 122
+          },
+          {
+            "playerId": "4e9e985e-6141-47b6-88ae-89afc5889baf",
+            "score": 100
+          }
+        ],
+        "winnerIds": [
+          "4e541792-81fe-4ade-89e1-0415bced06b1"
+        ],
+        "reviewMemo": "",
+        "id": "id-1788668125325-8fziqjd"
       }
     ],
     "stories": [
